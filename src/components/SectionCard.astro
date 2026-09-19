@@ -1,0 +1,83 @@
+---
+export interface Props {
+  slug: string;
+  unit: '67' | '106';
+  name: string;
+  typeLabel: string;
+  ageRange: string;
+  description: string;
+  photo?: string;
+  staffCount?: number;
+}
+
+const {
+  slug,
+  unit,
+  name,
+  typeLabel,
+  ageRange,
+  description,
+  photo = '/images/placeholder-section.jpg',
+  staffCount,
+} = Astro.props;
+
+const href = `/sections/${unit === '67' ? '67eme' : '106eme'}/${slug}`;
+const unitColor = unit === '67' ? 'guide-green' : 'scout-black';
+const unitBadge = unit === '67'
+  ? 'bg-guide-purple/10 text-guide-purple border border-guide-purple/20'
+  : 'bg-gray-100 text-gray-700 border border-gray-200';
+---
+
+<a
+  href={href}
+  class="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+>
+  <!-- Photo -->
+  <div class="relative h-48 overflow-hidden bg-gray-100">
+    <img
+      src={photo}
+      alt={`Section ${name}`}
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      loading="lazy"
+      onerror="this.src='/images/placeholder-section.jpg'"
+    />
+    <!-- Unit badge -->
+    <span class={`absolute top-3 right-3 text-xs font-semibold px-2 py-1 rounded-full backdrop-blur-sm ${
+      unit === '67'
+        ? 'bg-guide-purple/80 text-white'
+        : 'bg-black/70 text-white'
+    }`}>
+      {unit === '67' ? '67ème' : '106ème'}
+    </span>
+  </div>
+
+  <!-- Content -->
+  <div class="p-5">
+    <div class="flex items-start justify-between gap-2 mb-2">
+      <h3 class="font-bold text-unit-dark text-lg group-hover:text-unit-red transition-colors leading-tight">
+        {name}
+      </h3>
+      <span class={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full ${unitBadge}`}>
+        {ageRange}
+      </span>
+    </div>
+    <p class="text-xs text-gray-500 font-medium uppercase tracking-wide mb-3">{typeLabel}</p>
+    <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">{description}</p>
+
+    {staffCount !== undefined && (
+      <div class="mt-4 flex items-center gap-1 text-xs text-gray-400">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <span>{staffCount} animateur{staffCount > 1 ? 's' : ''}</span>
+      </div>
+    )}
+
+    <div class="mt-4 flex items-center gap-1 text-sm font-medium text-unit-red group-hover:gap-2 transition-all">
+      <span>Découvrir</span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+  </div>
+</a>

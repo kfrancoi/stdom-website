@@ -1,0 +1,164 @@
+---
+import PageLayout from '../components/PageLayout.astro';
+---
+
+<PageLayout
+  title="Alumni & Clan"
+  description="Rejoignez les Alumni de Saint-Dominique et restez connectés à l'unité. Découvrez aussi le Clan, groupe d'anciens chefs actifs."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">67-106</p>
+      <h1 class="text-4xl font-bold mb-3">Alumni & Clan</h1>
+      <p class="text-gray-300 max-w-xl">
+        L'aventure ne s'arrête pas quand on quitte le foulard. Restez connectés à la grande famille Saint-Dom !
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid lg:grid-cols-2 gap-12">
+
+      <!-- ══ ALUMNI ══ -->
+      <section>
+        <div class="inline-flex items-center gap-2 bg-unit-gold/10 border border-unit-gold/30 rounded-full px-4 py-1.5 mb-4">
+          <span class="text-unit-gold text-sm font-semibold">Alumni</span>
+        </div>
+        <h2 class="text-3xl font-bold text-unit-dark mb-4">Anciens de Saint-Dom</h2>
+        <p class="text-gray-600 leading-relaxed mb-6">
+          Notre section des Alumni a pour vocation de rassembler tous les anciens de Saint-Dom.
+          Un gros travail de rassemblement des coordonnées de ce réseau extraordinaire est en cours.
+        </p>
+        <p class="text-gray-600 leading-relaxed mb-8">
+          Les Alumni pourront ainsi être invités lors d'événements Saint-Dom, sollicités pour une aide
+          ponctuelle (compétence spécifique, endroit de camp/WE d'urgence), ou simplement tenus au
+          courant de la vie des unités.
+        </p>
+
+        <!-- Options -->
+        <div class="space-y-4 mb-8">
+          <div class="p-5 bg-gray-50 rounded-2xl border border-gray-100">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-unit-dark">Alumni « Sympathisant »</h3>
+                <p class="text-sm text-gray-500 mt-1 leading-relaxed">
+                  Vous restez au courant de la vie des deux Unités et recevez les invitations et appels
+                  ponctuels. Sans assurance.
+                </p>
+                <p class="text-xs text-gray-400 mt-2 font-medium">Gratuit</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 bg-white rounded-2xl border border-unit-gold/30 shadow-sm">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-unit-gold/20 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-unit-dark">Alumni « Actif »</h3>
+                <p class="text-sm text-gray-500 mt-1 leading-relaxed">
+                  Vous refaites partie de la Fédération avec une assurance RC, accidents corporels,
+                  défense civile et protection juridique. Vous intervenez pour des formations,
+                  coups de main, etc.
+                </p>
+                <div class="flex gap-3 mt-2 text-xs font-medium text-amber-700">
+                  <span class="bg-unit-gold/10 px-2 py-0.5 rounded-full">20€/an — GCB (Guides)</span>
+                  <span class="bg-unit-gold/10 px-2 py-0.5 rounded-full">25€/an — Scouts</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rejoindre -->
+        <div class="p-6 bg-unit-dark rounded-2xl text-white">
+          <h3 class="font-bold text-lg mb-2">Rejoindre les Alumni</h3>
+          <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+            Envoyez-nous un e-mail en précisant vos nom/prénom, votre ancienne unité (67ème et/ou 106ème)
+            et l'option choisie (sympathisant ou actif).
+          </p>
+          <a
+            href="mailto:alumni@stdom.be?subject=Rejoindre les Alumni Saint-Dom"
+            class="inline-flex items-center gap-2 bg-unit-gold text-unit-dark font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-yellow-400 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Écrire à alumni@stdom.be
+          </a>
+        </div>
+      </section>
+
+      <!-- ══ CLAN ══ -->
+      <section>
+        <div class="inline-flex items-center gap-2 bg-unit-red/10 border border-unit-red/20 rounded-full px-4 py-1.5 mb-4">
+          <span class="text-unit-red text-sm font-semibold">Le Clan</span>
+        </div>
+        <h2 class="text-3xl font-bold text-unit-dark mb-4">Anciens chefs actifs</h2>
+        <p class="text-gray-600 leading-relaxed mb-6">
+          Nouveau depuis quelques années, le Clan est un groupe d'une dizaine d'anciens chefs de section
+          désirant continuer à participer à la vie des unités en organisant et en s'investissant dans des
+          projets communs à la 67ème et la 106ème.
+        </p>
+        <p class="text-gray-600 leading-relaxed mb-8">
+          Le Clan prend une part active dans l'organisation du <strong class="text-unit-dark">WE d'Unités
+          du printemps 2026</strong> — un grand week-end commun pour toute la famille Saint-Dom !
+        </p>
+
+        <!-- Référents -->
+        <div class="grid sm:grid-cols-2 gap-4 mb-8">
+          <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm text-center">
+            <div class="w-16 h-16 rounded-full bg-unit-red/10 flex items-center justify-center mx-auto mb-3">
+              <span class="text-2xl font-bold text-unit-red">CW</span>
+            </div>
+            <p class="font-bold text-unit-dark">Aïdi</p>
+            <p class="text-sm text-gray-600">Carla WINNEN</p>
+            <p class="text-xs text-gray-400 mt-1">Référente</p>
+            <a href="tel:0473273610" class="block mt-2 text-xs text-gray-500 hover:text-unit-red transition-colors">
+              0473/27 36 10
+            </a>
+          </div>
+          <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm text-center">
+            <div class="w-16 h-16 rounded-full bg-unit-red/10 flex items-center justify-center mx-auto mb-3">
+              <span class="text-2xl font-bold text-unit-red">AJ</span>
+            </div>
+            <p class="font-bold text-unit-dark">Kodiak</p>
+            <p class="text-sm text-gray-600">Antonio JOORIS</p>
+            <p class="text-xs text-gray-400 mt-1">Référent</p>
+            <a href="tel:0498715888" class="block mt-2 text-xs text-gray-500 hover:text-unit-red transition-colors">
+              0498/71 58 88
+            </a>
+          </div>
+        </div>
+
+        <!-- Mission -->
+        <div class="bg-gradient-to-br from-unit-red/5 to-unit-gold/5 rounded-2xl p-6 border border-unit-red/10">
+          <h3 class="font-bold text-unit-dark mb-3">Mission du Clan</h3>
+          <ul class="space-y-2 text-sm text-gray-600">
+            {[
+              'Mettre des compétences au service des 2 unités',
+              'Défendre l\'image du scoutisme',
+              'Mettre un réseau à disposition des unités Saint-Dom',
+              'Se déclarer scout-friendly en période de camp',
+              'Co-organiser les événements inter-unités',
+            ].map((item) => (
+              <li class="flex items-start gap-2">
+                <span class="text-unit-red mt-0.5 shrink-0">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+</PageLayout>

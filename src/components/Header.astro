@@ -1,0 +1,105 @@
+---
+const navLinks = [
+  { href: '/', label: 'Accueil' },
+  { href: '/sections', label: 'Sections' },
+  { href: '/calendrier', label: 'Calendrier' },
+  { href: '/pratique', label: 'Pratique' },
+  { href: '/asbl', label: 'ASBL' },
+  { href: '/alumni-clan', label: 'Alumni & Clan' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo + Name -->
+      <a href="/" class="flex items-center gap-3 group">
+        <img
+          src="/images/logo-stdom.png"
+          alt="Logo Saint-Dominique"
+          class="h-10 w-10 object-contain"
+          onerror="this.style.display='none'"
+        />
+        <div class="leading-tight">
+          <span class="block font-bold text-unit-dark text-base group-hover:text-unit-red transition-colors">
+            Saint-Dominique
+          </span>
+          <span class="block text-xs text-gray-500 font-medium tracking-wide">
+            67<sup>ème</sup> Guide · 106<sup>ème</sup> Scout
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-1">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "px-3 py-2 rounded-md text-sm font-medium transition-colors",
+              currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                ? "bg-unit-red text-white"
+                : "text-gray-700 hover:text-unit-red hover:bg-red-50"
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href="/contact#inscription"
+          class="ml-3 px-4 py-2 bg-unit-red text-white text-sm font-semibold rounded-full hover:bg-red-700 transition-colors shadow-sm"
+        >
+          S'inscrire
+        </a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 rounded-md text-gray-700 hover:text-unit-red hover:bg-red-50 transition-colors"
+        aria-label="Ouvrir le menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
+    <div class="px-4 py-3 space-y-1">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            "block px-3 py-2 rounded-md text-sm font-medium transition-colors",
+            currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+              ? "bg-unit-red text-white"
+              : "text-gray-700 hover:text-unit-red hover:bg-red-50"
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="/contact#inscription"
+        class="block mt-2 px-4 py-2 bg-unit-red text-white text-sm font-semibold rounded-full text-center hover:bg-red-700 transition-colors"
+      >
+        S'inscrire
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>

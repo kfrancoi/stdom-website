@@ -1,0 +1,29 @@
+---
+import PageLayout from '../components/PageLayout.astro';
+---
+
+<PageLayout title="Page introuvable">
+  <div class="min-h-[70vh] flex items-center justify-center px-4">
+    <div class="text-center max-w-md">
+      <div class="text-8xl mb-6">🏕️</div>
+      <h1 class="text-4xl font-bold text-unit-dark mb-3">Oups, page introuvable !</h1>
+      <p class="text-gray-500 mb-8 leading-relaxed">
+        On dirait que cette page s'est perdue dans la forêt. Les scouts de Saint-Dom vont la retrouver !
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a
+          href="/"
+          class="px-6 py-3 bg-unit-red text-white font-semibold rounded-full hover:bg-red-700 transition-colors"
+        >
+          Retour à l'accueil
+        </a>
+        <a
+          href="/sections"
+          class="px-6 py-3 bg-gray-100 text-unit-dark font-semibold rounded-full hover:bg-gray-200 transition-colors"
+        >
+          Voir les sections
+        </a>
+      </div>
+    </div>
+  </div>
+</PageLayout>

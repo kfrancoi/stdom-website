@@ -1,0 +1,228 @@
+---
+import PageLayout from '../../../components/PageLayout.astro';
+import StaffCard from '../../../components/StaffCard.astro';
+import { sections67 } from '../../../data/sections-67';
+
+export async function getStaticPaths() {
+  return sections67.map((section) => ({
+    params: { slug: section.slug },
+    props: { section },
+  }));
+}
+
+const { section } = Astro.props;
+
+const typeLabel = {
+  lutins: 'Ronde de Lutins',
+  guides: 'Compagnie de Guides',
+  horizons: 'Chaîne Guide Horizons',
+};
+
+const [cheftaine, ...animatrices] = section.staff;
+---
+
+<PageLayout
+  title={section.name}
+  description={section.description}
+>
+  <!-- Breadcrumb -->
+  <nav class="bg-gray-50 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-unit-red transition-colors">Accueil</a></li>
+        <li class="text-gray-300">/</li>
+        <li><a href="/sections" class="hover:text-unit-red transition-colors">Sections</a></li>
+        <li class="text-gray-300">/</li>
+        <li><a href="/sections#67eme" class="hover:text-unit-red transition-colors">67ème Guide</a></li>
+        <li class="text-gray-300">/</li>
+        <li class="text-unit-dark font-medium">{section.name}</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero de section -->
+  <section class="relative bg-gradient-to-br from-guide-purple to-guide-green overflow-hidden">
+    <!-- Background photos collage -->
+    {section.photos.length > 0 && (
+      <div class="absolute inset-0 opacity-20">
+        <img
+          src={section.photos[0]}
+          alt=""
+          class="w-full h-full object-cover"
+          onerror="this.style.display='none'"
+        />
+      </div>
+    )}
+    <div class="absolute inset-0 bg-gradient-to-r from-guide-purple/90 to-guide-green/70"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="max-w-2xl">
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <span class="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/30">
+            67ème Unité Guide
+          </span>
+          <span class="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/30">
+            {section.typeLabel}
+          </span>
+          <span class="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/30">
+            {section.ageRange}
+          </span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">{section.name}</h1>
+        <p class="text-white/85 text-lg leading-relaxed">{section.description}</p>
+        <div class="mt-6">
+          <a
+            href={`mailto:${section.contact}`}
+            class="inline-flex items-center gap-2 bg-white text-guide-purple font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-white/90 transition-colors shadow-lg"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Contacter la section
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid lg:grid-cols-3 gap-12">
+
+      <!-- Left col: staff -->
+      <div class="lg:col-span-2">
+        <!-- Cheftaine -->
+        <div class="mb-10">
+          <h2 class="text-xl font-bold text-unit-dark mb-6 flex items-center gap-2">
+            <span class="w-1 h-6 rounded-full bg-guide-purple inline-block"></span>
+            Cheftaine
+          </h2>
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <StaffCard
+              totem={cheftaine.totem}
+              name={cheftaine.name}
+              role={cheftaine.role}
+              phone={cheftaine.phone}
+            />
+          </div>
+        </div>
+
+        <!-- Team -->
+        {animatrices.length > 0 && (
+          <div class="mb-10">
+            <h2 class="text-xl font-bold text-unit-dark mb-6 flex items-center gap-2">
+              <span class="w-1 h-6 rounded-full bg-guide-green inline-block"></span>
+              L'équipe d'animatrices
+            </h2>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {animatrices.map((member) => (
+                <StaffCard
+                  totem={member.totem}
+                  name={member.name}
+                  role={member.role}
+                  phone={member.phone}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Photos -->
+        {section.photos.length > 1 && (
+          <div class="mb-10">
+            <h2 class="text-xl font-bold text-unit-dark mb-6 flex items-center gap-2">
+              <span class="w-1 h-6 rounded-full bg-unit-gold inline-block"></span>
+              Galerie
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {section.photos.map((photo, i) => (
+                <div class="aspect-square rounded-xl overflow-hidden bg-gray-100">
+                  <img
+                    src={photo}
+                    alt={`${section.name} — photo ${i + 1}`}
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    onerror="this.parentElement.style.display='none'"
+                  />
+                </div>
+              ))}
+            </div>
+            <p class="text-xs text-gray-400 mt-3 text-center italic">
+              Photos à venir — la section partagera bientôt ses meilleurs moments !
+            </p>
+          </div>
+        )}
+      </div>
+
+      <!-- Right col: info -->
+      <div class="space-y-6">
+        <!-- Info card -->
+        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+          <h3 class="font-bold text-unit-dark mb-4">Informations</h3>
+          <dl class="space-y-3 text-sm">
+            <div>
+              <dt class="text-gray-500 font-medium">Type de section</dt>
+              <dd class="text-unit-dark mt-0.5">{section.typeLabel}</dd>
+            </div>
+            <div>
+              <dt class="text-gray-500 font-medium">Tranche d'âge</dt>
+              <dd class="text-unit-dark mt-0.5">{section.ageRange}</dd>
+            </div>
+            <div>
+              <dt class="text-gray-500 font-medium">Unité</dt>
+              <dd class="text-unit-dark mt-0.5">67ème Unité Guide</dd>
+            </div>
+            <div>
+              <dt class="text-gray-500 font-medium">Nombre d'animatrices</dt>
+              <dd class="text-unit-dark mt-0.5">{section.staff.length} animatrices</dd>
+            </div>
+            <div>
+              <dt class="text-gray-500 font-medium">Contact</dt>
+              <dd class="mt-0.5">
+                <a href={`mailto:${section.contact}`} class="text-unit-red hover:underline break-all">
+                  {section.contact}
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- CTA inscription -->
+        <div class="bg-gradient-to-br from-guide-purple to-guide-green rounded-2xl p-6 text-white">
+          <h3 class="font-bold text-lg mb-2">Intéressé·e ?</h3>
+          <p class="text-white/80 text-sm mb-4 leading-relaxed">
+            Votre fille a {section.ageRange.replace('–', 'à')} ? Contactez-nous pour l'inscrire dans cette section !
+          </p>
+          <a
+            href={`mailto:inscriptions67@stdom.be?subject=Inscription ${section.name}`}
+            class="block text-center bg-white text-guide-purple font-semibold text-sm px-4 py-2.5 rounded-full hover:bg-white/90 transition-colors"
+          >
+            Demande d'inscription
+          </a>
+        </div>
+
+        <!-- Back links -->
+        <div class="space-y-2">
+          <a
+            href="/sections#67eme"
+            class="flex items-center gap-2 text-sm text-gray-500 hover:text-unit-red transition-colors"
+          >
+            <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            Toutes les sections guides
+          </a>
+          <a
+            href="/calendrier"
+            class="flex items-center gap-2 text-sm text-gray-500 hover:text-unit-red transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Voir le calendrier
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</PageLayout>

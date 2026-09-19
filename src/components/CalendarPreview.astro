@@ -1,0 +1,84 @@
+---
+import { getUpcomingEvents, categoryConfig } from '../data/calendar';
+
+const events = getUpcomingEvents(6);
+
+function formatDate(dateStr: string): { day: string; month: string; weekday: string } {
+  const date = new Date(dateStr + 'T12:00:00');
+  return {
+    day: date.toLocaleDateString('fr-BE', { day: '2-digit' }),
+    month: date.toLocaleDateString('fr-BE', { month: 'short' }),
+    weekday: date.toLocaleDateString('fr-BE', { weekday: 'short' }),
+  };
+}
+
+function formatDateRange(start: string, end?: string): string {
+  const s = new Date(start + 'T12:00:00');
+  if (!end) return s.toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric' });
+  const e = new Date(end + 'T12:00:00');
+  if (s.getMonth() === e.getMonth()) {
+    return `${s.getDate()} – ${e.getDate()} ${e.toLocaleDateString('fr-BE', { month: 'long', year: 'numeric' })}`;
+  }
+  return `${s.toLocaleDateString('fr-BE', { day: 'numeric', month: 'short' })} – ${e.toLocaleDateString('fr-BE', { day: 'numeric', month: 'short', year: 'numeric' })}`;
+}
+
+const unitLabel = { '67': '67ème', '106': '106ème', 'both': '67ème & 106ème' };
+---
+
+<div class="space-y-3">
+  {events.length === 0 ? (
+    <p class="text-gray-500 text-sm text-center py-8">Aucun événement à venir pour le moment.</p>
+  ) : (
+    events.map((event) => {
+      const { day, month, weekday } = formatDate(event.date);
+      const config = categoryConfig[event.category];
+      return (
+        <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-sm transition-all">
+          <!-- Date box -->
+          <div class="shrink-0 w-14 text-center">
+            <div class="text-xs font-medium text-gray-400 uppercase">{weekday}</div>
+            <div class="text-2xl font-bold text-unit-dark leading-none">{day}</div>
+            <div class="text-xs font-semibold text-unit-red uppercase">{month}</div>
+          </div>
+
+          <!-- Divider -->
+          <div class={`w-1 self-stretch rounded-full ${config.bg} opacity-80`}></div>
+
+          <!-- Event info -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-2 flex-wrap">
+              <h4 class="font-semibold text-unit-dark text-sm">{event.title}</h4>
+              <span class={`shrink-0 text-xs px-2 py-0.5 rounded-full font-medium ${config.color} bg-opacity-10`}
+                style={`background-color: color-mix(in srgb, currentColor 10%, transparent)`}>
+                {config.label}
+              </span>
+            </div>
+            {event.endDate && (
+              <p class="text-xs text-gray-400 mt-0.5">{formatDateRange(event.date, event.endDate)}</p>
+            )}
+            {event.description && (
+              <p class="text-xs text-gray-500 mt-1 line-clamp-2">{event.description}</p>
+            )}
+            {event.unit && (
+              <span class="inline-block mt-1 text-xs text-gray-400">
+                {unitLabel[event.unit]}
+              </span>
+            )}
+          </div>
+        </div>
+      );
+    })
+  )}
+
+  <div class="pt-2">
+    <a
+      href="/calendrier"
+      class="flex items-center justify-center gap-2 w-full py-3 text-sm font-medium text-unit-red hover:text-red-700 hover:bg-red-50 rounded-xl transition-colors border border-red-100 hover:border-red-200"
+    >
+      <span>Voir tout le calendrier</span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+</div>

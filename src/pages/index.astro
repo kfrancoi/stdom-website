@@ -1,0 +1,367 @@
+---
+import PageLayout from '../components/PageLayout.astro';
+import CalendarPreview from '../components/CalendarPreview.astro';
+import SectionCard from '../components/SectionCard.astro';
+import { sections67 } from '../data/sections-67';
+import { sections106 } from '../data/sections-106';
+
+// Sélection des sections à afficher en homepage (2 par type)
+const featuredGuides = sections67.filter((s) => ['farfadets', 'amazones', 'eldorado'].includes(s.slug));
+const featuredScouts = sections106.filter((s) => ['merlin', 'abeilles', 'aigles'].includes(s.slug));
+
+const values = [
+  {
+    icon: '🌿',
+    title: 'Nature & Aventure',
+    text: "Le camp, c'est la vie en vrai. Coupés des écrans, les enfants vivent des choses qu'ils n'apprennent ni à l'école, ni en famille. Ils découvrent la nature, relèvent des défis et sortent de leur zone de confort.",
+  },
+  {
+    icon: '🤝',
+    title: 'Fraternité',
+    text: "Un camp, c'est une micro-organisation : des tâches à définir, tout le monde doit s'aider. On apprend l'auto-gestion, la responsabilisation. Les amitiés qui se forment durent toute une vie.",
+  },
+  {
+    icon: '⭐',
+    title: 'Dépassement de soi',
+    text: "La première nuit sans maman/papa, le défi physique d'une totémisation… Les enfants qui passent au-dessus de leurs appréhensions sont fiers de l'autonomie gagnée. C'est une forme de dépassement de soi.",
+  },
+  {
+    icon: '🙏',
+    title: 'Sens & Foi',
+    text: "Notre mouvement est ouvert à tous, clairement attaché aux valeurs de la foi catholique. Les rituels, les symboles, les histoires transmises deviennent des repères solides dans l'épanouissement des jeunes.",
+  },
+  {
+    icon: '🌍',
+    title: 'Service aux autres',
+    text: "Shoe-box pour Noël, opération Arc-en-Ciel, ramassage de déchets dans le quartier : nos sections contribuent au bien-être de la communauté qui nous accueille.",
+  },
+  {
+    icon: '🦁',
+    title: 'Engagement animateur',
+    text: "130 animateurs donnent leur temps, leurs talents et leur cœur chaque semaine. Des jeunes de 16 à 25 ans formés, passionnés, qui construisent les chefs de demain.",
+  },
+];
+---
+
+<PageLayout
+  title="Accueil"
+  description="Unité Saint-Dominique — 67ème Guide & 106ème Scout. Du temps, du talent et du cœur au service des jeunes de Kraainem depuis plus de 100 ans."
+>
+  <!-- ══════════════════════════════════════════════════════════════ HERO -->
+  <section class="relative min-h-[90vh] flex items-center overflow-hidden bg-unit-dark">
+    <!-- Background image with overlay -->
+    <div class="absolute inset-0">
+      <img
+        src="/images/hero-bg.jpg"
+        alt="Scouts et guides de Saint-Dominique"
+        class="w-full h-full object-cover opacity-40"
+        onerror="this.style.display='none'"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-unit-dark/80 via-unit-dark/60 to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div class="max-w-2xl">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6">
+          <span class="w-2 h-2 rounded-full bg-unit-gold animate-pulse"></span>
+          <span class="text-white/90 text-sm font-medium">67<sup>ème</sup> Guide · 106<sup>ème</sup> Scout · Kraainem</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          Du temps,<br />
+          du talent,<br />
+          <span class="text-unit-gold">et du cœur.</span>
+        </h1>
+
+        <p class="text-lg text-white/80 leading-relaxed mb-8 max-w-lg">
+          L'unité Saint-Dominique rassemble <strong class="text-white">plus de 620 jeunes</strong>
+          et <strong class="text-white">130 animateurs</strong> unis par les valeurs scoutes et guides
+          depuis plus de 100 ans.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="/sections"
+            class="px-6 py-3 bg-unit-gold text-unit-dark font-bold rounded-full hover:bg-yellow-400 transition-colors shadow-lg"
+          >
+            Découvrir les sections
+          </a>
+          <a
+            href="/contact#inscription"
+            class="px-6 py-3 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full border border-white/30 hover:bg-white/20 transition-colors"
+          >
+            S'inscrire
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 animate-bounce">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════ DEUX UNITÉS -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-unit-dark mb-3">Une unité, deux familles</h2>
+        <p class="text-gray-500 max-w-xl mx-auto">
+          Saint-Dominique regroupe deux mouvements distincts qui partagent le même parvis,
+          les mêmes valeurs et le même esprit.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- 67ème Guides -->
+        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-guide-purple to-guide-green p-8 text-white shadow-lg">
+          <div class="absolute top-0 right-0 w-48 h-48 opacity-10">
+            <img src="/images/logo-stdom.png" alt="" class="w-full h-full object-contain" />
+          </div>
+          <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 mb-4">
+              <span class="w-3 h-3 rounded-full bg-white/70 inline-block"></span>
+              <span class="w-3 h-3 rounded-sm bg-guide-purple/70 inline-block rotate-45 -ml-1"></span>
+              <span class="text-white/70 text-sm font-medium ml-1">Foulard vert & mauve</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">67<sup>ème</sup> Unité Guide</h3>
+            <p class="text-white/80 text-sm mb-6">
+              Les Guides Catholiques de Belgique — pour les <strong class="text-white">filles de 8 à 17 ans</strong>.
+              3 rondes de Lutins, 3 Compagnies de Guides, 2 Chaînes Horizons.
+            </p>
+            <div class="grid grid-cols-3 gap-3 mb-6 text-center">
+              <div class="bg-white/10 rounded-xl p-3">
+                <div class="text-2xl font-bold">255</div>
+                <div class="text-xs text-white/70">animées</div>
+              </div>
+              <div class="bg-white/10 rounded-xl p-3">
+                <div class="text-2xl font-bold">46</div>
+                <div class="text-xs text-white/70">animatrices</div>
+              </div>
+              <div class="bg-white/10 rounded-xl p-3">
+                <div class="text-2xl font-bold">7</div>
+                <div class="text-xs text-white/70">sections</div>
+              </div>
+            </div>
+            <a
+              href="/sections#67eme"
+              class="inline-flex items-center gap-2 bg-white text-guide-purple font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-white/90 transition-colors"
+            >
+              Sections de la 67ème
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 106ème Scouts -->
+        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-gray-700 p-8 text-white shadow-lg">
+          <div class="absolute top-0 right-0 w-48 h-48 opacity-10">
+            <img src="/images/logo-stdom.png" alt="" class="w-full h-full object-contain" />
+          </div>
+          <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 mb-4">
+              <span class="w-3 h-3 rounded-full bg-gray-300 inline-block"></span>
+              <span class="text-white/70 text-sm font-medium ml-1">Foulard noir & blanc</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">106<sup>ème</sup> Unité Scoute</h3>
+            <p class="text-white/80 text-sm mb-6">
+              Les Scouts Baden Powell de Belgique — pour les <strong class="text-white">garçons et filles de 6 à 17 ans</strong>.
+              3 Ribambelles de Baladins, 3 Meutes, 2 Troupes, 2 Postes Pionniers.
+            </p>
+            <div class="grid grid-cols-3 gap-3 mb-6 text-center">
+              <div class="bg-white/10 rounded-xl p-3">
+                <div class="text-2xl font-bold">330</div>
+                <div class="text-xs text-white/70">animés</div>
+              </div>
+              <div class="bg-white/10 rounded-xl p-3">
+                <div class="text-2xl font-bold">63</div>
+                <div class="text-xs text-white/70">animateurs</div>
+              </div>
+              <div class="bg-white/10 rounded-xl p-3">
+                <div class="text-2xl font-bold">10</div>
+                <div class="text-xs text-white/70">sections</div>
+              </div>
+            </div>
+            <a
+              href="/sections#106eme"
+              class="inline-flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-white/90 transition-colors"
+            >
+              Sections de la 106ème
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ VALEURS -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <p class="text-unit-red font-semibold text-sm uppercase tracking-wider mb-2">Le scoutisme</p>
+        <h2 class="text-3xl font-bold text-unit-dark mb-4">Des valeurs pour la vie</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed">
+          "Essayez de quitter ce monde en le laissant un peu meilleur que vous ne l'avez trouvé."
+          <em class="block mt-1 text-gray-400">— Baden-Powell</em>
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {values.map((v) => (
+          <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+            <div class="text-3xl mb-4">{v.icon}</div>
+            <h3 class="font-bold text-unit-dark text-base mb-2">{v.title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ CALENDRIER + SECTIONS APERÇU -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-5 gap-12">
+
+        <!-- Calendrier (3/5) -->
+        <div class="lg:col-span-3">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <p class="text-unit-red font-semibold text-sm uppercase tracking-wider mb-1">Agenda</p>
+              <h2 class="text-2xl font-bold text-unit-dark">Prochains événements</h2>
+            </div>
+            <a href="/calendrier" class="text-sm text-unit-red font-medium hover:underline hidden sm:block">
+              Tout voir →
+            </a>
+          </div>
+          <CalendarPreview />
+        </div>
+
+        <!-- Aperçu sections (2/5) -->
+        <div class="lg:col-span-2">
+          <div class="mb-6">
+            <p class="text-unit-red font-semibold text-sm uppercase tracking-wider mb-1">Sections</p>
+            <h2 class="text-2xl font-bold text-unit-dark">Trouvez votre section</h2>
+          </div>
+
+          <div class="space-y-3">
+            <!-- Guide sections summary -->
+            <a href="/sections#67eme" class="block p-4 bg-gradient-to-r from-guide-purple/5 to-guide-green/5 border border-guide-purple/20 rounded-2xl hover:border-guide-purple/40 transition-colors group">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="font-semibold text-unit-dark group-hover:text-guide-purple transition-colors">67ème — Guides</p>
+                  <p class="text-xs text-gray-500 mt-0.5">Filles · 8 à 17 ans · 7 sections</p>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-guide-purple/10 flex items-center justify-center">
+                  <svg class="w-4 h-4 text-guide-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-1 mt-3">
+                {['Lutins', 'Guides', 'Horizons'].map((t) => (
+                  <span class="text-xs bg-guide-purple/10 text-guide-purple px-2 py-0.5 rounded-full">{t}</span>
+                ))}
+              </div>
+            </a>
+
+            <!-- Scout sections summary -->
+            <a href="/sections#106eme" class="block p-4 bg-gray-50 border border-gray-200 rounded-2xl hover:border-gray-400 transition-colors group">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="font-semibold text-unit-dark group-hover:text-gray-900 transition-colors">106ème — Scouts</p>
+                  <p class="text-xs text-gray-500 mt-0.5">Garçons & filles · 6 à 17 ans · 10 sections</p>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                  <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-1 mt-3">
+                {['Baladins', 'Louveteaux', 'Éclaireurs', 'Pionniers'].map((t) => (
+                  <span class="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">{t}</span>
+                ))}
+              </div>
+            </a>
+
+            <a
+              href="/sections"
+              class="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-white bg-unit-red hover:bg-red-700 rounded-2xl transition-colors shadow-sm"
+            >
+              Voir toutes les sections
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ PHOTOS D'AMBIANCE -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="text-unit-red font-semibold text-sm uppercase tracking-wider mb-2">La vie à Saint-Dom</p>
+        <h2 class="text-3xl font-bold text-unit-dark">Des aventures inoubliables</h2>
+      </div>
+
+      <!-- Mosaic grid — remplacer les images par les vraies photos -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 auto-rows-[200px]">
+        <div class="col-span-2 row-span-2 rounded-2xl overflow-hidden bg-gray-200">
+          <img src="/images/ambiance-1.jpg" alt="Scouts en camp" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy" />
+        </div>
+        <div class="rounded-2xl overflow-hidden bg-gray-200">
+          <img src="/images/ambiance-2.jpg" alt="Activité guides" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy" />
+        </div>
+        <div class="rounded-2xl overflow-hidden bg-gray-200">
+          <img src="/images/ambiance-3.jpg" alt="Feu de camp" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy" />
+        </div>
+        <div class="rounded-2xl overflow-hidden bg-gray-200">
+          <img src="/images/ambiance-4.jpg" alt="Jeux en plein air" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy" />
+        </div>
+        <div class="rounded-2xl overflow-hidden bg-gray-200">
+          <img src="/images/ambiance-5.jpg" alt="Réunion section" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ REJOINDRE -->
+  <section class="py-20 bg-unit-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
+        Rejoignez l'aventure Saint-Dom !
+      </h2>
+      <p class="text-gray-300 text-lg mb-8 leading-relaxed max-w-2xl mx-auto">
+        Votre enfant a entre 6 et 17 ans ? Inscrivez-le dès maintenant dans l'une de nos sections.
+        Nos animateurs l'accueilleront avec joie !
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="/contact#inscription"
+          class="px-8 py-4 bg-unit-gold text-unit-dark font-bold text-lg rounded-full hover:bg-yellow-400 transition-colors shadow-lg"
+        >
+          S'inscrire maintenant
+        </a>
+        <a
+          href="/pratique"
+          class="px-8 py-4 bg-white/10 text-white font-semibold text-lg rounded-full border border-white/20 hover:bg-white/20 transition-colors"
+        >
+          Infos pratiques
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

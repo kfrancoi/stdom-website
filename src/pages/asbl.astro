@@ -1,0 +1,145 @@
+---
+import PageLayout from '../components/PageLayout.astro';
+import StaffCard from '../components/StaffCard.astro';
+import { asblMembers } from '../data/staff';
+
+const projects = [
+  { icon: '🚿', title: 'Réfection des sanitaires', desc: 'Modernisation des installations sanitaires pour l\'ensemble du parvis.' },
+  { icon: '🚰', title: 'Point d\'eau & grand évier', desc: 'Installation d\'un point d\'eau accessible directement sur le parvis Saint-Dominique.' },
+  { icon: '🏠', title: 'Toiture des locaux en dur', desc: 'Remplacement complet de la toiture du bar d\'U, Mickeys, Soleil Levant et Durandal.' },
+  { icon: '📝', title: 'Contrats emphytéotiques', desc: 'Signature d\'actes de base et contrats d\'emphytéose avec la fabrique d\'église pour les locaux en dur.' },
+  { icon: '🗑️', title: 'Bac à poubelles', desc: 'Installation d\'un bac à poubelles digne de ce nom sur le parvis.' },
+  { icon: '🚲', title: 'Racks à vélo', desc: 'Aménagement de stationnements vélos pour les animateurs et animés.' },
+  { icon: '🌳', title: 'Élagage des arbres', desc: 'Élagage de nombreux arbres du parvis pour sécuriser l\'espace.' },
+];
+---
+
+<PageLayout
+  title="ASBL"
+  description="Présentation de l'ASBL Les Unités scoute et guide de Saint-Dominique — gestion des locaux, projets d'infrastructure et mission."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">67-106</p>
+      <h1 class="text-4xl font-bold mb-3">L'ASBL Saint-Dominique</h1>
+      <p class="text-gray-300 max-w-xl">
+        La structure juridique qui permet à l'unité de gérer, rénover et pérenniser ses infrastructures.
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid lg:grid-cols-3 gap-12">
+
+      <div class="lg:col-span-2 space-y-12">
+
+        <!-- Présentation -->
+        <section>
+          <h2 class="text-2xl font-bold text-unit-dark mb-6">Qui sommes-nous ?</h2>
+          <div class="prose prose-gray max-w-none space-y-4 text-gray-600 leading-relaxed">
+            <p>
+              L'ASBL <strong class="text-unit-dark">« Les Unités scoute et guide de Saint-Dominique »</strong>
+              (n° 0747720342) a été officiellement créée le <strong>20 mai 2020</strong>.
+            </p>
+            <p>
+              Elle a statutairement pour but <em>« la mise à disposition de locaux, bâtiments et terrains
+              au bénéfice des Unités 106ème et 67ème. Elle a pour objet la gestion des locaux,
+              bâtiments et terrains sur les parcelles concernées, en ce compris la rénovation et la
+              construction de locaux et bâtiments »</em>.
+            </p>
+            <p>
+              Sa création était un passage utile et nécessaire pour signer un contrat d'emphytéose de longue
+              durée avec le propriétaire du terrain sur lequel se trouvent nos locaux en bois, accueillir les
+              subsides (notamment de la commune de Kraainem) et vos dons (avec attestation fiscale).
+            </p>
+            <p>
+              Une petite équipe, constituée d'actuels et anciens membres des staffs d'unité et de chefs des
+              deux unités, constitue le noyau de cette ASBL, avec mandats de deux ans validés par les deux
+              conseils d'unité.
+            </p>
+          </div>
+
+          <div class="mt-6 p-5 bg-unit-gold/10 border border-unit-gold/30 rounded-2xl flex items-start gap-4">
+            <div class="text-2xl">💰</div>
+            <div>
+              <p class="font-semibold text-unit-dark">Faire un don</p>
+              <p class="text-sm text-gray-600 mt-1">
+                Vous souhaitez soutenir les projets d'infrastructure de l'unité ? Les dons sont acceptés
+                avec attestation fiscale via l'ASBL. Contactez-nous à
+                <a href="mailto:asbl@stdom.be" class="text-unit-red hover:underline">asbl@stdom.be</a>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Projets -->
+        <section>
+          <h2 class="text-2xl font-bold text-unit-dark mb-6">Nos projets</h2>
+          <div class="grid sm:grid-cols-2 gap-4">
+            {projects.map(({ icon, title, desc }) => (
+              <div class="flex gap-4 p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                <div class="text-2xl shrink-0">{icon}</div>
+                <div>
+                  <h3 class="font-semibold text-unit-dark text-sm">{title}</h3>
+                  <p class="text-xs text-gray-500 mt-1 leading-relaxed">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- Board -->
+        <section>
+          <h2 class="text-2xl font-bold text-unit-dark mb-6">Conseil d'administration</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {asblMembers.map((m) => (
+              <StaffCard
+                totem={m.totem}
+                name={m.name}
+                role={m.role}
+                phone={m.phone}
+                email={m.email}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6">
+        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+          <h3 class="font-bold text-unit-dark mb-4">Coordonnées ASBL</h3>
+          <dl class="space-y-3 text-sm">
+            <div>
+              <dt class="text-gray-500 font-medium">Dénomination</dt>
+              <dd class="text-unit-dark mt-0.5 text-xs">Les Unités scoute et guide de Saint-Dominique</dd>
+            </div>
+            <div>
+              <dt class="text-gray-500 font-medium">N° entreprise</dt>
+              <dd class="text-unit-dark mt-0.5">0747720342</dd>
+            </div>
+            <div>
+              <dt class="text-gray-500 font-medium">Date de création</dt>
+              <dd class="text-unit-dark mt-0.5">20 mai 2020</dd>
+            </div>
+            <div>
+              <dt class="text-gray-500 font-medium">Contact</dt>
+              <dd class="mt-0.5">
+                <a href="mailto:asbl@stdom.be" class="text-unit-red hover:underline">asbl@stdom.be</a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+          <h3 class="font-bold text-unit-dark mb-3">Soutien communal</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            La commune de <strong>Kraainem</strong> soutient activement nos projets d'infrastructure
+            via des subsides accordés à l'ASBL.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</PageLayout>

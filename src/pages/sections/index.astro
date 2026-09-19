@@ -1,0 +1,164 @@
+---
+import PageLayout from '../../components/PageLayout.astro';
+import SectionCard from '../../components/SectionCard.astro';
+import { sections67 } from '../../data/sections-67';
+import { sections106 } from '../../data/sections-106';
+
+const typeOrder67 = { lutins: 0, guides: 1, horizons: 2 };
+const typeOrder106 = { baladins: 0, louveteaux: 1, eclaireurs: 2, pionniers: 3 };
+
+const sorted67 = [...sections67].sort((a, b) => typeOrder67[a.type] - typeOrder67[b.type]);
+const sorted106 = [...sections106].sort((a, b) => typeOrder106[a.type] - typeOrder106[b.type]);
+
+const guide67Types = [
+  { key: 'lutins',   label: 'Rondes de Lutins',         ageRange: '8 – 12 ans',  color: 'bg-guide-green/10 text-guide-green border-guide-green/30' },
+  { key: 'guides',   label: 'Compagnies de Guides',     ageRange: '12 – 16 ans', color: 'bg-guide-purple/10 text-guide-purple border-guide-purple/30' },
+  { key: 'horizons', label: 'Chaînes Guide Horizons',   ageRange: '16 – 17 ans', color: 'bg-guide-green/10 text-guide-green border-guide-green/30' },
+];
+
+const scout106Types = [
+  { key: 'baladins',   label: 'Ribambelles de Baladins', ageRange: '6 – 8 ans',   color: 'bg-gray-100 text-gray-600 border-gray-200' },
+  { key: 'louveteaux', label: 'Meutes de Louveteaux',    ageRange: '8 – 12 ans',  color: 'bg-gray-100 text-gray-600 border-gray-200' },
+  { key: 'eclaireurs', label: 'Troupes Scoutes',         ageRange: '12 – 16 ans', color: 'bg-gray-100 text-gray-600 border-gray-200' },
+  { key: 'pionniers',  label: 'Postes Pionniers',        ageRange: '15 – 17 ans', color: 'bg-gray-100 text-gray-600 border-gray-200' },
+];
+---
+
+<PageLayout
+  title="Sections"
+  description="Découvrez toutes les sections de l'unité Saint-Dominique : guides, lutins, scouts, louveteaux, pionniers. Trouvez la section adaptée à l'âge de votre enfant."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-20 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">67ème & 106ème</p>
+        <h1 class="text-4xl font-bold mb-4">Nos sections</h1>
+        <p class="text-gray-300 text-lg leading-relaxed">
+          17 sections pour accueillir les jeunes de 6 à 17 ans. Chaque section a sa propre identité,
+          ses traditions, ses chefs — et le même esprit Saint-Dom.
+        </p>
+      </div>
+
+      <!-- Age guide -->
+      <div class="mt-10 flex flex-wrap gap-3">
+        {[
+          { age: '6–8 ans', section: 'Baladins', color: 'bg-white/10' },
+          { age: '8–12 ans', section: 'Lutins / Louveteaux', color: 'bg-white/10' },
+          { age: '12–16 ans', section: 'Guides / Éclaireurs', color: 'bg-white/10' },
+          { age: '16–17 ans', section: 'Horizons / Pionniers', color: 'bg-white/10' },
+        ].map(({ age, section, color }) => (
+          <div class={`${color} backdrop-blur-sm border border-white/20 rounded-xl px-4 py-2 text-sm`}>
+            <span class="font-bold text-unit-gold">{age}</span>
+            <span class="text-gray-300 ml-2">{section}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════ 67ème GUIDES -->
+  <section id="67eme" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header 67 -->
+      <div class="flex items-start gap-6 mb-12">
+        <div class="w-2 self-stretch rounded-full bg-gradient-to-b from-guide-purple to-guide-green hidden sm:block"></div>
+        <div>
+          <div class="inline-flex items-center gap-2 bg-guide-purple/10 border border-guide-purple/20 rounded-full px-4 py-1.5 mb-3">
+            <span class="w-2 h-2 rounded-full bg-guide-purple"></span>
+            <span class="text-guide-purple text-sm font-semibold">67ème Unité Guide</span>
+          </div>
+          <h2 class="text-3xl font-bold text-unit-dark mb-2">Les Guides</h2>
+          <p class="text-gray-500 max-w-xl">
+            Les Guides Catholiques de Belgique. Pour les filles de 8 à 17 ans.
+            Foulard <span class="font-medium text-guide-green">vert</span> &amp;
+            <span class="font-medium text-guide-purple">mauve</span>.
+            Contact : <a href="mailto:administration67@stdom.be" class="text-unit-red hover:underline">administration67@stdom.be</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Sections by type -->
+      {guide67Types.map(({ key, label, ageRange, color }) => {
+        const sectionsList = sorted67.filter((s) => s.type === key);
+        if (sectionsList.length === 0) return null;
+        return (
+          <div class="mb-14">
+            <div class="flex items-center gap-3 mb-6">
+              <span class={`text-xs font-semibold px-3 py-1 rounded-full border ${color}`}>{label}</span>
+              <span class="text-sm text-gray-400">{ageRange}</span>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {sectionsList.map((s) => (
+                <SectionCard
+                  slug={s.slug}
+                  unit="67"
+                  name={s.name}
+                  typeLabel={s.typeLabel}
+                  ageRange={s.ageRange}
+                  description={s.description}
+                  photo={s.photos[0]}
+                  staffCount={s.staff.length}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Separator -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ 106ème SCOUTS -->
+  <section id="106eme" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header 106 -->
+      <div class="flex items-start gap-6 mb-12">
+        <div class="w-2 self-stretch rounded-full bg-gradient-to-b from-gray-800 to-gray-500 hidden sm:block"></div>
+        <div>
+          <div class="inline-flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-full px-4 py-1.5 mb-3">
+            <span class="w-2 h-2 rounded-full bg-gray-700"></span>
+            <span class="text-gray-700 text-sm font-semibold">106ème Unité Scoute</span>
+          </div>
+          <h2 class="text-3xl font-bold text-unit-dark mb-2">Les Scouts</h2>
+          <p class="text-gray-500 max-w-xl">
+            Les Scouts Baden Powell de Belgique. Pour les garçons et filles de 6 à 17 ans.
+            Foulard <span class="font-medium">noir</span> &amp; blanc.
+            Contact : <a href="mailto:administration106@stdom.be" class="text-unit-red hover:underline">administration106@stdom.be</a>
+          </p>
+        </div>
+      </div>
+
+      {scout106Types.map(({ key, label, ageRange, color }) => {
+        const sectionsList = sorted106.filter((s) => s.type === key);
+        if (sectionsList.length === 0) return null;
+        return (
+          <div class="mb-14">
+            <div class="flex items-center gap-3 mb-6">
+              <span class={`text-xs font-semibold px-3 py-1 rounded-full border ${color}`}>{label}</span>
+              <span class="text-sm text-gray-400">{ageRange}</span>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {sectionsList.map((s) => (
+                <SectionCard
+                  slug={s.slug}
+                  unit="106"
+                  name={s.name}
+                  typeLabel={s.typeLabel}
+                  ageRange={s.ageRange}
+                  description={s.description}
+                  photo={s.photos[0]}
+                  staffCount={s.staff.length}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</PageLayout>

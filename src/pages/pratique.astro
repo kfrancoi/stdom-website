@@ -1,0 +1,243 @@
+---
+import PageLayout from '../components/PageLayout.astro';
+
+const faq = [
+  {
+    q: "À quel âge mon enfant peut-il rejoindre les scouts ou guides ?",
+    a: "À la 106ème, les Baladins accueillent les enfants dès 6 ans. Pour la 67ème, les Lutins commencent à 8 ans. Les sections vont jusqu'à 17 ans pour les Pionniers et Guides Horizons."
+  },
+  {
+    q: "Mon fils peut-il aller dans les guides (67ème) ?",
+    a: "La 67ème est une unité exclusivement féminine (Guides Catholiques de Belgique). Les garçons sont accueillis à la 106ème, sauf pour les Baladins (6–8 ans) qui sont mixtes."
+  },
+  {
+    q: "Quelle est la fréquence des réunions ?",
+    a: "Les réunions ont lieu en général le dimanche matin (environ 2h30), avec un week-end de section par trimestre et un grand camp en juillet."
+  },
+  {
+    q: "Que se passe-t-il lors du camp ?",
+    a: "Chaque section organise un grand camp en juillet (1 à 2 semaines). Les enfants vivent en pleine nature, sous tentes, coupés des écrans. C'est le moment fort de l'année scoute !"
+  },
+  {
+    q: "Mon enfant n'a jamais fait de scoutisme. Est-ce un problème ?",
+    a: "Pas du tout ! Nos sections accueillent volontiers les débutants. Les animateurs veillent à l'intégration de chaque nouveau membre dans la bonne humeur."
+  },
+  {
+    q: "Comment se déroule l'inscription ?",
+    a: "Envoyez un e-mail à inscriptions67@stdom.be (pour les guides) ou inscriptions106@stdom.be (pour les scouts). Vous serez recontacté·e rapidement pour finaliser l'inscription."
+  },
+  {
+    q: "Y a-t-il une cotisation annuelle ?",
+    a: "Oui, une cotisation annuelle est demandée pour couvrir l'affiliation aux fédérations (assurance incluse), les frais de fonctionnement et une partie du matériel. Le montant vous sera communiqué lors de l'inscription."
+  },
+  {
+    q: "Mon enfant a des besoins spécifiques (allergie, régime, etc.). Comment le signaler ?",
+    a: "Toutes ces informations peuvent être communiquées lors de l'inscription ou directement à l'équipe d'animateurs de la section. Nous veillons à l'adaptation pour chaque enfant."
+  },
+  {
+    q: "Puis-je visiter les locaux avant d'inscrire mon enfant ?",
+    a: "Absolument ! Contactez-nous pour convenir d'une visite lors d'une réunion. Votre enfant pourra aussi essayer une séance avant de s'engager."
+  },
+];
+
+const inscriptionSteps = [
+  { n: '1', title: 'Choisir la section', desc: 'Consultez la page Sections pour trouver celle adaptée à l\'âge de votre enfant.' },
+  { n: '2', title: 'Envoyer un e-mail', desc: 'Écrivez à inscriptions67@stdom.be ou inscriptions106@stdom.be en précisant le prénom, l\'âge et la section souhaitée.' },
+  { n: '3', title: 'Rencontrer les chefs', desc: 'Les animateurs vous recontactent pour vous accueillir lors d\'une réunion découverte.' },
+  { n: '4', title: 'Officialiser', desc: 'Complétion du formulaire d\'inscription officiel et paiement de la cotisation annuelle.' },
+];
+---
+
+<PageLayout
+  title="Pratique"
+  description="Toutes les informations pratiques pour inscrire votre enfant à l'unité Saint-Dominique : procédure d'inscription, cotisations, FAQ."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">Informations</p>
+      <h1 class="text-4xl font-bold mb-3">Pratique</h1>
+      <p class="text-gray-300 max-w-xl">
+        Tout ce qu'il faut savoir pour rejoindre l'unité Saint-Dominique.
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid lg:grid-cols-3 gap-12">
+
+      <!-- Main content -->
+      <div class="lg:col-span-2 space-y-16">
+
+        <!-- Inscription -->
+        <section id="inscription">
+          <h2 class="text-2xl font-bold text-unit-dark mb-2">Comment s'inscrire ?</h2>
+          <p class="text-gray-500 mb-8">L'inscription se fait en 4 étapes simples.</p>
+
+          <div class="space-y-4">
+            {inscriptionSteps.map(({ n, title, desc }) => (
+              <div class="flex gap-4 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                <div class="w-10 h-10 rounded-full bg-unit-red text-white font-bold text-lg flex items-center justify-center shrink-0">
+                  {n}
+                </div>
+                <div>
+                  <h3 class="font-semibold text-unit-dark">{title}</h3>
+                  <p class="text-sm text-gray-500 mt-1 leading-relaxed">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- CTA -->
+          <div class="mt-8 grid sm:grid-cols-2 gap-4">
+            <a
+              href="mailto:inscriptions67@stdom.be"
+              class="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-guide-purple to-guide-green text-white font-semibold rounded-2xl hover:opacity-90 transition-opacity shadow-md"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Inscription 67ème (Guides)
+            </a>
+            <a
+              href="mailto:inscriptions106@stdom.be"
+              class="flex items-center justify-center gap-2 py-4 bg-unit-dark text-white font-semibold rounded-2xl hover:bg-gray-800 transition-colors shadow-md"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Inscription 106ème (Scouts)
+            </a>
+          </div>
+        </section>
+
+        <!-- Sections par âge -->
+        <section>
+          <h2 class="text-2xl font-bold text-unit-dark mb-6">Quelle section pour quel âge ?</h2>
+          <div class="overflow-hidden rounded-2xl border border-gray-100 shadow-sm">
+            <table class="w-full text-sm">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="text-left px-4 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wide">Âge</th>
+                  <th class="text-left px-4 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wide">67ème Guides (filles)</th>
+                  <th class="text-left px-4 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wide">106ème Scouts</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-50">
+                {[
+                  ['6–8 ans', '—', 'Ribambelle de Baladins (mixte)'],
+                  ['8–12 ans', 'Ronde de Lutins', 'Meute de Louveteaux'],
+                  ['12–16 ans', 'Compagnie de Guides', 'Troupe Scoute (Éclaireurs)'],
+                  ['16–17 ans', 'Chaîne Guide Horizons', 'Poste Pionnier'],
+                ].map(([age, guide, scout]) => (
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-4 py-3 font-semibold text-unit-dark">{age}</td>
+                    <td class="px-4 py-3 text-guide-purple font-medium">{guide}</td>
+                    <td class="px-4 py-3 text-gray-700">{scout}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-gray-400 mt-3">
+            * Les Baladins (6–8 ans) sont mixtes — filles et garçons ensemble.
+          </p>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+          <h2 class="text-2xl font-bold text-unit-dark mb-6">Questions fréquentes</h2>
+          <div class="space-y-3" id="faq-list">
+            {faq.map((item, i) => (
+              <div class="rounded-2xl border border-gray-100 overflow-hidden">
+                <button
+                  class="w-full flex items-center justify-between gap-4 px-5 py-4 text-left bg-white hover:bg-gray-50 transition-colors faq-trigger"
+                  data-index={i}
+                >
+                  <span class="font-medium text-unit-dark text-sm">{item.q}</span>
+                  <svg
+                    class="w-5 h-5 text-gray-400 shrink-0 transition-transform faq-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div class="hidden px-5 pb-4 bg-white border-t border-gray-50 faq-answer">
+                  <p class="text-sm text-gray-600 leading-relaxed">{item.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6">
+        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+          <h3 class="font-bold text-unit-dark mb-4">Contacts</h3>
+          <div class="space-y-4 text-sm">
+            <div>
+              <p class="text-guide-purple font-semibold mb-1">67ème Unité Guide</p>
+              <a href="mailto:administration67@stdom.be" class="block text-gray-600 hover:text-unit-red transition-colors">administration67@stdom.be</a>
+              <a href="mailto:inscriptions67@stdom.be" class="block text-gray-600 hover:text-unit-red transition-colors">inscriptions67@stdom.be</a>
+            </div>
+            <div>
+              <p class="text-gray-700 font-semibold mb-1">106ème Unité Scoute</p>
+              <a href="mailto:administration106@stdom.be" class="block text-gray-600 hover:text-unit-red transition-colors">administration106@stdom.be</a>
+              <a href="mailto:inscriptions106@stdom.be" class="block text-gray-600 hover:text-unit-red transition-colors">inscriptions106@stdom.be</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+          <h3 class="font-bold text-unit-dark mb-3">Nos fédérations</h3>
+          <div class="space-y-3 text-sm">
+            <a
+              href="https://lesguides.be"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 text-guide-purple hover:underline"
+            >
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              Les Guides Catholiques de Belgique
+            </a>
+            <a
+              href="https://lesscouts.be"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 text-gray-700 hover:underline"
+            >
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              Les Scouts Baden Powell de Belgique
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-unit-red/5 border border-unit-red/20 rounded-2xl p-5">
+          <p class="text-sm text-gray-700 leading-relaxed">
+            <strong class="text-unit-red">Des questions ?</strong><br />
+            N'hésitez pas à nous contacter via la page <a href="/contact" class="text-unit-red font-medium hover:underline">Contact</a> ou par e-mail. Nous répondons dans les plus brefs délais !
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</PageLayout>
+
+<script>
+  document.querySelectorAll('.faq-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const icon = btn.querySelector('.faq-icon') as HTMLElement;
+      const isOpen = !answer.classList.contains('hidden');
+      answer.classList.toggle('hidden', isOpen);
+      icon.style.transform = isOpen ? '' : 'rotate(180deg)';
+    });
+  });
+</script>

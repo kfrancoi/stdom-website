@@ -1,0 +1,242 @@
+---
+import PageLayout from '../components/PageLayout.astro';
+import { staff67, staff106 } from '../data/staff';
+
+const unitChef67 = staff67.find((s) => s.totem === 'Tupaïa')!;
+const unitChef106 = staff106.find((s) => s.totem === 'Almiki')!;
+---
+
+<PageLayout
+  title="Contact"
+  description="Contactez l'unité Saint-Dominique — 67ème Guide et 106ème Scout. Inscriptions, questions générales, ASBL."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">Parvis Saint-Dominique</p>
+      <h1 class="text-4xl font-bold mb-3">Contact</h1>
+      <p class="text-gray-300 max-w-xl">
+        Une question ? Une inscription ? Besoin d'informations ? Nous sommes là pour vous !
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid lg:grid-cols-3 gap-12">
+
+      <!-- Contacts principaux -->
+      <div class="lg:col-span-2 space-y-10">
+
+        <!-- Inscription -->
+        <section id="inscription">
+          <h2 class="text-2xl font-bold text-unit-dark mb-6">Inscriptions</h2>
+          <div class="grid sm:grid-cols-2 gap-5">
+
+            <!-- 67ème -->
+            <a
+              href="mailto:inscriptions67@stdom.be"
+              class="group block p-6 bg-gradient-to-br from-guide-purple/5 to-guide-green/5 border border-guide-purple/20 rounded-2xl hover:border-guide-purple/40 transition-all hover:shadow-md"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-guide-purple/10 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-guide-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-bold text-unit-dark">67ème Unité Guide</p>
+                  <p class="text-xs text-gray-400">Filles · 8–17 ans</p>
+                </div>
+              </div>
+              <p class="text-sm font-medium text-guide-purple group-hover:underline">inscriptions67@stdom.be</p>
+            </a>
+
+            <!-- 106ème -->
+            <a
+              href="mailto:inscriptions106@stdom.be"
+              class="group block p-6 bg-gray-50 border border-gray-200 rounded-2xl hover:border-gray-400 transition-all hover:shadow-md"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-bold text-unit-dark">106ème Unité Scoute</p>
+                  <p class="text-xs text-gray-400">Garçons & filles · 6–17 ans</p>
+                </div>
+              </div>
+              <p class="text-sm font-medium text-gray-700 group-hover:underline">inscriptions106@stdom.be</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Chefs d'unité -->
+        <section>
+          <h2 class="text-2xl font-bold text-unit-dark mb-6">Chefs d'unité</h2>
+          <div class="grid sm:grid-cols-2 gap-5">
+
+            <div class="p-6 bg-gradient-to-br from-guide-purple/5 to-guide-green/5 border border-guide-purple/10 rounded-2xl">
+              <p class="text-xs font-semibold text-guide-purple uppercase tracking-wide mb-3">67ème Guide</p>
+              <p class="font-bold text-unit-dark text-lg">{unitChef67.totem}</p>
+              <p class="text-gray-600">{unitChef67.name}</p>
+              <div class="mt-3 space-y-1">
+                {unitChef67.phone && (
+                  <a href={`tel:${unitChef67.phone.replace(/\//g, '').replace(/\s/g, '')}`}
+                    class="flex items-center gap-2 text-sm text-gray-500 hover:text-unit-red transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    {unitChef67.phone}
+                  </a>
+                )}
+                {unitChef67.email && (
+                  <a href={`mailto:${unitChef67.email}`}
+                    class="flex items-center gap-2 text-sm text-gray-500 hover:text-unit-red transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    {unitChef67.email}
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <div class="p-6 bg-gray-50 border border-gray-200 rounded-2xl">
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">106ème Scout</p>
+              <p class="font-bold text-unit-dark text-lg">{unitChef106.totem}</p>
+              <p class="text-gray-600">{unitChef106.name}</p>
+              <div class="mt-3 space-y-1">
+                {unitChef106.phone && (
+                  <a href={`tel:${unitChef106.phone.replace(/\//g, '').replace(/\s/g, '')}`}
+                    class="flex items-center gap-2 text-sm text-gray-500 hover:text-unit-red transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    {unitChef106.phone}
+                  </a>
+                )}
+                {unitChef106.email && (
+                  <a href={`mailto:${unitChef106.email}`}
+                    class="flex items-center gap-2 text-sm text-gray-500 hover:text-unit-red transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    {unitChef106.email}
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Autres contacts -->
+        <section>
+          <h2 class="text-2xl font-bold text-unit-dark mb-6">Autres contacts</h2>
+          <div class="grid sm:grid-cols-2 gap-4">
+            {[
+              { label: 'Administration 67ème', email: 'administration67@stdom.be', icon: '📋' },
+              { label: 'Administration 106ème', email: 'administration106@stdom.be', icon: '📋' },
+              { label: 'ASBL', email: 'asbl@stdom.be', icon: '🏛️' },
+              { label: 'Alumni', email: 'alumni@stdom.be', icon: '🎓' },
+            ].map(({ label, email, icon }) => (
+              <a
+                href={`mailto:${email}`}
+                class="flex items-center gap-3 p-4 bg-white rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-sm transition-all group"
+              >
+                <span class="text-2xl">{icon}</span>
+                <div>
+                  <p class="text-sm font-medium text-unit-dark">{label}</p>
+                  <p class="text-xs text-gray-500 group-hover:text-unit-red transition-colors">{email}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <!-- Réseaux sociaux -->
+        <section>
+          <h2 class="text-2xl font-bold text-unit-dark mb-6">Suivez-nous</h2>
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="https://www.facebook.com/UniteStDom"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-3 px-5 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-colors shadow-sm"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              Facebook
+            </a>
+            <a
+              href="https://instagram.com/st_dom_67_106"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-full hover:opacity-90 transition-opacity shadow-sm"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              Instagram
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6">
+        <!-- Localisation -->
+        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+          <h3 class="font-bold text-unit-dark mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-unit-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Nos locaux
+          </h3>
+          <div class="text-sm text-gray-600 space-y-1">
+            <p class="font-medium text-unit-dark">Parvis Saint-Dominique</p>
+            <p>Kraainem, Belgique</p>
+          </div>
+
+          <!-- Map placeholder -->
+          <div class="mt-4 aspect-video rounded-xl overflow-hidden bg-gray-200 flex items-center justify-center">
+            <a
+              href="https://maps.google.com/?q=Parvis+Saint-Dominique+Kraainem"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex flex-col items-center gap-2 text-gray-500 hover:text-unit-red transition-colors"
+            >
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span class="text-xs font-medium">Voir sur Google Maps</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Aumônier -->
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+          <h3 class="font-bold text-unit-dark mb-4">Animation à la foi</h3>
+          <div class="space-y-3 text-sm">
+            <div>
+              <p class="font-semibold text-unit-dark">François LAGASSE DE LOCHT</p>
+              <p class="text-gray-500">Aumônier (Courlis)</p>
+              <a href="tel:0476736439" class="text-gray-500 hover:text-unit-red transition-colors text-xs mt-1 block">0476/73 64 39</a>
+              <a href="mailto:francois.lagassedelocht@gmail.com" class="text-gray-500 hover:text-unit-red transition-colors text-xs block">francois.lagassedelocht@gmail.com</a>
+            </div>
+            <hr class="border-gray-100" />
+            <div>
+              <p class="font-semibold text-unit-dark">Benoît GOUBAU</p>
+              <p class="text-gray-500">Curé de la paroisse</p>
+              <a href="tel:027200261" class="text-gray-500 hover:text-unit-red transition-colors text-xs mt-1 block">02/720 02 61</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</PageLayout>
