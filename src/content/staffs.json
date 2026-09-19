@@ -1,0 +1,204 @@
+{
+  "staff67": [
+    {
+      "totem": "Tupaïa",
+      "name": "Perrine SNYERS",
+      "role": "Cheffe d'Unité",
+      "phone": "0474/24 50 40",
+      "email": "persnyers@gmail.com"
+    },
+    {
+      "totem": "Sittelle",
+      "name": "Virginie BRUNEAU",
+      "role": "Administration",
+      "phone": "0473/999084",
+      "email": "virgseb12512@gmail.com"
+    },
+    {
+      "totem": "Pika",
+      "name": "Philippe DELBRUYÈRE",
+      "role": "Trésorerie / Réf. Amazones",
+      "phone": "0486/72 10 88",
+      "email": "pdelbru@yahoo.fr"
+    },
+    {
+      "totem": "Zibeline",
+      "name": "Sara LORENZON",
+      "role": "Évènements / Communication / Réf. Gavroches",
+      "phone": "0474/34 04 52",
+      "email": "lorenzonsara@hotmail.com"
+    },
+    {
+      "totem": "Muntjac",
+      "name": "Sophie TURINE",
+      "role": "Bar d'U / Réf. Durandal / Réf. Guides Horizon",
+      "phone": "0472/99 95 03",
+      "email": "sturine@gmail.com"
+    },
+    {
+      "totem": "Axis",
+      "name": "Daphné LIÉNART",
+      "role": "Pharmacie / Évènements / Réf. Guides Horizon",
+      "phone": "0474/26 01 62",
+      "email": "lienartdaphne@yahoo.fr"
+    },
+    {
+      "totem": "Goéland",
+      "name": "Kevin FRANCOISSE",
+      "role": "Logistique / Réf. Tarentelles",
+      "phone": "0496/96 12 18",
+      "email": "kfrancoi+67@gmail.com"
+    },
+    {
+      "totem": "Chipmunk",
+      "name": "Aurélie STAS",
+      "role": "Sens et foi / Évènements / Réf. Soleil Levant",
+      "phone": "0472 65 01 60",
+      "email": "aureliestas@gmail.com"
+    },
+    {
+      "totem": "Tangara",
+      "name": "Thibault MERTENS",
+      "role": "Administration / Réf. Soleil Levant / Sens et Foi",
+      "phone": "0494 08 80 18",
+      "email": "thibaultmertens85@gmail.com"
+    },
+    {
+      "totem": "Galago",
+      "name": "Ariane LECLERCQ",
+      "role": "Administration / Évènements / Réf. Farfadets",
+      "phone": "0498625474",
+      "email": "ariane_leclercq@hotmail.com"
+    }
+  ],
+  "staff106": [
+    {
+      "totem": "Almiki",
+      "name": "Gwen MERRIMAN",
+      "role": "Cheffe d'Unité",
+      "phone": "0473/85 26 29",
+      "email": "gwenmerriman@gmail.com"
+    },
+    {
+      "totem": "Cotinga",
+      "name": "My YUEN",
+      "role": "Administration / Réf. Dhâk",
+      "phone": "0474/95 30 29",
+      "email": "my.yuen@hotmail.com"
+    },
+    {
+      "totem": "Ocelot",
+      "name": "Grégoire LITS",
+      "role": "Administration / Réf. Abeilles",
+      "phone": "0498/04 44 18",
+      "email": "gregoire.lits@gmail.com"
+    },
+    {
+      "totem": "Lama",
+      "name": "Nicolas DE GEYTER",
+      "role": "Sens et Foi / Réf. Pionniers",
+      "phone": "0479/55 05 01",
+      "email": "fonidou@gmail.com"
+    },
+    {
+      "totem": "Pardalote",
+      "name": "Guillaume de MARNEFFE",
+      "role": "Logistique / Réf. Mickey",
+      "phone": "0497/83 37 40",
+      "email": "gdemarneffe@gmail.com"
+    },
+    {
+      "totem": "Wombat",
+      "name": "Frédéric WATHELET",
+      "role": "Évènements / Réf. Rocher",
+      "phone": "0476/97 90 88",
+      "email": "fredericwathelet@gmail.com"
+    },
+    {
+      "totem": "Goundi",
+      "name": "Eric DEWEER",
+      "role": "Réf. Chevalerie",
+      "phone": "0476/73 84 78",
+      "email": "Eric.deweer@gmail.com"
+    },
+    {
+      "totem": "Wallaby",
+      "name": "Sandrine MOENS de HASE",
+      "role": "Endroits de camp / Réf. Merlins",
+      "phone": "0499/55 89 70",
+      "email": "sandrinemoens@gmail.com"
+    },
+    {
+      "totem": "Orignal",
+      "name": "Jean-Baptiste LORENT",
+      "role": "Réf. Chevalerie",
+      "phone": "0496/54 17 55",
+      "email": "Jblorent@gmail.com"
+    },
+    {
+      "totem": "Muscardin",
+      "name": "François-Xavier SINECHAL",
+      "role": "Administration / Réf. Pionniers",
+      "phone": "0486/84 88 41",
+      "email": "fx.sinechal@gmail.com"
+    },
+    {
+      "totem": "Zibeline",
+      "name": "Céline SCOUBEAU",
+      "role": "Réf. Serengeti",
+      "phone": "0479812404",
+      "email": "celinescoubeau@hotmail.com"
+    },
+    {
+      "totem": "Dingo",
+      "name": "Jérémy VANDERVEKEN",
+      "role": "Réf. Aigles",
+      "phone": "0499289571",
+      "email": "jeremyvdv@me.com"
+    }
+  ],
+  "asbl": [
+    {
+      "totem": "Hibou",
+      "name": "Jean-François COUVREUR",
+      "role": "Président du C.A.",
+      "phone": "0475/98 20 12",
+      "email": "jef.couv@gmail.com"
+    },
+    {
+      "totem": "Impala",
+      "name": "Christophe SCHUERMANS",
+      "role": "Vice-Président du C.A.",
+      "phone": "0475/96 58 13",
+      "email": "ch.schuermans@gmail.com"
+    },
+    {
+      "totem": "Marsupilami",
+      "name": "François STOOP",
+      "role": "Administrateur / Trésorier",
+      "phone": "0495/22 46 47",
+      "email": "françois.stoop@gmail.com"
+    },
+    {
+      "totem": "Belette",
+      "name": "Vincent VERVENNE",
+      "role": "Membre effectif",
+      "phone": "0477/99 35 75",
+      "email": "vervenne.servais@gmail.com"
+    },
+    {
+      "totem": "Tupaïa",
+      "name": "Perrine SNYERS",
+      "role": "Membre effectif",
+      "phone": "0474/24 50 40",
+      "email": "persnyers@gmail.com"
+    },
+    {
+      "totem": "Almiki",
+      "name": "Gwen MERRIMAN",
+      "role": "Membre effectif",
+      "phone": "0473/85 26 29",
+      "email": "gwenmerriman@gmail.com"
+    }
+  ]
+}

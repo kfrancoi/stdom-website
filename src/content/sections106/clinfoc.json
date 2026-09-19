@@ -1,0 +1,47 @@
+{
+  "name": "Clinfoc",
+  "type": "pionniers",
+  "typeLabel": "Poste Pionnier",
+  "ageRange": "15 – 17 ans",
+  "description": "Le poste Clinfoc rassemble les pionniers qui s'engagent pleinement dans des projets de grande envergure, portés par des valeurs profondes et une amitié scoute durable.",
+  "contact": "administration106@stdom.be",
+  "order": 8,
+  "staff": [
+    {
+      "totem": "Ourson",
+      "name": "Noé SAUVAGE",
+      "role": "Grand chef",
+      "phone": "0470 67 81 08",
+      "email": ""
+    },
+    {
+      "totem": "Brumby",
+      "name": "Victor van DOORSLAER",
+      "role": "",
+      "phone": "0477 04 71 21",
+      "email": ""
+    },
+    {
+      "totem": "Akita",
+      "name": "Amaury de CROMBRUGGHE",
+      "role": "",
+      "phone": "0491 63 38 39",
+      "email": ""
+    },
+    {
+      "totem": "Shetland",
+      "name": "Antoine WITTAMER",
+      "role": "",
+      "phone": "0487 12 56 15",
+      "email": ""
+    },
+    {
+      "totem": "Fennec",
+      "name": "Julien VAN DROOGENBROECK",
+      "role": "",
+      "phone": "0498 59 37 64",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

@@ -1,5 +1,10 @@
 ---
 import PageLayout from '../components/PageLayout.astro';
+import { getPage } from '../lib/content';
+
+const grandCamp = await getPage('grandCamp');
+const cotisations = await getPage('cotisations');
+const uniformes = await getPage('uniformes');
 
 const faq = [
   {
@@ -171,6 +176,33 @@ const inscriptionSteps = [
             ))}
           </div>
         </section>
+
+        <!-- Grand camp -->
+        {grandCamp && (
+          <section id="grand-camp">
+            <h2 class="text-2xl font-bold text-unit-dark mb-2">{grandCamp.title}</h2>
+            {grandCamp.intro && <p class="text-gray-600 mb-4">{grandCamp.intro}</p>}
+            <div class="prose prose-sm prose-gray max-w-none" set:html={grandCamp.html} />
+          </section>
+        )}
+
+        <!-- Cotisations & assurance -->
+        {cotisations && (
+          <section id="cotisations">
+            <h2 class="text-2xl font-bold text-unit-dark mb-2">{cotisations.title}</h2>
+            {cotisations.intro && <p class="text-gray-600 mb-4">{cotisations.intro}</p>}
+            <div class="prose prose-sm prose-gray max-w-none" set:html={cotisations.html} />
+          </section>
+        )}
+
+        <!-- Uniformes & scouterie -->
+        {uniformes && (
+          <section id="uniformes">
+            <h2 class="text-2xl font-bold text-unit-dark mb-2">{uniformes.title}</h2>
+            {uniformes.intro && <p class="text-gray-600 mb-4">{uniformes.intro}</p>}
+            <div class="prose prose-sm prose-gray max-w-none" set:html={uniformes.html} />
+          </section>
+        )}
       </div>
 
       <!-- Sidebar -->

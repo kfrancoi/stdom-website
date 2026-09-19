@@ -1,8 +1,10 @@
 ---
 import PageLayout from '../../components/PageLayout.astro';
 import SectionCard from '../../components/SectionCard.astro';
-import { sections67 } from '../../data/sections-67';
-import { sections106 } from '../../data/sections-106';
+import { getSections67, getSections106 } from '../../lib/content';
+
+const sections67 = await getSections67();
+const sections106 = await getSections106();
 
 const typeOrder67 = { lutins: 0, guides: 1, horizons: 2 };
 const typeOrder106 = { baladins: 0, louveteaux: 1, eclaireurs: 2, pionniers: 3 };

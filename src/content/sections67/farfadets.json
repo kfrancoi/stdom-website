@@ -1,0 +1,61 @@
+{
+  "name": "Les Farfadets",
+  "type": "lutins",
+  "typeLabel": "Ronde de Lutins",
+  "ageRange": "8 – 12 ans",
+  "description": "Les Farfadets, une ronde pleine d'énergie et de joie ! Chaque semaine, nos lutins explorent, créent, jouent et grandissent ensemble dans la bonne humeur.",
+  "contact": "ronde.des.farfadets@gmail.com",
+  "order": 0,
+  "staff": [
+    {
+      "totem": "Shiba",
+      "name": "Nine COOREN",
+      "role": "Cheftaine",
+      "phone": "0468 59 00 02",
+      "email": ""
+    },
+    {
+      "totem": "Lynx",
+      "name": "Manon DUPUIS",
+      "role": "",
+      "phone": "0493 83 13 48",
+      "email": ""
+    },
+    {
+      "totem": "Patou",
+      "name": "Emeline POELS",
+      "role": "",
+      "phone": "0498 01 76 91",
+      "email": ""
+    },
+    {
+      "totem": "Mazalaai",
+      "name": "Louise VANDERBORGHT",
+      "role": "",
+      "phone": "0493 96 82 72",
+      "email": ""
+    },
+    {
+      "totem": "Gyra",
+      "name": "Valentine ARNAUTS",
+      "role": "",
+      "phone": "0468 46 69 20",
+      "email": ""
+    },
+    {
+      "totem": "Madoqua",
+      "name": "Eleonore BUSLAIN",
+      "role": "",
+      "phone": "0491 75 35 74",
+      "email": ""
+    },
+    {
+      "totem": "Pika",
+      "name": "Emilie van DOORSELAER de ten RYEN",
+      "role": "",
+      "phone": "0493 02 79 84",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

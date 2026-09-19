@@ -1,0 +1,61 @@
+{
+  "name": "Durandal",
+  "type": "guides",
+  "typeLabel": "Compagnie de Guides",
+  "ageRange": "12 – 16 ans",
+  "description": "La compagnie Durandal, du nom de l'épée légendaire, incarne la force et la fidélité aux valeurs guides. Aventure, amitié et dépassement de soi sont au cœur de chaque réunion.",
+  "contact": "compagniedurandal@gmail.com",
+  "order": 4,
+  "staff": [
+    {
+      "totem": "Hyrax",
+      "name": "Alicia VAN GELDER",
+      "role": "Cheftaine",
+      "phone": "0474 90 24 35",
+      "email": ""
+    },
+    {
+      "totem": "Wallaby",
+      "name": "Laura LECOQ",
+      "role": "",
+      "phone": "0493 02 82 55",
+      "email": ""
+    },
+    {
+      "totem": "Isatis",
+      "name": "Alix-Anne KINT",
+      "role": "",
+      "phone": "0488 55 20 20",
+      "email": ""
+    },
+    {
+      "totem": "Kinkajou",
+      "name": "Hannah VANDOORNE",
+      "role": "",
+      "phone": "0468 28 73 34",
+      "email": ""
+    },
+    {
+      "totem": "Irbis",
+      "name": "Emilie BEYERMAN",
+      "role": "",
+      "phone": "0477 58 77 05",
+      "email": ""
+    },
+    {
+      "totem": "Havana",
+      "name": "Emilie THOMAS",
+      "role": "",
+      "phone": "0475 20 73 42",
+      "email": ""
+    },
+    {
+      "totem": "Sokoke",
+      "name": "Madeleine BEGAULT",
+      "role": "",
+      "phone": "0460 95 30 52",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

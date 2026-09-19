@@ -56,9 +56,11 @@ const currentYear = new Date().getFullYear();
         <ul class="space-y-2 text-sm">
           {[
             ['/', 'Accueil'],
+            ['/unite', "L'Unité"],
             ['/sections', 'Sections'],
             ['/calendrier', 'Calendrier'],
             ['/pratique', 'Pratique'],
+            ['/documents', 'Documents'],
           ].map(([href, label]) => (
             <li>
               <a href={href} class="hover:text-white transition-colors">{label}</a>

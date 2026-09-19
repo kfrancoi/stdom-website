@@ -1,0 +1,82 @@
+---
+import PageLayout from '../components/PageLayout.astro';
+import StaffCard from '../components/StaffCard.astro';
+import { getStaffs, getPage } from '../lib/content';
+
+const { staff67, staff106 } = await getStaffs();
+const histoire = await getPage('histoire');
+const presence = await getPage('presence');
+---
+
+<PageLayout
+  title="L'Unité"
+  description="L'unité Saint-Dominique : son histoire, ses staffs d'unité 67ème Guide et 106ème Scout, et l'engagement que nous portons."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">Saint-Dominique</p>
+      <h1 class="text-4xl font-bold mb-3">L'Unité</h1>
+      <p class="text-gray-300 max-w-xl">
+        Une unité, deux familles : la 67<sup>ème</sup> Guide et la 106<sup>ème</sup> Scout,
+        réunies sur le parvis Saint-Dominique.
+      </p>
+    </div>
+  </section>
+
+  <!-- Histoire -->
+  {histoire && (
+    <section class="py-16 bg-white">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-unit-dark mb-3">{histoire.title}</h2>
+        {histoire.intro && <p class="text-lg text-gray-600 mb-8">{histoire.intro}</p>}
+        <div class="prose prose-gray max-w-none" set:html={histoire.html} />
+      </div>
+    </section>
+  )}
+
+  <!-- Staffs d'unité -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-unit-dark mb-10 text-center">Les staffs d'unité</h2>
+
+      <div class="mb-12">
+        <h3 class="text-xl font-bold text-guide-purple mb-6">
+          67<sup>ème</sup> Guide
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {staff67.map((m) => (
+            <StaffCard totem={m.totem} name={m.name} role={m.role} phone={m.phone} email={m.email} />
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-bold text-unit-dark mb-6">
+          106<sup>ème</sup> Scout
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {staff106.map((m) => (
+            <StaffCard totem={m.totem} name={m.name} role={m.role} phone={m.phone} email={m.email} />
+          ))}
+        </div>
+      </div>
+
+      <p class="text-center text-gray-600 mt-10">
+        L'unité est soutenue par
+        <a href="/asbl" class="text-unit-red font-semibold hover:underline">l'ASBL Saint-Dominique</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Présence & engagement -->
+  {presence && (
+    <section class="py-16 bg-white">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-unit-dark mb-3">{presence.title}</h2>
+        {presence.intro && <p class="text-lg text-gray-600 mb-8">{presence.intro}</p>}
+        <div class="prose prose-gray max-w-none" set:html={presence.html} />
+      </div>
+    </section>
+  )}
+</PageLayout>

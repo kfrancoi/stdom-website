@@ -1,0 +1,54 @@
+{
+  "name": "Serengeti",
+  "type": "baladins",
+  "typeLabel": "Ribambelle de Baladins",
+  "ageRange": "6 – 8 ans",
+  "description": "Dans la savane Serengeti, les jeunes baladins partent à la découverte du monde qui les entoure. Curiosité, joie et partage sont les maîtres mots de cette ribambelle pleine de vie.",
+  "contact": "serengeti106e@gmail.com",
+  "order": 2,
+  "staff": [
+    {
+      "totem": "Mufasa",
+      "name": "Gregory HOMANS",
+      "role": "Grand chef",
+      "phone": "0478 01 98 97",
+      "email": ""
+    },
+    {
+      "totem": "Zazu",
+      "name": "Matis VANDENDAEL",
+      "role": "",
+      "phone": "0473 22 34 12",
+      "email": ""
+    },
+    {
+      "totem": "Mohatu",
+      "name": "Jean-Pierre DECKERS",
+      "role": "",
+      "phone": "0483 07 74 65",
+      "email": ""
+    },
+    {
+      "totem": "Nala",
+      "name": "Pauline HENNAU",
+      "role": "",
+      "phone": "0478 82 31 55",
+      "email": ""
+    },
+    {
+      "totem": "Rafiki",
+      "name": "Jeanne PLASSCHAERT",
+      "role": "",
+      "phone": "0485 80 27 14",
+      "email": ""
+    },
+    {
+      "totem": "Sarafina",
+      "name": "Athéna VAN LIPPEVELDE",
+      "role": "",
+      "phone": "0476 38 68 64",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

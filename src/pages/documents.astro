@@ -1,0 +1,130 @@
+---
+import PageLayout from '../components/PageLayout.astro';
+import { getDocuments, getChartes, getLiens } from '../lib/content';
+
+const documents = await getDocuments();
+const chartes = await getChartes();
+const liens = await getLiens();
+
+const docCategories: Record<string, string> = {
+  sante: 'Fiche santé',
+  autorisations: 'Autorisations',
+  administratif: 'Administratif',
+  autre: 'Autre',
+};
+
+const lienCategories: Record<string, string> = {
+  techniques: 'Techniques & constructions',
+  materiel: 'Malles & matériel',
+  reseaux: 'Réseaux des sections',
+  federations: 'Fédérations',
+  autre: 'Autre',
+};
+
+// Regroupe les liens par catégorie, dans l'ordre des libellés ci-dessus
+const liensParCategorie = Object.entries(lienCategories)
+  .map(([key, label]) => ({ label, items: liens.filter((l) => l.categorie === key) }))
+  .filter((g) => g.items.length > 0);
+---
+
+<PageLayout
+  title="Documents"
+  description="Documents à télécharger (fiche santé, autorisations), chartes de l'unité Saint-Dominique et liens utiles."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">Ressources</p>
+      <h1 class="text-4xl font-bold mb-3">Documents</h1>
+      <p class="text-gray-300 max-w-xl">
+        Fiches santé, autorisations, chartes de l'unité et liens utiles — tout au même endroit.
+      </p>
+    </div>
+  </section>
+
+  <!-- Téléchargements -->
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-unit-dark mb-8">📥 Téléchargements</h2>
+      {documents.length === 0 ? (
+        <p class="text-gray-600 bg-gray-50 border border-gray-200 rounded-xl p-6">
+          Les documents (fiche santé, autorisations…) seront bientôt disponibles ici.
+          En attendant, contactez le staff de votre section.
+        </p>
+      ) : (
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {documents.map((doc) => (
+            <a
+              href={doc.file}
+              download
+              class="flex items-start gap-4 bg-gray-50 border border-gray-200 rounded-xl p-5 hover:border-unit-red hover:shadow-md transition-all"
+            >
+              <span class="text-3xl">📄</span>
+              <span>
+                <span class="block font-semibold text-unit-dark">{doc.title}</span>
+                <span class="block text-xs font-medium text-unit-red uppercase tracking-wide mt-0.5">
+                  {docCategories[doc.categorie] ?? doc.categorie}
+                </span>
+                {doc.description && (
+                  <span class="block text-sm text-gray-600 mt-1">{doc.description}</span>
+                )}
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Chartes -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-unit-dark mb-8">📜 Les chartes</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {chartes.map((c) => (
+          <a
+            href={`/chartes/${c.slug}`}
+            class="bg-white border border-gray-200 rounded-xl p-6 hover:border-unit-red hover:shadow-md transition-all"
+          >
+            <h3 class="font-bold text-unit-dark mb-2">{c.title}</h3>
+            {c.intro && <p class="text-sm text-gray-600">{c.intro}</p>}
+            <span class="inline-block mt-3 text-sm font-semibold text-unit-red">Lire la charte →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Liens utiles -->
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-unit-dark mb-8">🔗 Liens utiles</h2>
+      {liensParCategorie.map((groupe) => (
+        <div class="mb-8 last:mb-0">
+          <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+            {groupe.label}
+          </h3>
+          <ul class="space-y-2">
+            {groupe.items.map((lien) => (
+              <li>
+                <a
+                  href={lien.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-baseline gap-2"
+                >
+                  <span class="font-semibold text-unit-dark group-hover:text-unit-red transition-colors">
+                    {lien.label} ↗
+                  </span>
+                  {lien.description && (
+                    <span class="text-sm text-gray-600">— {lien.description}</span>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</PageLayout>

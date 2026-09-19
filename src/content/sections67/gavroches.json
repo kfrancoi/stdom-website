@@ -1,0 +1,61 @@
+{
+  "name": "Les Gavroches",
+  "type": "lutins",
+  "typeLabel": "Ronde de Lutins",
+  "ageRange": "8 – 12 ans",
+  "description": "La ronde des Gavroches accueille les lutins dans un univers d'aventure et de découverte. Au programme : jeux, bricolage, sorties nature et belles amitiés.",
+  "contact": "rondegavroche.stdom@gmail.com",
+  "order": 1,
+  "staff": [
+    {
+      "totem": "Cabri",
+      "name": "Théodora LUYCKX",
+      "role": "Cheftaine",
+      "phone": "0475 44 37 47",
+      "email": ""
+    },
+    {
+      "totem": "Ourebi",
+      "name": "Lucie VAN DEN SCHRIEK",
+      "role": "",
+      "phone": "0490 39 81 25",
+      "email": ""
+    },
+    {
+      "totem": "Warrah",
+      "name": "Emilie GERSDORFF",
+      "role": "",
+      "phone": "0493 39 91 33",
+      "email": ""
+    },
+    {
+      "totem": "Estrella",
+      "name": "Manon BRIMBOIS",
+      "role": "",
+      "phone": "0479 15 55 24",
+      "email": ""
+    },
+    {
+      "totem": "Redunka",
+      "name": "Célestine SERMEUS",
+      "role": "",
+      "phone": "0468 29 77 55",
+      "email": ""
+    },
+    {
+      "totem": "Appaloosa",
+      "name": "Soline LHOAS",
+      "role": "",
+      "phone": "0483 99 64 71",
+      "email": ""
+    },
+    {
+      "totem": "Pajero",
+      "name": "Agnes HEYMANS",
+      "role": "",
+      "phone": "0494 48 27 20",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

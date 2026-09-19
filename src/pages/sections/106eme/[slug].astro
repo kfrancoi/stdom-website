@@ -1,9 +1,10 @@
 ---
 import PageLayout from '../../../components/PageLayout.astro';
 import StaffCard from '../../../components/StaffCard.astro';
-import { sections106 } from '../../../data/sections-106';
+import { getSections106 } from '../../../lib/content';
 
 export async function getStaticPaths() {
+  const sections106 = await getSections106();
   return sections106.map((section) => ({
     params: { slug: section.slug },
     props: { section },

@@ -1,7 +1,7 @@
 ---
-import { getUpcomingEvents, categoryConfig } from '../data/calendar';
+import { getUpcomingEvents, categoryConfig } from '../lib/content';
 
-const events = getUpcomingEvents(6);
+const events = await getUpcomingEvents(6);
 
 function formatDate(dateStr: string): { day: string; month: string; weekday: string } {
   const date = new Date(dateStr + 'T12:00:00');

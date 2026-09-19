@@ -1,0 +1,54 @@
+{
+  "name": "La Chevalerie",
+  "type": "eclaireurs",
+  "typeLabel": "Troupe Scoute",
+  "ageRange": "12 – 16 ans",
+  "description": "Fidèle à l'idéal chevaleresque, la troupe de la Chevalerie forge des scouts droits, courageux et au service des autres. Honneur, fraternité et aventure au programme !",
+  "contact": "chevalerie106@hotmail.com",
+  "order": 7,
+  "staff": [
+    {
+      "totem": "Grivet",
+      "name": "Raphaël DELVAUX",
+      "role": "Grand chef",
+      "phone": "0492 82 25 25",
+      "email": ""
+    },
+    {
+      "totem": "Axis",
+      "name": "Louis TIETARD",
+      "role": "",
+      "phone": "0478 74 56 01",
+      "email": ""
+    },
+    {
+      "totem": "Caracal",
+      "name": "Guillaume le MAISTRE d'ANSTAING",
+      "role": "",
+      "phone": "0493 47 34 54",
+      "email": ""
+    },
+    {
+      "totem": "Chinook",
+      "name": "Lucas FORTON",
+      "role": "",
+      "phone": "0485 25 06 10",
+      "email": ""
+    },
+    {
+      "totem": "Douc",
+      "name": "Pierre VANDEPUTTE",
+      "role": "",
+      "phone": "0493 94 47 86",
+      "email": ""
+    },
+    {
+      "totem": "Koudou",
+      "name": "Marin VANDOORNE",
+      "role": "",
+      "phone": "0484 28 51 43",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

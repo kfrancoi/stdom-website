@@ -1,0 +1,54 @@
+{
+  "name": "Le Rocher",
+  "type": "louveteaux",
+  "typeLabel": "Meute de Louveteaux",
+  "ageRange": "8 – 12 ans",
+  "description": "Solide comme un roc, la meute du Rocher construit des louveteaux déterminés et créatifs. Avec leurs chefs, ils apprennent à relever des défis et à grandir ensemble.",
+  "contact": "rocher106@gmail.com",
+  "order": 5,
+  "staff": [
+    {
+      "totem": "Akela",
+      "name": "Stanislas VERVENNE",
+      "role": "Grand chef",
+      "phone": "0479 03 47 68",
+      "email": ""
+    },
+    {
+      "totem": "Bagheera",
+      "name": "Nathan PITANCE",
+      "role": "",
+      "phone": "0493 82 23 44",
+      "email": ""
+    },
+    {
+      "totem": "Kaa",
+      "name": "Harold MICHAUX",
+      "role": "",
+      "phone": "0483 14 77 52",
+      "email": ""
+    },
+    {
+      "totem": "Hathi",
+      "name": "Arturo COMENGE",
+      "role": "",
+      "phone": "0474 07 41 25",
+      "email": ""
+    },
+    {
+      "totem": "Rama",
+      "name": "Diego BEGASSE",
+      "role": "",
+      "phone": "0490 43 52 38",
+      "email": ""
+    },
+    {
+      "totem": "Baloo",
+      "name": "Edouard VERSCHUERE",
+      "role": "",
+      "phone": "0472 79 10 10",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

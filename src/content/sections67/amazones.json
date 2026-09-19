@@ -1,0 +1,61 @@
+{
+  "name": "Les Amazones",
+  "type": "guides",
+  "typeLabel": "Compagnie de Guides",
+  "ageRange": "12 – 16 ans",
+  "description": "La compagnie des Amazones forge des jeunes femmes fortes, solidaires et créatives. Projets de patrouille, camps, service aux autres : les Amazones relèvent tous les défis !",
+  "contact": "amazones67eme@stdom.be",
+  "order": 3,
+  "staff": [
+    {
+      "totem": "Suni",
+      "name": "Alicia BUSLAIN",
+      "role": "Cheftaine",
+      "phone": "0496 07 24 00",
+      "email": ""
+    },
+    {
+      "totem": "Tamia",
+      "name": "Emilie LOSSON",
+      "role": "",
+      "phone": "0492 85 94 10",
+      "email": ""
+    },
+    {
+      "totem": "Tamia",
+      "name": "Valentine GERSDORFF",
+      "role": "",
+      "phone": "0489 23 60 01",
+      "email": ""
+    },
+    {
+      "totem": "Manningi",
+      "name": "Klara ROLAND",
+      "role": "",
+      "phone": "0496 75 51 78",
+      "email": ""
+    },
+    {
+      "totem": "Aluco",
+      "name": "Lisa Rose PEREZ",
+      "role": "",
+      "phone": "0473 83 39 01",
+      "email": ""
+    },
+    {
+      "totem": "Klee Kai",
+      "name": "Lucie BLANCHAERT",
+      "role": "",
+      "phone": "0476 35 81 38",
+      "email": ""
+    },
+    {
+      "totem": "Corsac",
+      "name": "Charlotte DE BRUYN",
+      "role": "",
+      "phone": "0470 89 53 32",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

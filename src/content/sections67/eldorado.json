@@ -1,0 +1,40 @@
+{
+  "name": "Eldorado",
+  "type": "horizons",
+  "typeLabel": "Chaîne Guide Horizons",
+  "ageRange": "16 – 17 ans",
+  "description": "Eldorado, c'est l'aventure vers de nouveaux horizons. Les aînées de la 67ème s'engagent dans des projets plus ambitieux, portées par des valeurs d'entraide, de sens et de responsabilité.",
+  "contact": "eldorado.stdom@gmail.com",
+  "order": 6,
+  "staff": [
+    {
+      "totem": "Springer",
+      "name": "Juliette GODIN",
+      "role": "Cheftaine",
+      "phone": "0494 41 93 86",
+      "email": ""
+    },
+    {
+      "totem": "Yearling",
+      "name": "Elise CATTOOR",
+      "role": "",
+      "phone": "0478 49 66 58",
+      "email": ""
+    },
+    {
+      "totem": "Burunduk",
+      "name": "Noémie de BIOLLEY",
+      "role": "",
+      "phone": "0470 79 30 26",
+      "email": ""
+    },
+    {
+      "totem": "Laurane",
+      "name": "Laurane PEETERS",
+      "role": "",
+      "phone": "0476 78 07 49",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

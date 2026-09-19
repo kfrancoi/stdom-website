@@ -1,0 +1,41 @@
+---
+import PageLayout from '../../components/PageLayout.astro';
+import { getChartes } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const chartes = await getChartes();
+  return chartes.map((charte) => ({
+    params: { slug: charte.slug },
+    props: { charte },
+  }));
+}
+
+const { charte } = Astro.props;
+---
+
+<PageLayout title={charte.title} description={charte.intro ?? charte.title}>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="text-sm text-gray-400 mb-4">
+        <a href="/" class="hover:text-unit-gold transition-colors">Accueil</a>
+        <span class="mx-2">/</span>
+        <a href="/documents" class="hover:text-unit-gold transition-colors">Documents</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-200">{charte.title}</span>
+      </nav>
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">Charte</p>
+      <h1 class="text-4xl font-bold mb-3">{charte.title}</h1>
+      {charte.intro && <p class="text-gray-300 max-w-xl">{charte.intro}</p>}
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-gray max-w-none" set:html={charte.html} />
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <a href="/documents" class="text-unit-red font-semibold hover:underline">← Retour aux documents</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

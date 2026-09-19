@@ -1,0 +1,61 @@
+{
+  "name": "Dhak",
+  "type": "louveteaux",
+  "typeLabel": "Meute de Louveteaux",
+  "ageRange": "8 – 12 ans",
+  "description": "La meute Dhak forge ses louveteaux dans l'esprit du Livre de la Jungle : entraide, courage et respect de la nature guident chaque réunion et chaque camp.",
+  "contact": "dhak.stdom@gmail.com",
+  "order": 4,
+  "staff": [
+    {
+      "totem": "Akela",
+      "name": "Sacha VANDERREYDT",
+      "role": "Grand chef",
+      "phone": "0499 91 81 24",
+      "email": ""
+    },
+    {
+      "totem": "Ziggy",
+      "name": "Corentin BOONEN",
+      "role": "",
+      "phone": "0499 50 90 09",
+      "email": ""
+    },
+    {
+      "totem": "Mysa",
+      "name": "Céleste DEGAND",
+      "role": "",
+      "phone": "0460 96 40 25",
+      "email": ""
+    },
+    {
+      "totem": "Calimico",
+      "name": "Xavier HOBBELEN",
+      "role": "",
+      "phone": "0471 60 20 66",
+      "email": ""
+    },
+    {
+      "totem": "Ourébi",
+      "name": "Maxime BRION",
+      "role": "",
+      "phone": "0470 11 56 75",
+      "email": ""
+    },
+    {
+      "totem": "Kotick",
+      "name": "Alexine MOYERSOEN",
+      "role": "",
+      "phone": "0468 24 44 77",
+      "email": ""
+    },
+    {
+      "totem": "Sona",
+      "name": "Chloé KOPP",
+      "role": "",
+      "phone": "0471 06 30 24",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

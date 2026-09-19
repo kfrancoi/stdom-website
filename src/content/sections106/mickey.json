@@ -1,0 +1,75 @@
+{
+  "name": "Mickey",
+  "type": "baladins",
+  "typeLabel": "Ribambelle de Baladins",
+  "ageRange": "6 – 8 ans",
+  "description": "La ribambelle Mickey emmène les tout-petits dans une ribambelle d'aventures ! Jeux, chants, bricolages et premières nuits en plein air : le début d'une longue histoire avec le scoutisme.",
+  "contact": "baladinsmickey@gmail.com",
+  "order": 1,
+  "staff": [
+    {
+      "totem": "Mickey",
+      "name": "Anli MICHEL",
+      "role": "Grande chef",
+      "phone": "0483 14 76 22",
+      "email": ""
+    },
+    {
+      "totem": "Lucky",
+      "name": "Géraldine BEYERMAN",
+      "role": "",
+      "phone": "0478 08 84 06",
+      "email": ""
+    },
+    {
+      "totem": "Djali",
+      "name": "Octave DE SMET",
+      "role": "",
+      "phone": "0474 06 60 47",
+      "email": ""
+    },
+    {
+      "totem": "Faloo",
+      "name": "Isabel DE PAU",
+      "role": "",
+      "phone": "0479 04 92 97",
+      "email": ""
+    },
+    {
+      "totem": "Koda",
+      "name": "Guillaume COLARD",
+      "role": "",
+      "phone": "0460 96 47 87",
+      "email": ""
+    },
+    {
+      "totem": "Copper",
+      "name": "Valentina GERZANICH",
+      "role": "",
+      "phone": "0498 73 09 39",
+      "email": ""
+    },
+    {
+      "totem": "Sirhiss",
+      "name": "Basil DEJONG",
+      "role": "",
+      "phone": "0478 08 06 13",
+      "email": ""
+    },
+    {
+      "totem": "Timon",
+      "name": "Anne-Catherine PEAUTAURIT",
+      "role": "",
+      "phone": "0496 87 34 25",
+      "email": ""
+    },
+    {
+      "totem": "Froufrou",
+      "name": "Satya RODALL",
+      "role": "",
+      "phone": "0495 19 43 98",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

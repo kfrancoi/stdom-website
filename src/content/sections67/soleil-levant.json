@@ -1,0 +1,61 @@
+{
+  "name": "Le Soleil Levant",
+  "type": "lutins",
+  "typeLabel": "Ronde de Lutins",
+  "ageRange": "8 – 12 ans",
+  "description": "La ronde du Soleil Levant brille par son enthousiasme ! Nos lutins s'épanouissent à travers des activités créatives, sportives et spirituelles tout au long de l'année.",
+  "contact": "soleillevantstdom@gmail.com",
+  "order": 2,
+  "staff": [
+    {
+      "totem": "Saïmiri",
+      "name": "Gabrielle GENNART",
+      "role": "Cheftaine",
+      "phone": "0470 79 30 26",
+      "email": ""
+    },
+    {
+      "totem": "Daman",
+      "name": "Marie JACOBS",
+      "role": "",
+      "phone": "0472 74 31 88",
+      "email": ""
+    },
+    {
+      "totem": "Ouandji",
+      "name": "Ombeline TRIEST",
+      "role": "",
+      "phone": "0499 84 11 78",
+      "email": ""
+    },
+    {
+      "totem": "Wombat",
+      "name": "Eléonore CASTELEIN",
+      "role": "",
+      "phone": "0456 15 07 16",
+      "email": ""
+    },
+    {
+      "totem": "Souslik",
+      "name": "Jeanne HUBLET",
+      "role": "",
+      "phone": "0471 86 85 58",
+      "email": ""
+    },
+    {
+      "totem": "Caracal",
+      "name": "Colombine PAQUOT",
+      "role": "",
+      "phone": "0479 11 20 55",
+      "email": ""
+    },
+    {
+      "totem": "Okami",
+      "name": "Joséphine WTTERWULGHE",
+      "role": "",
+      "phone": "0478 04 63 46",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

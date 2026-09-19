@@ -1,7 +1,8 @@
 ---
 import PageLayout from '../components/PageLayout.astro';
-import { events, categoryConfig } from '../data/calendar';
-import type { CalendarEvent } from '../data/calendar';
+import { getEvents, categoryConfig, type CalendarEvent } from '../lib/content';
+
+const events = await getEvents();
 
 // Group events by month
 const months: Record<string, CalendarEvent[]> = {};

@@ -2,8 +2,11 @@
 import PageLayout from '../components/PageLayout.astro';
 import CalendarPreview from '../components/CalendarPreview.astro';
 import SectionCard from '../components/SectionCard.astro';
-import { sections67 } from '../data/sections-67';
-import { sections106 } from '../data/sections-106';
+import { getSections67, getSections106, getActiveFlashs } from '../lib/content';
+
+const sections67 = await getSections67();
+const sections106 = await getSections106();
+const flashs = await getActiveFlashs();
 
 // Sélection des sections à afficher en homepage (2 par type)
 const featuredGuides = sections67.filter((s) => ['farfadets', 'amazones', 'eldorado'].includes(s.slug));
@@ -104,6 +107,27 @@ const values = [
       </svg>
     </div>
   </section>
+
+  <!-- ══════════════════════════════════════════════════════ INFOS FLASH -->
+  {flashs.length > 0 && (
+    <section class="bg-unit-gold/10 border-y border-unit-gold/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-2">
+        {flashs.map((flash) => (
+          <p class="text-sm text-unit-dark">
+            <span class="inline-block bg-unit-gold text-unit-dark text-xs font-bold uppercase tracking-wide rounded-full px-2 py-0.5 mr-2">
+              Info flash
+            </span>
+            <strong>{flash.title}</strong> — {flash.message}
+            {flash.link && (
+              <a href={flash.link} class="ml-1 font-semibold text-unit-red hover:underline">
+                {flash.linkLabel || 'En savoir plus'} →
+              </a>
+            )}
+          </p>
+        ))}
+      </div>
+    </section>
+  )}
 
   <!-- ══════════════════════════════════════════════════════ DEUX UNITÉS -->
   <section class="py-16 bg-gray-50">

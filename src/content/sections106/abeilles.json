@@ -1,0 +1,61 @@
+{
+  "name": "Les Abeilles",
+  "type": "louveteaux",
+  "typeLabel": "Meute de Louveteaux",
+  "ageRange": "8 – 12 ans",
+  "description": "La meute des Abeilles bourdonne d'activités ! Nos louveteaux apprennent à vivre en meute : loyauté, débrouillardise et sens du service sont les piliers de leur progression scoute.",
+  "contact": "abeilles@stdom.be",
+  "order": 3,
+  "staff": [
+    {
+      "totem": "Akela",
+      "name": "Ilhan GULBAKAN",
+      "role": "Grand chef",
+      "phone": "0486 20 99 11",
+      "email": ""
+    },
+    {
+      "totem": "Rama",
+      "name": "Victor WITTAMER",
+      "role": "",
+      "phone": "0485 75 01 12",
+      "email": ""
+    },
+    {
+      "totem": "Hathi",
+      "name": "Sam BOUMEDMED ZURSTRASSEN",
+      "role": "",
+      "phone": "0477 70 43 84",
+      "email": ""
+    },
+    {
+      "totem": "Kaa",
+      "name": "Grégoire HEYMANS",
+      "role": "",
+      "phone": "0494 48 28 05",
+      "email": ""
+    },
+    {
+      "totem": "Toomaï",
+      "name": "Arthur VANDERVAEREN",
+      "role": "",
+      "phone": "0485 75 01 12",
+      "email": ""
+    },
+    {
+      "totem": "Wontolla",
+      "name": "Arthur MANSVELT",
+      "role": "",
+      "phone": "0468 57 66 75",
+      "email": ""
+    },
+    {
+      "totem": "Mang",
+      "name": "Jules COOREN",
+      "role": "",
+      "phone": "0465 03 54 53",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

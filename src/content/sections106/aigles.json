@@ -1,0 +1,54 @@
+{
+  "name": "Les Aigles",
+  "type": "eclaireurs",
+  "typeLabel": "Troupe Scoute",
+  "ageRange": "12 – 16 ans",
+  "description": "La troupe des Aigles vole haut ! Nos éclaireurs développent leur autonomie, leur sens du dépassement et leurs compétences techniques à travers projets de patrouille et grands camps.",
+  "contact": "troupedesaigles@gmail.com",
+  "order": 6,
+  "staff": [
+    {
+      "totem": "Azores",
+      "name": "Alexandre PIRMEZ",
+      "role": "Grand chef",
+      "phone": "0479 82 58 24",
+      "email": ""
+    },
+    {
+      "totem": "Mustang",
+      "name": "Louis GOOSSENS",
+      "role": "",
+      "phone": "0456 02 43 25",
+      "email": ""
+    },
+    {
+      "totem": "Basenji",
+      "name": "Charles PICARD",
+      "role": "",
+      "phone": "0456 07 08 15",
+      "email": ""
+    },
+    {
+      "totem": "Alezan",
+      "name": "Tristan van den WOUWER",
+      "role": "",
+      "phone": "0492 20 01 87",
+      "email": ""
+    },
+    {
+      "totem": "Irbis",
+      "name": "Théo de KERCKHOVE",
+      "role": "",
+      "phone": "0478 81 80 19",
+      "email": ""
+    },
+    {
+      "totem": "Wapiti",
+      "name": "Benjamin PIRMEZ",
+      "role": "",
+      "phone": "0470 03 88 77",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

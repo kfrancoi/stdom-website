@@ -1,0 +1,61 @@
+{
+  "name": "La Tarentelle",
+  "type": "guides",
+  "typeLabel": "Compagnie de Guides",
+  "ageRange": "12 – 16 ans",
+  "description": "La Tarentelle danse au rythme de la vie guide : des réunions dynamiques, des camps mémorables et une équipe soudée prête à se lancer dans toutes les aventures.",
+  "contact": "tarentelle67@gmail.com",
+  "order": 5,
+  "staff": [
+    {
+      "totem": "Choussingha",
+      "name": "Alexia GERSDORFF",
+      "role": "Cheftaine",
+      "phone": "0470 48 64 39",
+      "email": ""
+    },
+    {
+      "totem": "Ourébi",
+      "name": "Violette STROOBANTS",
+      "role": "",
+      "phone": "0470 09 04 54",
+      "email": ""
+    },
+    {
+      "totem": "Quokka",
+      "name": "Alix de BONHOME",
+      "role": "",
+      "phone": "0471 56 75 57",
+      "email": ""
+    },
+    {
+      "totem": "Bagheera",
+      "name": "Lea KOPP",
+      "role": "",
+      "phone": "0471 06 30 45",
+      "email": ""
+    },
+    {
+      "totem": "Dingo",
+      "name": "Elisa ROULIVE",
+      "role": "",
+      "phone": "0471 21 43 31",
+      "email": ""
+    },
+    {
+      "totem": "Fanaloka",
+      "name": "Victoire HERMANS",
+      "role": "",
+      "phone": "0472 49 04 76",
+      "email": ""
+    },
+    {
+      "totem": "Manul",
+      "name": "Marie-Astrid HEYMANS",
+      "role": "",
+      "phone": "0490 40 23 61",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

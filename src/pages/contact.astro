@@ -1,6 +1,8 @@
 ---
 import PageLayout from '../components/PageLayout.astro';
-import { staff67, staff106 } from '../data/staff';
+import { getStaffs } from '../lib/content';
+
+const { staff67, staff106 } = await getStaffs();
 
 const unitChef67 = staff67.find((s) => s.totem === 'Tupaïa')!;
 const unitChef106 = staff106.find((s) => s.totem === 'Almiki')!;
