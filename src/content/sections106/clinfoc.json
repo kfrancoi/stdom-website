@@ -8,38 +8,38 @@
   "order": 8,
   "staff": [
     {
-      "totem": "Ourson",
-      "name": "Noé SAUVAGE",
-      "role": "Grand chef",
-      "phone": "0470 67 81 08",
+      "totem": "Azores",
+      "name": "Alexandre",
+      "role": "",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Brumby",
-      "name": "Victor van DOORSLAER",
+      "totem": "Guariba",
+      "name": "Sacha",
       "role": "",
-      "phone": "0477 04 71 21",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Akita",
-      "name": "Amaury de CROMBRUGGHE",
+      "totem": "Koudou",
+      "name": "Marin",
       "role": "",
-      "phone": "0491 63 38 39",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Shetland",
-      "name": "Antoine WITTAMER",
+      "totem": "Hathi",
+      "name": "Sam",
       "role": "",
-      "phone": "0487 12 56 15",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Fennec",
-      "name": "Julien VAN DROOGENBROECK",
+      "totem": "Sajou",
+      "name": "Nathan",
       "role": "",
-      "phone": "0498 59 37 64",
+      "phone": "",
       "email": ""
     }
   ],

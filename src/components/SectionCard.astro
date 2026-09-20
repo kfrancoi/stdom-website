@@ -17,7 +17,7 @@ const {
   typeLabel,
   ageRange,
   description,
-  photo = '/images/placeholder-section.jpg',
+  photo,
   staffCount,
 } = Astro.props;
 
@@ -33,14 +33,35 @@ const unitBadge = unit === '67'
   class="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 transition-all duration-300 hover:-translate-y-1"
 >
   <!-- Photo -->
-  <div class="relative h-48 overflow-hidden bg-gray-100">
-    <img
-      src={photo}
-      alt={`Section ${name}`}
-      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-      loading="lazy"
-      onerror="this.src='/images/placeholder-section.jpg'"
-    />
+  <div class={`relative h-48 overflow-hidden ${
+    unit === '67'
+      ? 'bg-gradient-to-br from-guide-green to-guide-purple'
+      : 'bg-gradient-to-br from-unit-dark to-unit-red'
+  }`}>
+    {photo ? (
+      <img
+        src={photo}
+        alt={`Section ${name}`}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+        onerror="this.onerror=null; this.style.display='none'"
+      />
+    ) : (
+      <!-- Pas de photo dans le CMS : motif de remplacement, sans requête réseau -->
+      <div class="w-full h-full flex items-center justify-center">
+        <svg
+          class="w-14 h-14 text-white/30 group-hover:scale-105 transition-transform duration-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M3 20l6.5-9 4.5 6 3-4L21 20H3z" />
+          <circle cx="7.5" cy="7.5" r="1.75" stroke-width="1.5" />
+        </svg>
+      </div>
+    )}
     <!-- Unit badge -->
     <span class={`absolute top-3 right-3 text-xs font-semibold px-2 py-1 rounded-full backdrop-blur-sm ${
       unit === '67'

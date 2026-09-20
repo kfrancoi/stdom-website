@@ -9,44 +9,58 @@
   "staff": [
     {
       "totem": "Mufasa",
-      "name": "Gregory HOMANS",
-      "role": "Grand chef",
-      "phone": "0478 01 98 97",
-      "email": ""
-    },
-    {
-      "totem": "Zazu",
-      "name": "Matis VANDENDAEL",
-      "role": "",
-      "phone": "0473 22 34 12",
+      "name": "Athéna",
+      "role": "Grande cheffe",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Mohatu",
-      "name": "Jean-Pierre DECKERS",
+      "name": "Jean-Pierre",
       "role": "",
-      "phone": "0483 07 74 65",
-      "email": ""
-    },
-    {
-      "totem": "Nala",
-      "name": "Pauline HENNAU",
-      "role": "",
-      "phone": "0478 82 31 55",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Rafiki",
-      "name": "Jeanne PLASSCHAERT",
+      "name": "Jeanne",
       "role": "",
-      "phone": "0485 80 27 14",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Sarafina",
-      "name": "Athéna VAN LIPPEVELDE",
+      "totem": "Nala",
+      "name": "Pauline",
       "role": "",
-      "phone": "0476 38 68 64",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Pumba",
+      "name": "Manon",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Simba",
+      "name": "Alexis",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Timon",
+      "name": "Camille",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Sarabi",
+      "name": "Alannah",
+      "role": "",
+      "phone": "",
       "email": ""
     }
   ],

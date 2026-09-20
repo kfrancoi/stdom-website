@@ -9,51 +9,51 @@
   "staff": [
     {
       "totem": "Akela",
-      "name": "Sacha VANDERREYDT",
-      "role": "Grand chef",
-      "phone": "0499 91 81 24",
+      "name": "Alexine",
+      "role": "Grande cheffe",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Ziggy",
-      "name": "Corentin BOONEN",
+      "totem": "Bagheera",
+      "name": "Maxime",
       "role": "",
-      "phone": "0499 50 90 09",
-      "email": ""
-    },
-    {
-      "totem": "Mysa",
-      "name": "Céleste DEGAND",
-      "role": "",
-      "phone": "0460 96 40 25",
-      "email": ""
-    },
-    {
-      "totem": "Calimico",
-      "name": "Xavier HOBBELEN",
-      "role": "",
-      "phone": "0471 60 20 66",
-      "email": ""
-    },
-    {
-      "totem": "Ourébi",
-      "name": "Maxime BRION",
-      "role": "",
-      "phone": "0470 11 56 75",
-      "email": ""
-    },
-    {
-      "totem": "Kotick",
-      "name": "Alexine MOYERSOEN",
-      "role": "",
-      "phone": "0468 24 44 77",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Sona",
-      "name": "Chloé KOPP",
+      "name": "Chloé",
       "role": "",
-      "phone": "0471 06 30 24",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Jacala",
+      "name": "Xavier",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Ikea",
+      "name": "Pauline",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Coco Chanel",
+      "name": "Leonie",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Haribo",
+      "name": "William",
+      "role": "",
+      "phone": "",
       "email": ""
     }
   ],

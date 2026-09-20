@@ -8,52 +8,45 @@
   "order": 2,
   "staff": [
     {
-      "totem": "Saïmiri",
-      "name": "Gabrielle GENNART",
-      "role": "Cheftaine",
-      "phone": "0470 79 30 26",
-      "email": ""
-    },
-    {
       "totem": "Daman",
-      "name": "Marie JACOBS",
+      "name": "Marie",
       "role": "",
-      "phone": "0472 74 31 88",
-      "email": ""
-    },
-    {
-      "totem": "Ouandji",
-      "name": "Ombeline TRIEST",
-      "role": "",
-      "phone": "0499 84 11 78",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Wombat",
-      "name": "Eléonore CASTELEIN",
+      "name": "Eléonore",
       "role": "",
-      "phone": "0456 15 07 16",
-      "email": ""
-    },
-    {
-      "totem": "Souslik",
-      "name": "Jeanne HUBLET",
-      "role": "",
-      "phone": "0471 86 85 58",
-      "email": ""
-    },
-    {
-      "totem": "Caracal",
-      "name": "Colombine PAQUOT",
-      "role": "",
-      "phone": "0479 11 20 55",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Okami",
-      "name": "Joséphine WTTERWULGHE",
+      "name": "Joséphine",
       "role": "",
-      "phone": "0478 04 63 46",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Caracal",
+      "name": "Colombine",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Coywolf",
+      "name": "Evelyne",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Spip",
+      "name": "Eglantine",
+      "role": "",
+      "phone": "",
       "email": ""
     }
   ],

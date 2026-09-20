@@ -8,59 +8,59 @@
   "order": 0,
   "staff": [
     {
-      "totem": "Merlin",
-      "name": "Juliette BERGHMAN",
-      "role": "Grande chef",
-      "phone": "0468 43 76 93",
-      "email": ""
-    },
-    {
-      "totem": "Freya",
-      "name": "Emma MOFFROID",
+      "totem": "Perceval",
+      "name": "Eloi",
       "role": "",
-      "phone": "0492 41 45 69",
-      "email": ""
-    },
-    {
-      "totem": "Pellinore",
-      "name": "Romane PONCE",
-      "role": "",
-      "phone": "0467 09 05 21",
-      "email": ""
-    },
-    {
-      "totem": "Kay",
-      "name": "Florentin VAN BASTELAER",
-      "role": "",
-      "phone": "0484 45 44 98",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Iseldir",
-      "name": "Romane CHABEAU",
+      "name": "Romane",
       "role": "",
-      "phone": "0488 37 03 73",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Perceval",
-      "name": "Eloi COUVREUR",
+      "totem": "Pellinore",
+      "name": "Romane",
       "role": "",
-      "phone": "0471 03 01 04",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Aithusa",
-      "name": "Fanny WILLEMS",
+      "totem": "Kay",
+      "name": "Florentin",
       "role": "",
-      "phone": "0460 96 90 27",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Sefa",
-      "name": "Louise HOARAU",
+      "name": "Louise",
       "role": "",
-      "phone": "0455 11 35 68",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Aithusa",
+      "name": "Fanny",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Oswald",
+      "name": "Nicolas",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Lancelot",
+      "name": "Augustin",
+      "role": "",
+      "phone": "",
       "email": ""
     }
   ],

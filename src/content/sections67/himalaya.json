@@ -1,0 +1,47 @@
+{
+  "name": "Himalaya",
+  "type": "horizons",
+  "typeLabel": "Chaîne Guide Horizons",
+  "ageRange": "16 – 17 ans",
+  "description": "La chaîne Himalaya emmène les aînées de la 67ème vers les sommets : projets ambitieux, engagement et solidarité rythment leur année, portés par une amitié guide durable.",
+  "contact": "himalaya.stdom@gmail.com",
+  "order": 7,
+  "staff": [
+    {
+      "totem": "Ourébi",
+      "name": "Violette",
+      "role": "Cheftaine",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Choussingha",
+      "name": "Alexia",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Quokka",
+      "name": "Alix",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Rikki",
+      "name": "Stanislas",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Chickaree",
+      "name": "Arturo",
+      "role": "",
+      "phone": "",
+      "email": ""
+    }
+  ],
+  "photos": []
+}

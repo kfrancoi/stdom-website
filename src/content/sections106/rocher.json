@@ -9,44 +9,51 @@
   "staff": [
     {
       "totem": "Akela",
-      "name": "Stanislas VERVENNE",
-      "role": "Grand chef",
-      "phone": "0479 03 47 68",
-      "email": ""
-    },
-    {
-      "totem": "Bagheera",
-      "name": "Nathan PITANCE",
+      "name": "Harold",
       "role": "",
-      "phone": "0493 82 23 44",
-      "email": ""
-    },
-    {
-      "totem": "Kaa",
-      "name": "Harold MICHAUX",
-      "role": "",
-      "phone": "0483 14 77 52",
-      "email": ""
-    },
-    {
-      "totem": "Hathi",
-      "name": "Arturo COMENGE",
-      "role": "",
-      "phone": "0474 07 41 25",
-      "email": ""
-    },
-    {
-      "totem": "Rama",
-      "name": "Diego BEGASSE",
-      "role": "",
-      "phone": "0490 43 52 38",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Baloo",
-      "name": "Edouard VERSCHUERE",
+      "name": "Edouard",
       "role": "",
-      "phone": "0472 79 10 10",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Rama",
+      "name": "Diego",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Wontolla",
+      "name": "Jules",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Phao",
+      "name": "Léon",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Oonaï",
+      "name": "Victor",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Sona",
+      "name": "Nathan",
+      "role": "",
+      "phone": "",
       "email": ""
     }
   ],

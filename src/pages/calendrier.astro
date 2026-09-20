@@ -43,17 +43,22 @@ const unitLabel: Record<string, string> = {
 
 const today = new Date().toISOString().split('T')[0];
 
+// Année scoute : elle démarre en septembre (2026–2027 à partir de sept. 2026)
+const now = new Date();
+const scoutYearStart = now.getMonth() >= 8 ? now.getFullYear() : now.getFullYear() - 1;
+const scoutYear = `${scoutYearStart}–${scoutYearStart + 1}`;
+
 const categories = Object.entries(categoryConfig);
 ---
 
 <PageLayout
   title="Calendrier"
-  description="Calendrier complet de l'année scoute 2025-2026 de l'unité Saint-Dominique — réunions, week-ends, camps et événements."
+  description={`Calendrier complet de l'année scoute ${scoutYear} de l'unité Saint-Dominique — réunions, week-ends, camps et événements.`}
 >
   <!-- Hero -->
   <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">Année scoute 2025–2026</p>
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">Année scoute {scoutYear}</p>
       <h1 class="text-4xl font-bold mb-3">Calendrier</h1>
       <p class="text-gray-300 max-w-xl">
         Toutes les dates importantes de l'unité Saint-Dominique. Marquez les dans votre agenda !
@@ -77,32 +82,45 @@ const categories = Object.entries(categoryConfig);
             ))}
           </ul>
 
-          <div class="mt-8">
-            <h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">Navigation</h2>
-            <ul class="space-y-1">
-              {sortedMonths.map((ym) => (
-                <li>
-                  <a
-                    href={`#month-${ym}`}
-                    class="text-sm text-gray-600 hover:text-unit-red capitalize transition-colors"
-                  >
-                    {monthLabel(ym)}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {sortedMonths.length > 0 && (
+            <div class="mt-8">
+              <h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">Navigation</h2>
+              <ul class="space-y-1">
+                {sortedMonths.map((ym) => (
+                  <li>
+                    <a
+                      href={`#month-${ym}`}
+                      class="text-sm text-gray-600 hover:text-unit-red capitalize transition-colors"
+                    >
+                      {monthLabel(ym)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-          <div class="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-xl">
-            <p class="text-xs text-amber-800 leading-relaxed">
-              <strong>Note :</strong> Certaines dates de camps sont provisoires et seront confirmées par les sections concernées.
-            </p>
-          </div>
+          {sortedMonths.length > 0 && (
+            <div class="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-xl">
+              <p class="text-xs text-amber-800 leading-relaxed">
+                <strong>Note :</strong> Certaines dates de camps sont provisoires et seront confirmées par les sections concernées.
+              </p>
+            </div>
+          )}
         </div>
       </aside>
 
       <!-- Events by month -->
       <main class="lg:col-span-3 space-y-10">
+        {sortedMonths.length === 0 && (
+          <div class="bg-white border border-dashed border-gray-200 rounded-xl p-10 text-center">
+            <p class="text-gray-600 font-medium">Le calendrier de l'année n'est pas encore publié.</p>
+            <p class="text-sm text-gray-500 mt-1">
+              Les dates seront ajoutées ici au fur et à mesure qu'elles seront confirmées.
+            </p>
+          </div>
+        )}
+
         {sortedMonths.map((ym) => (
           <div id={`month-${ym}`}>
             <h2 class="text-xl font-bold text-unit-dark capitalize mb-4 flex items-center gap-3">

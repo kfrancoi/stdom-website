@@ -8,31 +8,31 @@
   "order": 6,
   "staff": [
     {
-      "totem": "Springer",
-      "name": "Juliette GODIN",
+      "totem": "Kinkajou",
+      "name": "Hannah",
       "role": "Cheftaine",
-      "phone": "0494 41 93 86",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Yearling",
-      "name": "Elise CATTOOR",
+      "totem": "Wallaby",
+      "name": "Laura",
       "role": "",
-      "phone": "0478 49 66 58",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Burunduk",
-      "name": "Noémie de BIOLLEY",
+      "totem": "Isatis",
+      "name": "Alix-Anne",
       "role": "",
-      "phone": "0470 79 30 26",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Laurane",
-      "name": "Laurane PEETERS",
+      "totem": "Hyrax",
+      "name": "Alicia",
       "role": "",
-      "phone": "0476 78 07 49",
+      "phone": "",
       "email": ""
     }
   ],

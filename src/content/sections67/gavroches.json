@@ -8,52 +8,52 @@
   "order": 1,
   "staff": [
     {
-      "totem": "Cabri",
-      "name": "Théodora LUYCKX",
+      "totem": "Estrella",
+      "name": "Manon",
       "role": "Cheftaine",
-      "phone": "0475 44 37 47",
-      "email": ""
-    },
-    {
-      "totem": "Ourebi",
-      "name": "Lucie VAN DEN SCHRIEK",
-      "role": "",
-      "phone": "0490 39 81 25",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Warrah",
-      "name": "Emilie GERSDORFF",
+      "name": "Emilie",
       "role": "",
-      "phone": "0493 39 91 33",
-      "email": ""
-    },
-    {
-      "totem": "Estrella",
-      "name": "Manon BRIMBOIS",
-      "role": "",
-      "phone": "0479 15 55 24",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Redunka",
-      "name": "Célestine SERMEUS",
+      "name": "Célestine",
       "role": "",
-      "phone": "0468 29 77 55",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Appaloosa",
-      "name": "Soline LHOAS",
+      "name": "Soline",
       "role": "",
-      "phone": "0483 99 64 71",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Pajero",
-      "name": "Agnes HEYMANS",
+      "name": "Agnes",
       "role": "",
-      "phone": "0494 48 27 20",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Hutia",
+      "name": "Julie",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Mangabey",
+      "name": "Valentine",
+      "role": "",
+      "phone": "",
       "email": ""
     }
   ],

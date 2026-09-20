@@ -8,52 +8,45 @@
   "order": 4,
   "staff": [
     {
-      "totem": "Hyrax",
-      "name": "Alicia VAN GELDER",
-      "role": "Cheftaine",
-      "phone": "0474 90 24 35",
-      "email": ""
-    },
-    {
-      "totem": "Wallaby",
-      "name": "Laura LECOQ",
-      "role": "",
-      "phone": "0493 02 82 55",
-      "email": ""
-    },
-    {
-      "totem": "Isatis",
-      "name": "Alix-Anne KINT",
-      "role": "",
-      "phone": "0488 55 20 20",
-      "email": ""
-    },
-    {
-      "totem": "Kinkajou",
-      "name": "Hannah VANDOORNE",
-      "role": "",
-      "phone": "0468 28 73 34",
-      "email": ""
-    },
-    {
       "totem": "Irbis",
-      "name": "Emilie BEYERMAN",
-      "role": "",
-      "phone": "0477 58 77 05",
+      "name": "Emilie",
+      "role": "Cheftaine",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Havana",
-      "name": "Emilie THOMAS",
+      "name": "Emilie",
       "role": "",
-      "phone": "0475 20 73 42",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Sokoke",
-      "name": "Madeleine BEGAULT",
+      "name": "Madeleine",
       "role": "",
-      "phone": "0460 95 30 52",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Souslik",
+      "name": "Jeanne",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Meeko",
+      "name": "Anli",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Azawakh",
+      "name": "Marilou",
+      "role": "",
+      "phone": "",
       "email": ""
     }
   ],

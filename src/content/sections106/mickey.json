@@ -8,66 +8,52 @@
   "order": 1,
   "staff": [
     {
-      "totem": "Mickey",
-      "name": "Anli MICHEL",
-      "role": "Grande chef",
-      "phone": "0483 14 76 22",
+      "totem": "Timon",
+      "name": "Anne-Catherine",
+      "role": "Grande cheffe",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Lucky",
-      "name": "Géraldine BEYERMAN",
+      "name": "Géraldine",
       "role": "",
-      "phone": "0478 08 84 06",
-      "email": ""
-    },
-    {
-      "totem": "Djali",
-      "name": "Octave DE SMET",
-      "role": "",
-      "phone": "0474 06 60 47",
-      "email": ""
-    },
-    {
-      "totem": "Faloo",
-      "name": "Isabel DE PAU",
-      "role": "",
-      "phone": "0479 04 92 97",
-      "email": ""
-    },
-    {
-      "totem": "Koda",
-      "name": "Guillaume COLARD",
-      "role": "",
-      "phone": "0460 96 47 87",
-      "email": ""
-    },
-    {
-      "totem": "Copper",
-      "name": "Valentina GERZANICH",
-      "role": "",
-      "phone": "0498 73 09 39",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Sirhiss",
-      "name": "Basil DEJONG",
+      "name": "Basil",
       "role": "",
-      "phone": "0478 08 06 13",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Timon",
-      "name": "Anne-Catherine PEAUTAURIT",
+      "totem": "Copper",
+      "name": "Valentina",
       "role": "",
-      "phone": "0496 87 34 25",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Froufrou",
-      "name": "Satya RODALL",
+      "totem": "Tagelong",
+      "name": "Léonie",
       "role": "",
-      "phone": "0495 19 43 98",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Lotso",
+      "name": "Louis",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Bogo",
+      "name": "Louis",
+      "role": "",
+      "phone": "",
       "email": ""
     }
   ],

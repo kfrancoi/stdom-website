@@ -8,45 +8,45 @@
   "order": 7,
   "staff": [
     {
-      "totem": "Grivet",
-      "name": "Raphaël DELVAUX",
-      "role": "Grand chef",
-      "phone": "0492 82 25 25",
+      "totem": "Caracal",
+      "name": "Guillaume",
+      "role": "",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Axis",
-      "name": "Louis TIETARD",
+      "name": "Louis",
       "role": "",
-      "phone": "0478 74 56 01",
-      "email": ""
-    },
-    {
-      "totem": "Caracal",
-      "name": "Guillaume le MAISTRE d'ANSTAING",
-      "role": "",
-      "phone": "0493 47 34 54",
-      "email": ""
-    },
-    {
-      "totem": "Chinook",
-      "name": "Lucas FORTON",
-      "role": "",
-      "phone": "0485 25 06 10",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Douc",
-      "name": "Pierre VANDEPUTTE",
+      "name": "Pierre",
       "role": "",
-      "phone": "0493 94 47 86",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Koudou",
-      "name": "Marin VANDOORNE",
+      "totem": "Chinook",
+      "name": "Lucas",
       "role": "",
-      "phone": "0484 28 51 43",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Falco",
+      "name": "Thomas",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Lionceau",
+      "name": "Charlie",
+      "role": "",
+      "phone": "",
       "email": ""
     }
   ],

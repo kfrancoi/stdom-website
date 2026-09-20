@@ -8,52 +8,59 @@
   "order": 5,
   "staff": [
     {
-      "totem": "Choussingha",
-      "name": "Alexia GERSDORFF",
+      "totem": "Manul",
+      "name": "Marie-Astrid",
       "role": "Cheftaine",
-      "phone": "0470 48 64 39",
-      "email": ""
-    },
-    {
-      "totem": "Ourébi",
-      "name": "Violette STROOBANTS",
-      "role": "",
-      "phone": "0470 09 04 54",
-      "email": ""
-    },
-    {
-      "totem": "Quokka",
-      "name": "Alix de BONHOME",
-      "role": "",
-      "phone": "0471 56 75 57",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Bagheera",
-      "name": "Lea KOPP",
+      "name": "Lea",
       "role": "",
-      "phone": "0471 06 30 45",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Dingo",
-      "name": "Elisa ROULIVE",
+      "name": "Elisa",
       "role": "",
-      "phone": "0471 21 43 31",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Fanaloka",
-      "name": "Victoire HERMANS",
+      "totem": "Shiba",
+      "name": "Nine",
       "role": "",
-      "phone": "0472 49 04 76",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Manul",
-      "name": "Marie-Astrid HEYMANS",
+      "totem": "Cabri",
+      "name": "Théodora",
       "role": "",
-      "phone": "0490 40 23 61",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Ourebi",
+      "name": "Lucie",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Mazalaai",
+      "name": "Louise",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Capucin",
+      "name": "Laure",
+      "role": "",
+      "phone": "",
       "email": ""
     }
   ],

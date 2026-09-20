@@ -8,52 +8,52 @@
   "order": 3,
   "staff": [
     {
-      "totem": "Suni",
-      "name": "Alicia BUSLAIN",
+      "totem": "Tamia",
+      "name": "Emilie",
       "role": "Cheftaine",
-      "phone": "0496 07 24 00",
-      "email": ""
-    },
-    {
-      "totem": "Tamia",
-      "name": "Emilie LOSSON",
-      "role": "",
-      "phone": "0492 85 94 10",
-      "email": ""
-    },
-    {
-      "totem": "Tamia",
-      "name": "Valentine GERSDORFF",
-      "role": "",
-      "phone": "0489 23 60 01",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Manningi",
-      "name": "Klara ROLAND",
+      "name": "Klara",
       "role": "",
-      "phone": "0496 75 51 78",
+      "phone": "",
       "email": ""
     },
     {
-      "totem": "Aluco",
-      "name": "Lisa Rose PEREZ",
+      "totem": "Tamia",
+      "name": "Valentine",
       "role": "",
-      "phone": "0473 83 39 01",
-      "email": ""
-    },
-    {
-      "totem": "Klee Kai",
-      "name": "Lucie BLANCHAERT",
-      "role": "",
-      "phone": "0476 35 81 38",
+      "phone": "",
       "email": ""
     },
     {
       "totem": "Corsac",
-      "name": "Charlotte DE BRUYN",
+      "name": "Charlotte",
       "role": "",
-      "phone": "0470 89 53 32",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Aluco",
+      "name": "Lisa Rose",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Palomino",
+      "name": "Valentine",
+      "role": "",
+      "phone": "",
+      "email": ""
+    },
+    {
+      "totem": "Saïmiri",
+      "name": "Gabrielle",
+      "role": "",
+      "phone": "",
       "email": ""
     }
   ],

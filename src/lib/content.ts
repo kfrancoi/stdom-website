@@ -87,8 +87,6 @@ const sectionColors: Record<string, { color: string; accentColor: string }> = {
   pionniers: { color: 'unit-red', accentColor: 'unit-gold' },
 };
 
-const PLACEHOLDER_PHOTO = '/images/placeholder-section.jpg';
-
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 const clean = (s: string | null | undefined) => (s ? s : undefined);
@@ -158,9 +156,9 @@ async function getSections(
         phone: clean(m.phone),
         email: clean(m.email),
       })),
-      photos: entry.photos.length
-        ? (entry.photos.filter(Boolean) as string[])
-        : [PLACEHOLDER_PHOTO, PLACEHOLDER_PHOTO, PLACEHOLDER_PHOTO],
+      // Pas de photo dans le CMS : liste vide, les vues affichent leur propre
+      // visuel de remplacement (pas d'image fantôme à charger).
+      photos: entry.photos.filter(Boolean) as string[],
     }))
     .sort((a, b) => a.order - b.order);
 }
