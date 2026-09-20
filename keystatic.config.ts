@@ -36,7 +36,15 @@ const contentPage = (label: string, slug: string) =>
 // ── Configuration ────────────────────────────────────────────────────────────
 
 export default config({
-  storage: { kind: 'local' },
+  // En dev : édition directe des fichiers locaux, sans authentification.
+  // En production (Vercel) : mode cloud — les éditeurs se connectent avec un
+  // compte Keystatic Cloud (pas besoin de compte GitHub) et chaque sauvegarde
+  // crée un commit sur le dépôt via keystatic.cloud.
+  storage: import.meta.env.DEV ? { kind: 'local' } : { kind: 'cloud' },
+  cloud: {
+    // Doit correspondre à l'équipe/projet créés sur https://keystatic.cloud
+    project: 'saint-dom/stdom-website',
+  },
   ui: {
     brand: { name: 'Saint-Dom — Gestion du contenu' },
     navigation: {
