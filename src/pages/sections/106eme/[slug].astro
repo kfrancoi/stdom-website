@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import PageLayout from '../../../components/PageLayout.astro';
 import StaffCard from '../../../components/StaffCard.astro';
 import { getSections106 } from '../../../lib/content';
@@ -50,9 +51,15 @@ const [grandChef, ...animateurs] = section.staff;
   <section class={`relative bg-gradient-to-br ${colors.from} ${colors.to} overflow-hidden`}>
     {heroVisual && (
       <div class="absolute inset-0 opacity-20">
-        <img
+        <Image
           src={heroVisual}
           alt=""
+          width={1600}
+          height={900}
+          widths={[640, 1280, 1600]}
+          sizes="100vw"
+          quality={60}
+          loading="eager"
           class="w-full h-full object-cover"
           onerror="this.style.display='none'"
         />
@@ -142,9 +149,14 @@ const [grandChef, ...animateurs] = section.staff;
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {section.photos.map((photo, i) => (
                 <div class="aspect-square rounded-xl overflow-hidden bg-gray-100">
-                  <img
+                  <Image
                     src={photo}
                     alt={`${section.name} — photo ${i + 1}`}
+                    width={640}
+                    height={640}
+                    widths={[320, 640]}
+                    sizes="(min-width: 640px) 33vw, 50vw"
+                    quality={72}
                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                     onerror="this.parentElement.style.display='none'"
