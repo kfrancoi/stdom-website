@@ -238,6 +238,7 @@ export default config({
             { label: 'Autorisations', value: 'autorisations' },
             { label: 'Administratif', value: 'administratif' },
             { label: 'Techniques & outils', value: 'techniques' },
+            { label: 'Malles & matériel', value: 'materiel' },
             { label: 'Autre', value: 'autre' },
           ],
           defaultValue: 'autre',
