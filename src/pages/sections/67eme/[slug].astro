@@ -13,6 +13,9 @@ export async function getStaticPaths() {
 
 const { section } = Astro.props;
 
+// Fond du hero : première photo si la section en a, sinon son visuel de thème.
+const heroVisual = section.photos[0] ?? section.illustration;
+
 const typeLabel = {
   lutins: 'Ronde de Lutins',
   guides: 'Compagnie de Guides',
@@ -44,10 +47,10 @@ const [cheftaine, ...animatrices] = section.staff;
   <!-- Hero de section -->
   <section class="relative bg-gradient-to-br from-guide-purple to-guide-green overflow-hidden">
     <!-- Background photos collage -->
-    {section.photos.length > 0 && (
+    {heroVisual && (
       <div class="absolute inset-0 opacity-20">
         <img
-          src={section.photos[0]}
+          src={heroVisual}
           alt=""
           class="w-full h-full object-cover"
           onerror="this.style.display='none'"

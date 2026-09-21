@@ -49,6 +49,7 @@ export interface Section {
   color: string;
   accentColor: string;
   staff: StaffMember[];
+  illustration?: string;
   photos: string[];
 }
 
@@ -156,6 +157,9 @@ async function getSections(
         phone: clean(m.phone),
         email: clean(m.email),
       })),
+      // Visuel de thème de la section, affiché tant qu'il n'y a pas de photos
+      // (et en attendant les balzons).
+      illustration: clean(entry.illustration),
       // Pas de photo dans le CMS : liste vide, les vues affichent leur propre
       // visuel de remplacement (pas d'image fantôme à charger).
       photos: entry.photos.filter(Boolean) as string[],

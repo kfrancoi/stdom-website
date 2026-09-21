@@ -161,6 +161,11 @@ export default config({
           defaultValue: 0,
         }),
         staff: staffArray('Staff de la section'),
+        illustration: fields.image({
+          label: 'Visuel de thème (en attendant le balzon)',
+          directory: 'public/images/art_sections',
+          publicPath: '/images/art_sections/',
+        }),
         photos: fields.array(
           fields.image({
             label: 'Photo',
@@ -211,6 +216,11 @@ export default config({
           defaultValue: 0,
         }),
         staff: staffArray('Staff de la section'),
+        illustration: fields.image({
+          label: 'Visuel de thème (en attendant le balzon)',
+          directory: 'public/images/art_sections',
+          publicPath: '/images/art_sections/',
+        }),
         photos: fields.array(
           fields.image({
             label: 'Photo',

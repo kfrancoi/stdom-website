@@ -13,6 +13,9 @@ export async function getStaticPaths() {
 
 const { section } = Astro.props;
 
+// Fond du hero : première photo si la section en a, sinon son visuel de thème.
+const heroVisual = section.photos[0] ?? section.illustration;
+
 const typeColors: Record<string, { from: string; to: string; badge: string; btn: string }> = {
   baladins:   { from: 'from-amber-700', to: 'to-amber-500', badge: 'bg-amber-100 text-amber-800 border-amber-200', btn: 'text-amber-800' },
   louveteaux: { from: 'from-gray-800', to: 'to-gray-600', badge: 'bg-gray-100 text-gray-700 border-gray-200', btn: 'text-gray-800' },
@@ -45,10 +48,10 @@ const [grandChef, ...animateurs] = section.staff;
 
   <!-- Hero -->
   <section class={`relative bg-gradient-to-br ${colors.from} ${colors.to} overflow-hidden`}>
-    {section.photos.length > 0 && (
+    {heroVisual && (
       <div class="absolute inset-0 opacity-20">
         <img
-          src={section.photos[0]}
+          src={heroVisual}
           alt=""
           class="w-full h-full object-cover"
           onerror="this.style.display='none'"

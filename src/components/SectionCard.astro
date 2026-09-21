@@ -7,6 +7,7 @@ export interface Props {
   ageRange: string;
   description: string;
   photo?: string;
+  illustration?: string;
   staffCount?: number;
 }
 
@@ -18,8 +19,13 @@ const {
   ageRange,
   description,
   photo,
+  illustration,
   staffCount,
 } = Astro.props;
+
+// Une photo réelle primer sur le visuel de thème, qui sert de repli tant que la
+// section n'a pas de photos dans le CMS.
+const visual = photo ?? illustration;
 
 const href = `/sections/${unit === '67' ? '67eme' : '106eme'}/${slug}`;
 const unitColor = unit === '67' ? 'guide-green' : 'scout-black';
@@ -38,10 +44,10 @@ const unitBadge = unit === '67'
       ? 'bg-gradient-to-br from-guide-green to-guide-purple'
       : 'bg-gradient-to-br from-unit-dark to-unit-red'
   }`}>
-    {photo ? (
+    {visual ? (
       <img
-        src={photo}
-        alt={`Section ${name}`}
+        src={visual}
+        alt={photo ? `Section ${name}` : `Visuel du thème de la section ${name}`}
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         loading="lazy"
         onerror="this.onerror=null; this.style.display='none'"
