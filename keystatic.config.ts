@@ -237,6 +237,7 @@ export default config({
             { label: 'Fiche santé', value: 'sante' },
             { label: 'Autorisations', value: 'autorisations' },
             { label: 'Administratif', value: 'administratif' },
+            { label: 'Techniques & outils', value: 'techniques' },
             { label: 'Autre', value: 'autre' },
           ],
           defaultValue: 'autre',
