@@ -51,7 +51,7 @@ export default config({
       Actualités: ['flashs', 'evenements'],
       Unité: ['staffs', 'histoire', 'presence'],
       Sections: ['sections67', 'sections106'],
-      Pratique: ['grandCamp', 'cotisations', 'uniformes'],
+      Pratique: ['inscriptions', 'grandCamp', 'cotisations', 'uniformes'],
       Documents: ['documents', 'chartes', 'liens'],
     },
   },
@@ -310,6 +310,25 @@ export default config({
         staff67: staffArray("Staff d'unité 67ème (Guides)"),
         staff106: staffArray("Staff d'unité 106ème (Scouts)"),
         asbl: staffArray("Conseil d'administration de l'ASBL"),
+      },
+    }),
+
+    // ── Inscriptions (page Pratique) ────────────────────────────────────────
+    inscriptions: singleton({
+      label: 'Inscriptions',
+      path: 'src/content/inscriptions',
+      format: { data: 'json' },
+      schema: {
+        open: fields.checkbox({
+          label: 'Inscriptions ouvertes',
+          description:
+            "Décoché : les boutons d'inscription de la page Pratique sont grisés et non cliquables.",
+          defaultValue: false,
+        }),
+        message: fields.text({
+          label: "Message d'information (affiché au-dessus des boutons, vide = aucun message)",
+          multiline: true,
+        }),
       },
     }),
 

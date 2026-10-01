@@ -1,10 +1,15 @@
 ---
 import PageLayout from '../components/PageLayout.astro';
-import { getPage } from '../lib/content';
+import { getInscriptions, getPage } from '../lib/content';
 
 const grandCamp = await getPage('grandCamp');
 const cotisations = await getPage('cotisations');
 const uniformes = await getPage('uniformes');
+const inscriptions = await getInscriptions();
+
+// Boutons d'inscription : liens e-mail si ouvertes, sinon grisés et non cliquables
+const CtaTag = inscriptions.open ? 'a' : 'span';
+const ctaState = inscriptions.open ? 'shadow-md' : 'opacity-40 cursor-not-allowed select-none';
 
 const faq = [
   {
@@ -93,26 +98,37 @@ const inscriptionSteps = [
             ))}
           </div>
 
+          {inscriptions.message && (
+            <div class="mt-8 flex gap-3 p-5 bg-unit-gold/10 border border-unit-gold/30 rounded-2xl">
+              <svg class="w-5 h-5 text-amber-700 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p class="text-sm font-medium text-amber-900 leading-relaxed whitespace-pre-line">{inscriptions.message}</p>
+            </div>
+          )}
+
           <!-- CTA -->
-          <div class="mt-8 grid sm:grid-cols-2 gap-4">
-            <a
-              href="mailto:inscriptions67@stdom.be"
-              class="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-guide-purple to-guide-green text-white font-semibold rounded-2xl hover:opacity-90 transition-opacity shadow-md"
+          <div class:list={['grid sm:grid-cols-2 gap-4', inscriptions.message ? 'mt-4' : 'mt-8']}>
+            <CtaTag
+              href={inscriptions.open ? 'mailto:inscriptions67@stdom.be' : undefined}
+              aria-disabled={inscriptions.open ? undefined : 'true'}
+              class:list={['flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-guide-purple to-guide-green text-white font-semibold rounded-2xl', inscriptions.open && 'hover:opacity-90 transition-opacity', ctaState]}
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               Inscription 67ème (Guides)
-            </a>
-            <a
-              href="mailto:inscriptions106@stdom.be"
-              class="flex items-center justify-center gap-2 py-4 bg-unit-dark text-white font-semibold rounded-2xl hover:bg-gray-800 transition-colors shadow-md"
+            </CtaTag>
+            <CtaTag
+              href={inscriptions.open ? 'mailto:inscriptions106@stdom.be' : undefined}
+              aria-disabled={inscriptions.open ? undefined : 'true'}
+              class:list={['flex items-center justify-center gap-2 py-4 bg-unit-dark text-white font-semibold rounded-2xl', inscriptions.open && 'hover:bg-gray-800 transition-colors', ctaState]}
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               Inscription 106ème (Scouts)
-            </a>
+            </CtaTag>
           </div>
         </section>
 

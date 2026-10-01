@@ -188,6 +188,16 @@ export async function getActiveFlashs(): Promise<Flash[]> {
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
+// ── Inscriptions ─────────────────────────────────────────────────────────────
+
+export async function getInscriptions() {
+  const entry = await reader.singletons.inscriptions.read();
+  return {
+    open: entry?.open ?? false,
+    message: clean(entry?.message?.trim()),
+  };
+}
+
 // ── Documents & liens ────────────────────────────────────────────────────────
 
 export async function getDocuments() {
