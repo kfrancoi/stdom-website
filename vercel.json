@@ -1,3 +1,27 @@
 {
-  "regions": ["cdg1"]
+  "regions": ["cdg1"],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<section>amazones|durandal|eldorado|farfadets|gavroches|himalaya|soleil-levant|tarentelle)\\.stdom\\.be"
+        }
+      ],
+      "destination": "https://stdom.be/sections/67eme/:section",
+      "permanent": false
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<section>abeilles|aigles|chevalerie|clinfoc|dhak|merlin|mickey|rocher|serengeti)\\.stdom\\.be"
+        }
+      ],
+      "destination": "https://stdom.be/sections/106eme/:section",
+      "permanent": false
+    }
+  ]
 }
