@@ -29,7 +29,18 @@ const contentPage = (label: string, slug: string) =>
         label: 'Introduction (affichée sous le titre)',
         multiline: true,
       }),
-      content: fields.markdoc({ label: 'Contenu' }),
+      content: fields.markdoc({
+        label: 'Contenu',
+        // Sans ce réglage, Keystatic range les images à côté du fichier de la
+        // page (src/content/…), dossier qui n'est pas publié : elles
+        // s'afficheraient en 404 sur le site.
+        options: {
+          image: {
+            directory: 'public/images/pages',
+            publicPath: '/images/pages/',
+          },
+        },
+      }),
     },
   });
 
@@ -271,7 +282,15 @@ export default config({
       schema: {
         title: fields.slug({ name: { label: 'Titre' } }),
         intro: fields.text({ label: 'Introduction', multiline: true }),
-        content: fields.markdoc({ label: 'Contenu' }),
+        content: fields.markdoc({
+          label: 'Contenu',
+          options: {
+            image: {
+              directory: 'public/images/chartes',
+              publicPath: '/images/chartes/',
+            },
+          },
+        }),
       },
     }),
 
