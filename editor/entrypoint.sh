@@ -74,6 +74,8 @@ else
       fi
     done
     echo "  }"
+    # Lien court pour les chefs : la racine ouvre directement l'éditeur.
+    echo "  redir / /keystatic"
     # Vite refuse les noms d'hôte inconnus : on lui présente localhost.
     echo "  reverse_proxy 127.0.0.1:4321 {"
     echo "    header_up Host localhost:4321"
