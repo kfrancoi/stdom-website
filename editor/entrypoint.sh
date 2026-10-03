@@ -20,7 +20,18 @@ export APP_DIR=/data/site
 mkdir -p ~/.ssh
 echo "$GIT_DEPLOY_KEY" | base64 -d > ~/.ssh/deploy_key
 chmod 600 ~/.ssh/deploy_key
-export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+# Railway bloque le port 22 en sortie : GitHub accepte aussi SSH sur le port
+# 443, via ssh.github.com.
+cat > ~/.ssh/config <<EOF
+Host github.com
+  HostName ssh.github.com
+  Port 443
+  User git
+  IdentityFile $HOME/.ssh/deploy_key
+  IdentitiesOnly yes
+  StrictHostKeyChecking accept-new
+EOF
+chmod 600 ~/.ssh/config
 
 # ── Dépôt ───────────────────────────────────────────────────────────────────
 if [ ! -d "$APP_DIR/.git" ]; then
