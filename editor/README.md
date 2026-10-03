@@ -53,9 +53,10 @@ ssh-keygen -t ed25519 -N "" -C "editeur-stdom" -f /tmp/editeur_key
    | `EDITOR_USERS` | `marie:motdepasse1,paul:motdepasse2` (un couple par éditeur, sans virgule ni `:` dans le mot de passe) |
    | `GITHUB_REPO` | optionnel, `kfrancoi/stdom-website` par défaut |
    | `SYNC_INTERVAL` | optionnel, 60 secondes par défaut |
+   | `GIT_AUTHOR_EMAIL` | optionnel, adresse « noreply » GitHub de `kfrancoi` par défaut. Vercel (plan Hobby) refuse de déployer un commit dont l'email n'est pas rattaché au compte GitHub propriétaire : à changer si le dépôt change de propriétaire |
 
 4. Ajouter un **volume** monté sur `/data`.
-5. Settings → Networking → **Generate Domain**. L'admin est sur `https://<nom>.up.railway.app/keystatic`.
+5. Settings → Networking → **Generate Domain** (port `8080`). L'admin est sur `https://<nom>.up.railway.app/keystatic`.
 6. Ajouter ou retirer un éditeur : modifier `EDITOR_USERS` ; Railway redémarre le service.
 
 ## 3. Passage à Cloudflare Access (à la mise en ligne sur `stdom.be`)
@@ -102,6 +103,9 @@ Modifier une info flash et sauvegarder. Dans les 1 à 2 minutes :
 - **« Blocked request » / « Invalid host »** (mode Cloudflare) : le réglage *HTTP Host Header* du tunnel manque.
 - **Tunnel *Inactive*** : vérifier `TUNNEL_TOKEN` et les logs Railway.
 - **Échec du push** : la clé de déploiement n'a pas l'accès en écriture, ou une protection de branche bloque.
+- **Vercel bloque le déploiement (« commit author email is not valid »)** : voir `GIT_AUTHOR_EMAIL`.
+- **Clone impossible (`port 22: Connection timed out`)** : Railway bloque le port 22 ; le conteneur passe par `ssh.github.com:443`, vérifier que `~/.ssh/config` est bien généré.
+- **502 au premier démarrage** : normal pendant le clone et `npm ci` (quelques minutes) ; Caddy démarre ensuite.
 
 ## À savoir
 

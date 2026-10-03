@@ -38,8 +38,10 @@ if [ ! -d "$APP_DIR/.git" ]; then
   git clone "git@github.com:${GITHUB_REPO}.git" "$APP_DIR"
 fi
 cd "$APP_DIR"
+# Vercel (plan Hobby) ne déploie que les commits dont l'email d'auteur est
+# rattaché au compte GitHub propriétaire : on utilise son adresse « noreply ».
 git config user.name "Éditeurs Saint-Dom"
-git config user.email "editeurs@stdom.be"
+git config user.email "${GIT_AUTHOR_EMAIL:-1470140+kfrancoi@users.noreply.github.com}"
 git pull --rebase --autostash || echo "pull initial impossible, on continue avec la copie locale"
 npm ci
 
