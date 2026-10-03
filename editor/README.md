@@ -110,7 +110,7 @@ Modifier une info flash et sauvegarder. Dans les 1 à 2 minutes :
 ## À savoir
 
 - **Conflits** : si un développeur pousse du code, le serveur le récupère automatiquement. En cas de conflit sur un même fichier, le push échoue et se réessaie ; en dernier recours, supprimer le volume et redéployer repart d'une copie propre (les modifications non publiées sont perdues).
-- **Changement de dépendances** (`package.json`) : redéployer le service pour relancer `npm ci`.
+- **Dépendances** : `npm ci` ne tourne qu'au premier démarrage et quand `package-lock.json` change (récupéré au redémarrage suivant).
 - **Sécurité** : le serveur de dev expose aussi le code source à qui est connecté ; n'autoriser que des personnes de confiance. La clé de déploiement, le jeton du tunnel et les mots de passe sont des secrets : à garder uniquement dans les variables Railway.
 - **Pas d'attribution** : tous les commits portent le même auteur. (En mode Cloudflare, Access journalise qui s'est connecté.)
 - **Admin Vercel** : `/keystatic` sur le site Vercel (mode cloud) reste accessible tant que la config n'est pas changée ; on peut le désactiver une fois ce serveur adopté.

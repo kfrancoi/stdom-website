@@ -43,7 +43,14 @@ cd "$APP_DIR"
 git config user.name "Éditeurs Saint-Dom"
 git config user.email "${GIT_AUTHOR_EMAIL:-1470140+kfrancoi@users.noreply.github.com}"
 git pull --rebase --autostash || echo "pull initial impossible, on continue avec la copie locale"
-npm ci
+
+# Les dépendances restent dans le volume : on ne réinstalle que si
+# package-lock.json a changé (un redémarrage prend alors quelques secondes).
+lock_hash="$(sha256sum package-lock.json | cut -d' ' -f1)"
+if [ "$(cat node_modules/.lock-hash 2>/dev/null)" != "$lock_hash" ]; then
+  npm ci
+  echo "$lock_hash" > node_modules/.lock-hash
+fi
 
 # ── Processus ───────────────────────────────────────────────────────────────
 npx astro dev --host 127.0.0.1 --port 4321 &
