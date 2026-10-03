@@ -2,7 +2,7 @@
 # - tunnel Cloudflare protégé par Cloudflare Access (si TUNNEL_TOKEN est défini) ;
 # - sinon mot de passe (basic auth Caddy) sur le domaine public de Railway.
 # Le code du site n'est pas copié dans l'image : entrypoint.sh le clone depuis
-# GitHub dans le volume /data, ce qui permet de garder les modifications non
+# GitHub dans /data, ce qui permet de garder les modifications non
 # publiées si le conteneur redémarre.
 FROM node:22-bookworm-slim
 
@@ -16,5 +16,6 @@ COPY editor/entrypoint.sh editor/sync.sh /opt/editor/
 RUN chmod +x /opt/editor/*.sh
 
 ENV ASTRO_TELEMETRY_DISABLED=1
-VOLUME /data
+# /data doit être un volume persistant, monté par l'hébergeur (Railway refuse
+# l'instruction VOLUME dans le Dockerfile).
 CMD ["/opt/editor/entrypoint.sh"]
