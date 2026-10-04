@@ -73,7 +73,7 @@ Cloudflare Access ne protège que des noms d'hôte dont le DNS est géré par Cl
 ### Tunnel
 
 1. Zero Trust (plan Free) → Networks → Tunnels → Create a tunnel → Cloudflared → `stdom-editeur`. Copier le **token** (la chaîne après `--token`).
-2. Public hostname : `edition.stdom.be` → Service `HTTP` `localhost:4321`. Dans *Additional application settings → HTTP Settings*, mettre **HTTP Host Header** à `localhost:4321` (Vite refuse les noms d'hôte inconnus).
+2. Public hostname : `edition.stdom.be` → Service `HTTP` `localhost:8080` (Caddy, qui n'écoute qu'en local en mode tunnel et s'occupe de l'en-tête Host attendu par Vite).
 
 ### Access
 
@@ -100,7 +100,7 @@ Modifier une info flash et sauvegarder. Dans les 1 à 2 minutes :
 
 ## Dépannage
 
-- **« Blocked request » / « Invalid host »** (mode Cloudflare) : le réglage *HTTP Host Header* du tunnel manque.
+- **Erreur 502 / « Bad gateway » sur `edition.stdom.be`** : vérifier que le service du tunnel pointe bien sur `http://localhost:8080`.
 - **Tunnel *Inactive*** : vérifier `TUNNEL_TOKEN` et les logs Railway.
 - **Échec du push** : la clé de déploiement n'a pas l'accès en écriture, ou une protection de branche bloque.
 - **Vercel bloque le déploiement (« commit author email is not valid »)** : voir `GIT_AUTHOR_EMAIL`.

@@ -56,17 +56,23 @@ fi
 npx astro dev --host 127.0.0.1 --port 4321 &
 /opt/editor/sync.sh &
 
+# Caddy sert l'éditeur dans les deux modes (redirection de la racine, en-tête
+# Host attendu par Vite). En mode tunnel, il n'écoute qu'en local et sans mot
+# de passe : c'est Cloudflare Access qui contrôle l'accès.
 if [ -n "${TUNNEL_TOKEN:-}" ]; then
   echo "Accès : tunnel Cloudflare (Cloudflare Access)"
-  cloudflared tunnel --no-autoupdate run --token "$TUNNEL_TOKEN" &
+  listen="127.0.0.1:8080"
 else
   echo "Accès : mot de passe (basic auth) sur le port ${PORT:-8080}"
-  {
-    echo "{"
-    echo "  auto_https off"
-    echo "  admin off"
-    echo "}"
-    echo ":${PORT:-8080} {"
+  listen=":${PORT:-8080}"
+fi
+{
+  echo "{"
+  echo "  auto_https off"
+  echo "  admin off"
+  echo "}"
+  echo "http://${listen} {"
+  if [ -z "${TUNNEL_TOKEN:-}" ]; then
     echo "  basic_auth {"
     echo "$EDITOR_USERS" | tr ',' '\n' | while IFS=: read -r user pass; do
       if [ -n "$user" ] && [ -n "$pass" ]; then
@@ -74,15 +80,19 @@ else
       fi
     done
     echo "  }"
-    # Lien court pour les chefs : la racine ouvre directement l'éditeur.
-    echo "  redir / /keystatic"
-    # Vite refuse les noms d'hôte inconnus : on lui présente localhost.
-    echo "  reverse_proxy 127.0.0.1:4321 {"
-    echo "    header_up Host localhost:4321"
-    echo "  }"
-    echo "}"
-  } > /tmp/Caddyfile
-  caddy run --config /tmp/Caddyfile --adapter caddyfile &
+  fi
+  # Lien court pour les chefs : la racine ouvre directement l'éditeur.
+  echo "  redir / /keystatic"
+  # Vite refuse les noms d'hôte inconnus : on lui présente localhost.
+  echo "  reverse_proxy 127.0.0.1:4321 {"
+  echo "    header_up Host localhost:4321"
+  echo "  }"
+  echo "}"
+} > /tmp/Caddyfile
+caddy run --config /tmp/Caddyfile --adapter caddyfile &
+
+if [ -n "${TUNNEL_TOKEN:-}" ]; then
+  cloudflared tunnel --no-autoupdate run --token "$TUNNEL_TOKEN" &
 fi
 
 # Si l'un des processus s'arrête, on quitte pour que Railway redémarre le service.
