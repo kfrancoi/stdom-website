@@ -61,7 +61,7 @@ npx astro dev --host 127.0.0.1 --port 4321 &
 # de passe : c'est Cloudflare Access qui contrôle l'accès.
 if [ -n "${TUNNEL_TOKEN:-}" ]; then
   echo "Accès : tunnel Cloudflare (Cloudflare Access)"
-  listen="127.0.0.1:8080"
+  listen=":8080"
 else
   echo "Accès : mot de passe (basic auth) sur le port ${PORT:-8080}"
   listen=":${PORT:-8080}"
@@ -72,7 +72,11 @@ fi
   echo "  admin off"
   echo "}"
   echo "http://${listen} {"
-  if [ -z "${TUNNEL_TOKEN:-}" ]; then
+  # Mode tunnel : local uniquement, en IPv4 et IPv6 (« localhost » côté
+  # cloudflared se résout en ::1).
+  if [ -n "${TUNNEL_TOKEN:-}" ]; then
+    echo "  bind 127.0.0.1 ::1"
+  else
     echo "  basic_auth {"
     echo "$EDITOR_USERS" | tr ',' '\n' | while IFS=: read -r user pass; do
       if [ -n "$user" ] && [ -n "$pass" ]; then
