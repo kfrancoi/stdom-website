@@ -1,0 +1,313 @@
+---
+// Page d'une section (67ème ou 106ème). Toutes les rubriques viennent du CMS ;
+// une rubrique vide n'est ni affichée ni reprise dans le sommaire.
+import { Image } from 'astro:assets';
+import PageLayout from './PageLayout.astro';
+import StaffCard from './StaffCard.astro';
+import type { Section } from '../lib/content';
+
+export interface Theme {
+  unitLabel: string; // « 67ème Unité Guide »
+  breadcrumbLabel: string; // « 67ème Guide »
+  sectionsHref: string; // ancre de la liste des sections de l'unité
+  backLabel: string; // « Toutes les sections guides »
+  heroBg: string; // classes du fond du hero
+  heroOverlay: string; // voile au-dessus de la photo du hero
+  leaderLabel: string; // « Cheftaine », « Grand chef »
+  teamLabel: string; // « L'équipe d'animatrices »
+  staffNoun: string; // « animatrices »
+  barLeader: string; // couleur du trait devant les titres
+  barTeam: string;
+  ctaBox: string; // encadré « Intéressé·e ? »
+  ctaText: string;
+  ctaButton: string;
+  ctaPhrase: string; // « Votre fille a 8 à 12 ans ? … »
+  inscriptionEmail: string;
+}
+
+export interface Props {
+  section: Section;
+  theme: Theme;
+}
+
+const { section, theme } = Astro.props;
+
+// Fond du hero : première photo si la section en a, sinon son visuel de thème.
+const heroVisual = section.photos[0]?.src ?? section.illustration;
+const [chef, ...equipeStaff] = section.staff;
+
+// Titre par défaut de la rubrique des petits groupes, selon la branche
+const equipesTitreParType: Record<string, string> = {
+  louveteaux: 'Les sizaines',
+  guides: 'Les patrouilles',
+  eclaireurs: 'Les patrouilles',
+};
+const equipes = section.equipes;
+const hasEquipes = equipes.liste.length > 0 || Boolean(equipes.intro);
+const equipesTitre = equipes.titre || equipesTitreParType[section.type] || 'Les équipes';
+
+const isFilled = (html: string) => html.replace(/<[^>]*>/g, '').trim() !== '';
+
+// Rubriques présentes, dans l'ordre de la page (sert aussi au sommaire)
+const rubriques = [
+  { id: 'valeurs', titre: 'Nos valeurs', visible: isFilled(section.valeurs) },
+  { id: 'staff', titre: 'Le staff', visible: section.staff.length > 0 },
+  { id: 'equipes', titre: equipesTitre, visible: hasEquipes },
+  { id: 'infos-pratiques', titre: 'Infos pratiques', visible: isFilled(section.infosPratiques) },
+  { id: 'uniforme', titre: 'Uniforme & matériel', visible: isFilled(section.uniforme) },
+  { id: 'photos', titre: 'Best of', visible: section.photos.length > 0 },
+].filter((r) => r.visible);
+const show = (id: string) => rubriques.some((r) => r.id === id);
+---
+
+<PageLayout title={section.name} description={section.description} image={heroVisual}>
+  <!-- Fil d'Ariane -->
+  <nav class="bg-gray-50 border-b border-gray-100" aria-label="Fil d'Ariane">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex flex-wrap items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-accent transition-colors">Accueil</a></li>
+        <li class="text-gray-300">/</li>
+        <li><a href="/sections" class="hover:text-accent transition-colors">Sections</a></li>
+        <li class="text-gray-300">/</li>
+        <li><a href={theme.sectionsHref} class="hover:text-accent transition-colors">{theme.breadcrumbLabel}</a></li>
+        <li class="text-gray-300">/</li>
+        <li class="text-unit-dark font-medium">{section.name}</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class:list={['relative overflow-hidden', theme.heroBg]}>
+    {heroVisual && (
+      <div class="absolute inset-0 opacity-20">
+        <Image
+          src={heroVisual}
+          alt=""
+          width={1600}
+          height={900}
+          widths={[640, 1280, 1600]}
+          sizes="100vw"
+          quality={60}
+          loading="eager"
+          class="w-full h-full object-cover"
+          onerror="this.style.display='none'"
+        />
+      </div>
+    )}
+    <div class:list={['absolute inset-0', theme.heroOverlay]}></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-6">
+        {section.blason && (
+          <img
+            src={section.blason}
+            alt={`Blason de ${section.name}`}
+            class="w-28 h-28 sm:w-36 sm:h-36 object-contain shrink-0 rounded-2xl bg-white/90 p-3 shadow-lg"
+          />
+        )}
+        <div class="max-w-2xl">
+          <div class="flex flex-wrap items-center gap-3 mb-4">
+            {[theme.unitLabel, section.typeLabel, section.ageRange].map((label) => (
+              <span class="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/30">
+                {label}
+              </span>
+            ))}
+          </div>
+          <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">{section.name}</h1>
+          <p class="text-white/85 text-lg leading-relaxed">{section.description}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sommaire des rubriques -->
+  {rubriques.length > 1 && (
+    <nav class="sticky top-16 z-30 bg-white/95 backdrop-blur border-b border-gray-100" aria-label="Rubriques de la section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex gap-2 overflow-x-auto">
+        {rubriques.map((r) => (
+          <a
+            href={`#${r.id}`}
+            class="shrink-0 px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 border border-gray-200 hover:border-accent hover:text-accent transition-colors"
+          >
+            {r.titre}
+          </a>
+        ))}
+      </div>
+    </nav>
+  )}
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid lg:grid-cols-3 gap-12">
+      <div class="lg:col-span-2 space-y-14">
+
+        {show('valeurs') && (
+          <section id="valeurs">
+            <h2 class="text-xl font-bold text-unit-dark mb-6 flex items-center gap-2">
+              <span class:list={['w-1 h-6 rounded-full inline-block', theme.barLeader]}></span>
+              Nos valeurs
+            </h2>
+            <div class="prose prose-gray max-w-none prose-a:text-accent" set:html={section.valeurs} />
+          </section>
+        )}
+
+        {show('staff') && (
+          <section id="staff" class="space-y-10">
+            <div>
+              <h2 class="text-xl font-bold text-unit-dark mb-6 flex items-center gap-2">
+                <span class:list={['w-1 h-6 rounded-full inline-block', theme.barLeader]}></span>
+                {theme.leaderLabel}
+              </h2>
+              <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <StaffCard totem={chef.totem} name={chef.name} role={chef.role} />
+              </div>
+            </div>
+            {equipeStaff.length > 0 && (
+              <div>
+                <h2 class="text-xl font-bold text-unit-dark mb-6 flex items-center gap-2">
+                  <span class:list={['w-1 h-6 rounded-full inline-block', theme.barTeam]}></span>
+                  {theme.teamLabel}
+                </h2>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {equipeStaff.map((m) => (
+                    <StaffCard totem={m.totem} name={m.name} role={m.role} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </section>
+        )}
+
+        {show('equipes') && (
+          <section id="equipes">
+            <h2 class="text-xl font-bold text-unit-dark mb-6 flex items-center gap-2">
+              <span class:list={['w-1 h-6 rounded-full inline-block', theme.barTeam]}></span>
+              {equipesTitre}
+            </h2>
+            {equipes.intro && <p class="text-gray-600 leading-relaxed mb-6 whitespace-pre-line">{equipes.intro}</p>}
+            {equipes.liste.length > 0 && (
+              <div class="grid sm:grid-cols-2 gap-4">
+                {equipes.liste.map((e) => (
+                  <div class="flex gap-4 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                    {e.image && <img src={e.image} alt="" class="w-16 h-16 object-contain shrink-0" loading="lazy" />}
+                    <div>
+                      <h3 class="font-semibold text-unit-dark">{e.nom}</h3>
+                      {e.description && <p class="text-sm text-gray-600 mt-1 leading-relaxed whitespace-pre-line">{e.description}</p>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
+        {show('infos-pratiques') && (
+          <section id="infos-pratiques">
+            <h2 class="text-xl font-bold text-unit-dark mb-6 flex items-center gap-2">
+              <span class:list={['w-1 h-6 rounded-full inline-block', theme.barLeader]}></span>
+              Infos pratiques
+            </h2>
+            <div class="prose prose-gray max-w-none prose-a:text-accent" set:html={section.infosPratiques} />
+          </section>
+        )}
+
+        {show('uniforme') && (
+          <section id="uniforme">
+            <h2 class="text-xl font-bold text-unit-dark mb-6 flex items-center gap-2">
+              <span class:list={['w-1 h-6 rounded-full inline-block', theme.barTeam]}></span>
+              Uniforme & matériel
+            </h2>
+            <div class="prose prose-gray max-w-none prose-a:text-accent" set:html={section.uniforme} />
+            <p class="text-sm text-gray-500 mt-4">
+              Voir aussi la page <a href="/pratique/uniforme" class="text-accent hover:underline">Uniforme</a> de l'unité.
+            </p>
+          </section>
+        )}
+
+        {show('photos') && (
+          <section id="photos">
+            <h2 class="text-xl font-bold text-unit-dark mb-6 flex items-center gap-2">
+              <span class="w-1 h-6 rounded-full bg-unit-gold inline-block"></span>
+              Best of
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {section.photos.map((photo, i) => (
+                <figure class="group relative aspect-square rounded-xl overflow-hidden bg-gray-100">
+                  <Image
+                    src={photo.src}
+                    alt={photo.legende ?? `${section.name} — photo ${i + 1}`}
+                    width={640}
+                    height={640}
+                    widths={[320, 640]}
+                    sizes="(min-width: 640px) 33vw, 50vw"
+                    quality={72}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    onerror="this.parentElement.style.display='none'"
+                  />
+                  {photo.legende && (
+                    <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 text-xs text-white">
+                      {photo.legende}
+                    </figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+
+      <!-- Colonne d'informations -->
+      <aside class="space-y-6">
+        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+          <h3 class="font-bold text-unit-dark mb-4">Informations</h3>
+          <dl class="space-y-3 text-sm">
+            <div>
+              <dt class="text-gray-500 font-medium">Type de section</dt>
+              <dd class="text-unit-dark mt-0.5">{section.typeLabel}</dd>
+            </div>
+            <div>
+              <dt class="text-gray-500 font-medium">Tranche d'âge</dt>
+              <dd class="text-unit-dark mt-0.5">{section.ageRange}</dd>
+            </div>
+            <div>
+              <dt class="text-gray-500 font-medium">Unité</dt>
+              <dd class="text-unit-dark mt-0.5">{theme.unitLabel}</dd>
+            </div>
+            {section.staff.length > 0 && (
+              <div>
+                <dt class="text-gray-500 font-medium">Staff</dt>
+                <dd class="text-unit-dark mt-0.5">{section.staff.length} {theme.staffNoun}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+
+        <div class:list={['rounded-2xl p-6 text-white', theme.ctaBox]}>
+          <h3 class="font-bold text-lg mb-2">Intéressé·e ?</h3>
+          <p class:list={['text-sm mb-4 leading-relaxed', theme.ctaText]}>{theme.ctaPhrase}</p>
+          <a
+            href={`mailto:${theme.inscriptionEmail}?subject=Inscription ${section.name}`}
+            class:list={['block text-center bg-white font-semibold text-sm px-4 py-2.5 rounded-full hover:bg-white/90 transition-colors', theme.ctaButton]}
+          >
+            Demande d'inscription
+          </a>
+        </div>
+
+        <div class="space-y-2">
+          <a href={theme.sectionsHref} class="flex items-center gap-2 text-sm text-gray-500 hover:text-accent transition-colors">
+            <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            {theme.backLabel}
+          </a>
+          <a href="/calendrier" class="flex items-center gap-2 text-sm text-gray-500 hover:text-accent transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Voir le calendrier
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</PageLayout>

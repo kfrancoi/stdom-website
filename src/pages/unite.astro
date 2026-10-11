@@ -1,16 +1,27 @@
 ---
 import PageLayout from '../components/PageLayout.astro';
 import StaffCard from '../components/StaffCard.astro';
-import { getStaffs, getPage } from '../lib/content';
+import Parcours from '../components/Parcours.astro';
+import { getStaffs, getPage, getChiffres } from '../lib/content';
 
 const { staff67, staff106 } = await getStaffs();
 const histoire = await getPage('histoire');
+const fonctionnement = await getPage('fonctionnement');
 const presence = await getPage('presence');
+const { total } = await getChiffres();
+
+// Chiffres non renseignés dans le CMS : simplement non affichés
+const chiffresCles = [
+  { valeur: total.animes, label: 'animés' },
+  { valeur: total.animateurs, label: 'chefs bénévoles' },
+  { valeur: total.sections, label: 'sections' },
+  { valeur: 2, label: 'unités, un parvis' },
+].filter((c) => c.valeur !== null);
 ---
 
 <PageLayout
   title="L'Unité"
-  description="L'unité Saint-Dominique : son histoire, ses staffs d'unité 67ème Guide et 106ème Scout, et l'engagement que nous portons."
+  description="L'unité Saint-Dominique : son histoire, son fonctionnement, le parcours de 6 à 17 ans, ses staffs d'unité 67ème Guide et 106ème Scout, et l'engagement que nous portons."
 >
   <!-- Hero -->
   <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
@@ -21,6 +32,17 @@ const presence = await getPage('presence');
         Une unité, deux familles : la 67<sup>ème</sup> Guide et la 106<sup>ème</sup> Scout,
         réunies sur le parvis Saint-Dominique.
       </p>
+      <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl">
+        {chiffresCles.map(({ valeur, label }) => (
+          <div class="bg-white/10 border border-white/10 rounded-xl p-4 text-center">
+            <dt class="sr-only">{label}</dt>
+            <dd>
+              <span class="block text-3xl font-bold text-unit-gold">{valeur}</span>
+              <span class="block text-xs text-gray-300 mt-1">{label}</span>
+            </dd>
+          </div>
+        ))}
+      </dl>
     </div>
   </section>
 
@@ -35,8 +57,28 @@ const presence = await getPage('presence');
     </section>
   )}
 
+  <!-- Fonctionnement -->
+  {fonctionnement && (
+    <section id="fonctionnement" class="py-16 bg-gray-50">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-unit-dark mb-3">{fonctionnement.title}</h2>
+        {fonctionnement.intro && <p class="text-lg text-gray-600 mb-8">{fonctionnement.intro}</p>}
+        <div class="prose prose-gray max-w-none prose-a:text-accent" set:html={fonctionnement.html} />
+      </div>
+    </section>
+  )}
+
+  <!-- Parcours 6-17 ans -->
+  <section id="parcours" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-unit-dark mb-3">Le parcours, de 6 à 17 ans</h2>
+      <p class="text-lg text-gray-600 mb-8">De branche en branche, chaque animé grandit avec sa section, jusqu'à devenir chef à son tour.</p>
+      <Parcours />
+    </div>
+  </section>
+
   <!-- Staffs d'unité -->
-  <section class="py-16 bg-gray-50">
+  <section id="staffs" class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-unit-dark mb-10 text-center">Les staffs d'unité</h2>
 
@@ -64,14 +106,14 @@ const presence = await getPage('presence');
 
       <p class="text-center text-gray-600 mt-10">
         L'unité est soutenue par
-        <a href="/asbl" class="text-unit-red font-semibold hover:underline">l'ASBL Saint-Dominique</a>.
+        <a href="/asbl" class="text-accent font-semibold hover:underline">l'ASBL Saint-Dominique</a>.
       </p>
     </div>
   </section>
 
   <!-- Présence & engagement -->
   {presence && (
-    <section class="py-16 bg-white">
+    <section id="presence" class="py-16 bg-white">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-unit-dark mb-3">{presence.title}</h2>
         {presence.intro && <p class="text-lg text-gray-600 mb-8">{presence.intro}</p>}

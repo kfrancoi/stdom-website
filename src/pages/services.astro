@@ -1,0 +1,62 @@
+---
+import PageLayout from '../components/PageLayout.astro';
+import { getPage, getServices } from '../lib/content';
+
+const page = await getPage('servicesPage');
+const all = await getServices();
+const services = all.filter((s) => s.type === 'service');
+const bonsPlans = all.filter((s) => s.type === 'bon-plan');
+const title = page?.title ?? 'Bons plans & services';
+
+const groupes = [
+  { id: 'services', titre: 'Les services proposés', items: services },
+  { id: 'bons-plans', titre: 'Bons plans', items: bonsPlans },
+].filter((g) => g.items.length > 0);
+---
+
+<PageLayout
+  title={title}
+  description="Baby-sitting, jardinage, aide au déménagement… Les Horizons et Pionniers de Saint-Dominique proposent leurs services toute l'année pour financer leurs projets."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">Entraide</p>
+      <h1 class="text-4xl font-bold mb-3">{title}</h1>
+      {page?.intro && <p class="text-gray-300 max-w-2xl">{page.intro}</p>}
+    </div>
+  </section>
+
+  {groupes.map(({ id, titre, items }, i) => (
+    <section id={id} class:list={['py-16', i % 2 === 0 ? 'bg-white' : 'bg-gray-50']}>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-unit-dark mb-8">{titre}</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {items.map((item) => (
+            <article class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col">
+              {item.icone && <span class="text-4xl mb-3" aria-hidden="true">{item.icone}</span>}
+              <h3 class="text-lg font-bold text-unit-dark">{item.title}</h3>
+              {item.proposePar && (
+                <p class="text-xs font-semibold uppercase tracking-wide text-accent mt-1">{item.proposePar}</p>
+              )}
+              {item.description && <p class="text-sm text-gray-600 leading-relaxed mt-3 flex-1">{item.description}</p>}
+              {item.lien && (
+                <a href={item.lien} target="_blank" rel="noopener noreferrer" class="mt-4 text-sm font-medium text-accent hover:underline">
+                  En savoir plus ↗
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  {page?.html.trim() && (
+    <section class:list={['py-16', groupes.length % 2 === 0 ? 'bg-white' : 'bg-gray-50']}>
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="prose prose-gray max-w-none prose-a:text-accent" set:html={page.html} />
+      </div>
+    </section>
+  )}
+</PageLayout>

@@ -10,53 +10,35 @@
     {
       "totem": "Tamia",
       "name": "Emilie",
-      "role": "Cheftaine",
-      "phone": "",
-      "email": ""
+      "role": "Cheftaine"
     },
     {
       "totem": "Manningi",
-      "name": "Klara",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Klara"
     },
     {
       "totem": "Tamia",
-      "name": "Valentine",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Valentine"
     },
     {
       "totem": "Corsac",
-      "name": "Charlotte",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Charlotte"
     },
     {
       "totem": "Aluco",
-      "name": "Lisa Rose",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Lisa Rose"
     },
     {
       "totem": "Palomino",
-      "name": "Valentine",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Valentine"
     },
     {
       "totem": "Saïmiri",
-      "name": "Gabrielle",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Gabrielle"
     }
   ],
-  "illustration": "/images/art_sections/amazones.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

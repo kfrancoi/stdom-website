@@ -1,8 +1,10 @@
 ---
 import PageLayout from '../components/PageLayout.astro';
-import { getEvents, categoryConfig, type CalendarEvent } from '../lib/content';
+import { getEvents, getPage, categoryConfig, type CalendarEvent } from '../lib/content';
 
 const events = await getEvents();
+// Rappel de l'engagement, en tête du calendrier (texte : intro de la page Présence)
+const presence = await getPage('presence');
 
 // Group events by month
 const months: Record<string, CalendarEvent[]> = {};
@@ -67,6 +69,22 @@ const categories = Object.entries(categoryConfig);
   </section>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    {presence?.intro && (
+      <aside class="mb-10 flex flex-col sm:flex-row sm:items-center gap-4 p-6 rounded-2xl bg-accent/5 border border-accent/20">
+        <span class="text-3xl" aria-hidden="true">🤝</span>
+        <div class="flex-1">
+          <h2 class="font-bold text-unit-dark">{presence.title}</h2>
+          <p class="text-sm text-gray-700 leading-relaxed mt-1">{presence.intro}</p>
+        </div>
+        <a
+          href="/unite#presence"
+          class="shrink-0 px-4 py-2 rounded-full bg-accent text-white text-sm font-semibold hover:bg-accent-dark transition-colors text-center"
+        >
+          Nos engagements
+        </a>
+      </aside>
+    )}
+
     <div class="grid lg:grid-cols-4 gap-10">
 
       <!-- Légende (sidebar) -->
@@ -90,7 +108,7 @@ const categories = Object.entries(categoryConfig);
                   <li>
                     <a
                       href={`#month-${ym}`}
-                      class="text-sm text-gray-600 hover:text-unit-red capitalize transition-colors"
+                      class="text-sm text-gray-600 hover:text-accent capitalize transition-colors"
                     >
                       {monthLabel(ym)}
                     </a>
@@ -148,7 +166,7 @@ const categories = Object.entries(categoryConfig);
                         <h3 class="font-semibold text-unit-dark">{event.title}</h3>
                         <div class="flex flex-wrap gap-1.5">
                           <span class={`text-xs px-2 py-0.5 rounded-full font-medium border ${
-                            event.category === 'camp' ? 'bg-unit-red/10 text-unit-red border-unit-red/20' :
+                            event.category === 'camp' ? 'bg-accent/10 text-accent border-accent/20' :
                             event.category === 'we-unite' ? 'bg-unit-gold/20 text-amber-700 border-unit-gold/30' :
                             'bg-gray-100 text-gray-600 border-gray-200'
                           }`}>
@@ -161,7 +179,7 @@ const categories = Object.entries(categoryConfig);
                           )}
                         </div>
                       </div>
-                      <p class="text-sm text-unit-red font-medium mt-1">
+                      <p class="text-sm text-accent font-medium mt-1">
                         {formatRange(event.date, event.endDate)}
                       </p>
                       {event.description && (

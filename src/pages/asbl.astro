@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../components/PageLayout.astro';
 import StaffCard from '../components/StaffCard.astro';
+import Soutiens from '../components/Soutiens.astro';
 import { getStaffs } from '../lib/content';
 
 const { asblMembers } = await getStaffs();
@@ -69,7 +70,7 @@ const projects = [
               <p class="text-sm text-gray-600 mt-1">
                 Vous souhaitez soutenir les projets d'infrastructure de l'unité ? Les dons sont acceptés
                 avec attestation fiscale via l'ASBL. Contactez-nous à
-                <a href="mailto:asbl@stdom.be" class="text-unit-red hover:underline">asbl@stdom.be</a>.
+                <a href="mailto:asbl@stdom.be" class="text-accent hover:underline">asbl@stdom.be</a>.
               </p>
             </div>
           </div>
@@ -128,18 +129,15 @@ const projects = [
             <div>
               <dt class="text-gray-500 font-medium">Contact</dt>
               <dd class="mt-0.5">
-                <a href="mailto:asbl@stdom.be" class="text-unit-red hover:underline">asbl@stdom.be</a>
+                <a href="mailto:asbl@stdom.be" class="text-accent hover:underline">asbl@stdom.be</a>
               </dd>
             </div>
           </dl>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-          <h3 class="font-bold text-unit-dark mb-3">Soutien communal</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            La commune de <strong>Kraainem</strong> soutient activement nos projets d'infrastructure
-            via des subsides accordés à l'ASBL.
-          </p>
+        <div id="soutiens">
+          <h3 class="font-bold text-unit-dark mb-3">Merci à nos soutiens</h3>
+          <Soutiens compact />
         </div>
       </aside>
     </div>

@@ -1,15 +1,61 @@
 ---
-const navLinks = [
+interface NavItem {
+  href: string;
+  label: string;
+  children?: { href: string; label: string }[];
+  // Préfixes d'URL pour lesquels l'item est mis en évidence (défaut : href)
+  match?: string[];
+}
+
+const navItems: NavItem[] = [
   { href: '/', label: 'Accueil' },
-  { href: '/unite', label: "L'Unité" },
+  {
+    href: '/unite',
+    label: "L'Unité",
+    match: ['/unite', '/asbl', '/alumni-clan'],
+    children: [
+      { href: '/unite', label: 'Histoire & fonctionnement' },
+      { href: '/unite#staffs', label: "Staffs d'unité" },
+      { href: '/unite#presence', label: 'Présence & engagement' },
+      { href: '/asbl', label: 'ASBL Saint-Dominique' },
+      { href: '/alumni-clan', label: 'Alumni & Clan' },
+    ],
+  },
   { href: '/sections', label: 'Sections' },
+  {
+    href: '/activites',
+    label: 'Activités',
+    match: ['/activites', '/services'],
+    children: [
+      { href: '/activites#reunions', label: 'Réunions' },
+      { href: '/activites#week-ends', label: 'Week-ends & hikes' },
+      { href: '/activites#grand-camp', label: 'Grand camp' },
+      { href: '/activites#temps-forts', label: 'Temps forts & engagements' },
+      { href: '/services', label: 'Bons plans & services' },
+    ],
+  },
   { href: '/calendrier', label: 'Calendrier' },
-  { href: '/pratique', label: 'Pratique' },
+  {
+    href: '/pratique',
+    label: 'Pratique',
+    children: [
+      { href: '/pratique', label: 'Inscriptions' },
+      { href: '/pratique/cotisations', label: 'Cotisations & assurances' },
+      { href: '/pratique/uniforme', label: 'Uniforme' },
+      { href: '/documents#a-remplir', label: 'Documents à remplir' },
+    ],
+  },
   { href: '/documents', label: 'Documents' },
   { href: '/contact', label: 'Contact' },
 ];
 
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (item: NavItem) =>
+  item.href === '/'
+    ? currentPath === '/'
+    : (item.match ?? [item.href]).some((p) => currentPath === p || currentPath.startsWith(p + '/'));
+// Un sous-lien vers une ancre n'est jamais « actif » : il pointe dans une page
+const isChildActive = (href: string) => !href.includes('#') && currentPath === href;
 ---
 
 <header class="bg-white shadow-sm sticky top-0 z-50">
@@ -25,7 +71,7 @@ const currentPath = Astro.url.pathname;
           onerror="this.style.display='none'"
         />
         <div class="leading-tight">
-          <span class="block font-bold text-unit-dark text-base group-hover:text-unit-red transition-colors">
+          <span class="block font-bold text-unit-dark text-base group-hover:text-accent transition-colors">
             Saint-Dominique
           </span>
           <span class="block text-xs text-gray-500 font-medium tracking-wide">
@@ -35,23 +81,57 @@ const currentPath = Astro.url.pathname;
       </a>
 
       <!-- Desktop nav -->
-      <nav class="hidden md:flex items-center gap-1">
-        {navLinks.map((link) => (
-          <a
-            href={link.href}
-            class:list={[
-              "px-3 py-2 rounded-md text-sm font-medium transition-colors",
-              currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-                ? "bg-unit-red text-white"
-                : "text-gray-700 hover:text-unit-red hover:bg-red-50"
-            ]}
-          >
-            {link.label}
-          </a>
-        ))}
+      <nav class="hidden xl:flex items-center gap-0.5" aria-label="Navigation principale">
+        {navItems.map((item) =>
+          item.children ? (
+            <div class="relative group">
+              <a
+                href={item.href}
+                aria-haspopup="true"
+                class:list={[
+                  "inline-flex items-center gap-1 px-2.5 py-2 rounded-md text-sm font-medium transition-colors",
+                  isActive(item) ? "bg-accent text-white" : "text-gray-700 hover:text-accent hover:bg-accent/5"
+                ]}
+              >
+                {item.label}
+                <svg class="w-3.5 h-3.5 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+              <!-- pt-2 : pont invisible pour garder le survol entre le lien et le menu -->
+              <div class="absolute left-0 top-full pt-2 w-64 invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 transition-opacity">
+                <ul class="bg-white rounded-xl shadow-lg border border-gray-100 py-2">
+                  {item.children.map((child) => (
+                    <li>
+                      <a
+                        href={child.href}
+                        class:list={[
+                          "block px-4 py-2 text-sm transition-colors",
+                          isChildActive(child.href) ? "text-accent font-semibold" : "text-gray-700 hover:text-accent hover:bg-accent/5"
+                        ]}
+                      >
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              class:list={[
+                "px-2.5 py-2 rounded-md text-sm font-medium transition-colors",
+                isActive(item) ? "bg-accent text-white" : "text-gray-700 hover:text-accent hover:bg-accent/5"
+              ]}
+            >
+              {item.label}
+            </a>
+          )
+        )}
         <a
           href="/pratique#inscription"
-          class="ml-3 px-4 py-2 bg-unit-red text-white text-sm font-semibold rounded-full hover:bg-red-700 transition-colors shadow-sm"
+          class="ml-2 px-4 py-2 bg-accent text-white text-sm font-semibold rounded-full hover:bg-accent-dark transition-colors shadow-sm"
         >
           S'inscrire
         </a>
@@ -60,7 +140,7 @@ const currentPath = Astro.url.pathname;
       <!-- Mobile menu button -->
       <button
         id="mobile-menu-btn"
-        class="md:hidden p-2 rounded-md text-gray-700 hover:text-unit-red hover:bg-red-50 transition-colors"
+        class="xl:hidden p-2 rounded-md text-gray-700 hover:text-accent hover:bg-accent/5 transition-colors"
         aria-label="Ouvrir le menu"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,28 +151,43 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <!-- Mobile nav -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
-    <div class="px-4 py-3 space-y-1">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class:list={[
-            "block px-3 py-2 rounded-md text-sm font-medium transition-colors",
-            currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-              ? "bg-unit-red text-white"
-              : "text-gray-700 hover:text-unit-red hover:bg-red-50"
-          ]}
-        >
-          {link.label}
-        </a>
+  <div id="mobile-menu" class="hidden xl:hidden border-t border-gray-100 bg-white max-h-[calc(100vh-4rem)] overflow-y-auto">
+    <nav class="px-4 py-3 space-y-1" aria-label="Navigation principale">
+      {navItems.map((item) => (
+        <div>
+          <a
+            href={item.href}
+            class:list={[
+              "block px-3 py-2 rounded-md text-sm font-medium transition-colors",
+              isActive(item) ? "bg-accent text-white" : "text-gray-700 hover:text-accent hover:bg-accent/5"
+            ]}
+          >
+            {item.label}
+          </a>
+          {item.children && (
+            <div class="ml-4 my-1 pl-3 border-l-2 border-gray-100 space-y-0.5">
+              {item.children.map((child) => (
+                <a
+                  href={child.href}
+                  class:list={[
+                    "block px-3 py-1.5 rounded-md text-sm transition-colors",
+                    isChildActive(child.href) ? "text-accent font-semibold" : "text-gray-600 hover:text-accent hover:bg-accent/5"
+                  ]}
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
       ))}
       <a
         href="/pratique#inscription"
-        class="block mt-2 px-4 py-2 bg-unit-red text-white text-sm font-semibold rounded-full text-center hover:bg-red-700 transition-colors"
+        class="block mt-2 px-4 py-2 bg-accent text-white text-sm font-semibold rounded-full text-center hover:bg-accent-dark transition-colors"
       >
         S'inscrire
       </a>
-    </div>
+    </nav>
   </div>
 </header>
 
@@ -102,4 +197,9 @@ const currentPath = Astro.url.pathname;
   btn?.addEventListener('click', () => {
     menu?.classList.toggle('hidden');
   });
+  // Un lien vers une ancre de la page courante ne recharge pas la page :
+  // on referme le menu pour laisser voir la section ciblée.
+  menu?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => menu?.classList.add('hidden'))
+  );
 </script>

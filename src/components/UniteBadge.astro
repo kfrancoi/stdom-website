@@ -1,0 +1,21 @@
+---
+// Pastille « unité concernée » : 67ème, 106ème ou les deux
+import type { Unite } from '../lib/content';
+
+export interface Props {
+  unite: Unite;
+}
+
+const { unite } = Astro.props;
+
+const badges: Record<Unite, { label: string; class: string }> = {
+  both: { label: '67ème & 106ème', class: 'bg-unit-gold/15 text-amber-800' },
+  '67': { label: '67ème Guide', class: 'bg-guide-purple/10 text-guide-purple' },
+  '106': { label: '106ème Scout', class: 'bg-gray-100 text-gray-700' },
+};
+const badge = badges[unite] ?? badges.both;
+---
+
+<span class:list={['inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full', badge.class]}>
+  {badge.label}
+</span>

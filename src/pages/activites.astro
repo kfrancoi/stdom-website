@@ -1,0 +1,90 @@
+---
+import PageLayout from '../components/PageLayout.astro';
+import UniteBadge from '../components/UniteBadge.astro';
+import { getPage, getTempsForts } from '../lib/content';
+
+const reunions = await getPage('reunions');
+const weekends = await getPage('weekends');
+const grandCamp = await getPage('grandCamp');
+const tempsForts = await getTempsForts();
+
+// Blocs de texte de la page, dans l'ordre d'affichage (masqués s'ils n'existent pas)
+const blocs = [
+  { id: 'reunions', page: reunions },
+  { id: 'week-ends', page: weekends },
+  { id: 'grand-camp', page: grandCamp },
+].filter((b) => b.page !== null);
+
+const sommaire = [
+  ...blocs.map((b) => ({ id: b.id, label: b.page!.title })),
+  ...(tempsForts.length > 0 ? [{ id: 'temps-forts', label: 'Temps forts & engagements' }] : []),
+];
+---
+
+<PageLayout
+  title="Activités"
+  description="L'année scoute et guide à Saint-Dominique : réunions du dimanche, week-ends et hikes, grand camp de juillet et temps forts de l'année."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">L'année scoute</p>
+      <h1 class="text-4xl font-bold mb-3">Activités</h1>
+      <p class="text-gray-300 max-w-xl">
+        Des réunions du dimanche au grand camp de juillet : comment se déroule une année à Saint-Dom.
+      </p>
+      <nav class="mt-8 flex flex-wrap gap-2" aria-label="Sommaire">
+        {sommaire.map(({ id, label }) => (
+          <a
+            href={`#${id}`}
+            class="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm font-medium hover:bg-white/20 transition-colors"
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </section>
+
+  {blocs.map(({ id, page }, i) => (
+    <section id={id} class:list={['py-16', i % 2 === 0 ? 'bg-white' : 'bg-gray-50']}>
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-unit-dark mb-3">{page!.title}</h2>
+        {page!.intro && <p class="text-lg text-gray-600 mb-8">{page!.intro}</p>}
+        <div class="prose prose-gray max-w-none prose-a:text-accent" set:html={page!.html} />
+      </div>
+    </section>
+  ))}
+
+  <!-- Temps forts -->
+  {tempsForts.length > 0 && (
+    <section id="temps-forts" class:list={['py-16', blocs.length % 2 === 0 ? 'bg-white' : 'bg-gray-50']}>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-10">
+          <h2 class="text-3xl font-bold text-unit-dark mb-3">Temps forts & engagements</h2>
+          <p class="text-lg text-gray-600">
+            Fêtes, défis et actions solidaires : tout au long de l'année, des moments particuliers rythment la vie des deux unités.
+            Les dates sont reprises dans le <a href="/calendrier" class="text-accent font-medium hover:underline">calendrier</a>.
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tempsForts.map((tf) => (
+            <article class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+              {tf.image && <img src={tf.image} alt="" class="w-full h-44 object-cover" loading="lazy" />}
+              <div class="p-6 flex-1">
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                  {tf.periode && (
+                    <span class="text-xs font-semibold uppercase tracking-wide text-accent">{tf.periode}</span>
+                  )}
+                  <UniteBadge unite={tf.unite} />
+                </div>
+                <h3 class="text-lg font-bold text-unit-dark mb-2">{tf.title}</h3>
+                {tf.description && <p class="text-sm text-gray-600 leading-relaxed">{tf.description}</p>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</PageLayout>

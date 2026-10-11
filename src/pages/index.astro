@@ -2,11 +2,30 @@
 import PageLayout from '../components/PageLayout.astro';
 import CalendarPreview from '../components/CalendarPreview.astro';
 import SectionCard from '../components/SectionCard.astro';
-import { getSections67, getSections106, getActiveFlashs } from '../lib/content';
+import Soutiens from '../components/Soutiens.astro';
+import { getSections67, getSoutiens, getSections106, getActiveFlashs, getChiffres } from '../lib/content';
 
 const sections67 = await getSections67();
 const sections106 = await getSections106();
 const flashs = await getActiveFlashs();
+const chiffres = await getChiffres();
+const soutiens = await getSoutiens();
+
+// « 3 Rondes de Lutins, 3 Compagnies de Guides… » : composé à partir des sections du CMS
+const typeNames: Record<string, [string, string]> = {
+  lutins: ['Ronde de Lutins', 'Rondes de Lutins'],
+  guides: ['Compagnie de Guides', 'Compagnies de Guides'],
+  horizons: ['Chaîne Horizons', 'Chaînes Horizons'],
+  baladins: ['Ribambelle de Baladins', 'Ribambelles de Baladins'],
+  louveteaux: ['Meute', 'Meutes'],
+  eclaireurs: ['Troupe', 'Troupes'],
+  pionniers: ['Poste Pionniers', 'Postes Pionniers'],
+};
+const composition = (parType: Record<string, number>) =>
+  Object.keys(typeNames)
+    .filter((type) => parType[type])
+    .map((type) => `${parType[type]} ${typeNames[type][parType[type] > 1 ? 1 : 0]}`)
+    .join(', ') + '.';
 
 // Sélection des sections à afficher en homepage (2 par type)
 const featuredGuides = sections67.filter((s) => ['farfadets', 'amazones', 'eldorado'].includes(s.slug));
@@ -120,7 +139,7 @@ const values = [
             </span>
             <strong>{flash.title}</strong> — {flash.message}
             {flash.link && (
-              <a href={flash.link} class="ml-1 font-semibold text-unit-red hover:underline">
+              <a href={flash.link} class="ml-1 font-semibold text-accent hover:underline">
                 {flash.linkLabel || 'En savoir plus'} →
               </a>
             )}
@@ -129,6 +148,23 @@ const values = [
       </div>
     </section>
   )}
+
+  <!-- ═══════════════════════════════════════════════════════════ DEVISE -->
+  <section class="bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+      <div class="flex items-center justify-center gap-4 mb-4" aria-hidden="true">
+        <span class="h-px w-12 bg-unit-gold/60"></span>
+        <span class="text-unit-gold text-sm">✦</span>
+        <span class="h-px w-12 bg-unit-gold/60"></span>
+      </div>
+      <p class="text-xl sm:text-2xl font-display italic text-gray-700 leading-snug">
+        Un mouvement de jeunes, pour les jeunes, géré par les jeunes.
+      </p>
+      <a href="/unite#fonctionnement" class="inline-block mt-3 text-sm text-gray-500 hover:text-accent transition-colors">
+        Comment fonctionne l'unité →
+      </a>
+    </div>
+  </section>
 
   <!-- ══════════════════════════════════════════════════════ DEUX UNITÉS -->
   <section class="py-16 bg-gray-50">
@@ -156,19 +192,19 @@ const values = [
             <h3 class="text-2xl font-bold mb-2">67<sup>ème</sup> Unité Guide</h3>
             <p class="text-white/80 text-sm mb-6">
               Les Guides Catholiques de Belgique — pour les <strong class="text-white">filles de 8 à 17 ans</strong>.
-              3 rondes de Lutins, 3 Compagnies de Guides, 2 Chaînes Horizons.
+              {composition(chiffres.unit67.parType)}
             </p>
             <div class="grid grid-cols-3 gap-3 mb-6 text-center">
               <div class="bg-white/10 rounded-xl p-3">
-                <div class="text-2xl font-bold">255</div>
+                <div class="text-2xl font-bold">{chiffres.unit67.animes ?? '–'}</div>
                 <div class="text-xs text-white/70">animées</div>
               </div>
               <div class="bg-white/10 rounded-xl p-3">
-                <div class="text-2xl font-bold">46</div>
+                <div class="text-2xl font-bold">{chiffres.unit67.animateurs ?? '–'}</div>
                 <div class="text-xs text-white/70">animatrices</div>
               </div>
               <div class="bg-white/10 rounded-xl p-3">
-                <div class="text-2xl font-bold">7</div>
+                <div class="text-2xl font-bold">{chiffres.unit67.sections}</div>
                 <div class="text-xs text-white/70">sections</div>
               </div>
             </div>
@@ -197,19 +233,19 @@ const values = [
             <h3 class="text-2xl font-bold mb-2">106<sup>ème</sup> Unité Scoute</h3>
             <p class="text-white/80 text-sm mb-6">
               Les Scouts Baden Powell de Belgique — pour les <strong class="text-white">garçons et filles de 6 à 17 ans</strong>.
-              3 Ribambelles de Baladins, 3 Meutes, 2 Troupes, 2 Postes Pionniers.
+              {composition(chiffres.unit106.parType)}
             </p>
             <div class="grid grid-cols-3 gap-3 mb-6 text-center">
               <div class="bg-white/10 rounded-xl p-3">
-                <div class="text-2xl font-bold">330</div>
+                <div class="text-2xl font-bold">{chiffres.unit106.animes ?? '–'}</div>
                 <div class="text-xs text-white/70">animés</div>
               </div>
               <div class="bg-white/10 rounded-xl p-3">
-                <div class="text-2xl font-bold">63</div>
+                <div class="text-2xl font-bold">{chiffres.unit106.animateurs ?? '–'}</div>
                 <div class="text-xs text-white/70">animateurs</div>
               </div>
               <div class="bg-white/10 rounded-xl p-3">
-                <div class="text-2xl font-bold">10</div>
+                <div class="text-2xl font-bold">{chiffres.unit106.sections}</div>
                 <div class="text-xs text-white/70">sections</div>
               </div>
             </div>
@@ -232,7 +268,7 @@ const values = [
   <section class="py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-14">
-        <p class="text-unit-red font-semibold text-sm uppercase tracking-wider mb-2">Le scoutisme</p>
+        <p class="text-accent font-semibold text-sm uppercase tracking-wider mb-2">Le scoutisme</p>
         <h2 class="text-3xl font-bold text-unit-dark mb-4">Des valeurs pour la vie</h2>
         <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed">
           "Essayez de quitter ce monde en le laissant un peu meilleur que vous ne l'avez trouvé."
@@ -261,10 +297,10 @@ const values = [
         <div class="lg:col-span-3">
           <div class="flex items-center justify-between mb-6">
             <div>
-              <p class="text-unit-red font-semibold text-sm uppercase tracking-wider mb-1">Agenda</p>
+              <p class="text-accent font-semibold text-sm uppercase tracking-wider mb-1">Agenda</p>
               <h2 class="text-2xl font-bold text-unit-dark">Prochains événements</h2>
             </div>
-            <a href="/calendrier" class="text-sm text-unit-red font-medium hover:underline hidden sm:block">
+            <a href="/calendrier" class="text-sm text-accent font-medium hover:underline hidden sm:block">
               Tout voir →
             </a>
           </div>
@@ -274,7 +310,7 @@ const values = [
         <!-- Aperçu sections (2/5) -->
         <div class="lg:col-span-2">
           <div class="mb-6">
-            <p class="text-unit-red font-semibold text-sm uppercase tracking-wider mb-1">Sections</p>
+            <p class="text-accent font-semibold text-sm uppercase tracking-wider mb-1">Sections</p>
             <h2 class="text-2xl font-bold text-unit-dark">Trouvez votre section</h2>
           </div>
 
@@ -321,7 +357,7 @@ const values = [
 
             <a
               href="/sections"
-              class="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-white bg-unit-red hover:bg-red-700 rounded-2xl transition-colors shadow-sm"
+              class="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-white bg-accent hover:bg-accent-dark rounded-2xl transition-colors shadow-sm"
             >
               Voir toutes les sections
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -338,7 +374,7 @@ const values = [
   <section class="py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <p class="text-unit-red font-semibold text-sm uppercase tracking-wider mb-2">La vie à Saint-Dom</p>
+        <p class="text-accent font-semibold text-sm uppercase tracking-wider mb-2">La vie à Saint-Dom</p>
         <h2 class="text-3xl font-bold text-unit-dark">Des aventures inoubliables</h2>
       </div>
 
@@ -362,6 +398,19 @@ const values = [
       </div>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ MERCI -->
+  {soutiens.length > 0 && (
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <p class="text-accent font-semibold text-sm uppercase tracking-wider mb-2">Merci !</p>
+          <h2 class="text-3xl font-bold text-unit-dark">Ils nous soutiennent</h2>
+        </div>
+        <Soutiens />
+      </div>
+    </section>
+  )}
 
   <!-- ═══════════════════════════════════════════════════════════ REJOINDRE -->
   <section class="py-20 bg-unit-dark">

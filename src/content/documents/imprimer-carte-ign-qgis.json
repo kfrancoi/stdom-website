@@ -2,5 +2,6 @@
   "title": "Imprimer une carte IGN avec QGIS",
   "description": "Pas à pas pour découper et imprimer une carte IGN au format voulu, en haute définition — pratique pour préparer les hikes.",
   "categorie": "techniques",
+  "unite": "both",
   "file": "/documents/Imprimer-une-carte-IGN-avec-QGIS.pdf"
 }

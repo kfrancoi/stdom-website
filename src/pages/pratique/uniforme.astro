@@ -1,0 +1,219 @@
+---
+import PageLayout from '../../components/PageLayout.astro';
+import UniteBadge from '../../components/UniteBadge.astro';
+import { getUniforme, pointDeVenteLabels } from '../../lib/content';
+
+const page = await getUniforme();
+const title = page?.title ?? 'Uniforme & équipement';
+
+const articles = page?.articles ?? [];
+const pointsDeVente = page?.pointsDeVente ?? [];
+const insignes = (page?.insignes ?? []).filter((g) => g.items.length > 0);
+const placement = page?.placement ?? [];
+
+// Colonnes du tableau : seulement les types de points de vente utilisés
+const colonnes = Object.keys(pointDeVenteLabels).filter((type) =>
+  articles.some((a) => a.ou.includes(type))
+);
+
+// Les onglets 67ème / 106ème n'ont de sens que si un élément est propre à une unité
+const hasUnitSpecific = [...articles, ...pointsDeVente, ...insignes, ...placement].some(
+  (el) => el.unite !== 'both'
+);
+const isEmpty =
+  !page?.html.trim() && articles.length + pointsDeVente.length + insignes.length + placement.length === 0;
+---
+
+<PageLayout
+  title={title}
+  description="L'uniforme à l'unité Saint-Dominique : composition, où l'acheter, insignes et écussons, pour la 67ème Guide et la 106ème Scout."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">
+        <a href="/pratique" class="hover:underline">Pratique</a>
+      </p>
+      <h1 class="text-4xl font-bold mb-3">{title}</h1>
+      {page?.intro && <p class="text-gray-300 max-w-xl">{page.intro}</p>}
+    </div>
+  </section>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+    {isEmpty && (
+      <p class="text-gray-600 bg-gray-50 border border-gray-200 rounded-xl p-6">
+        Les informations sur l'uniforme seront bientôt disponibles. En attendant, renseignez-vous auprès du staff de votre section.
+      </p>
+    )}
+
+    {page?.html.trim() && (
+      <div class="prose prose-gray max-w-none prose-a:text-accent" set:html={page.html} />
+    )}
+
+    {hasUnitSpecific && (
+      <div class="sticky top-16 z-30 -mx-4 px-4 py-3 bg-white/95 backdrop-blur border-b border-gray-100">
+        <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Choisir l'unité">
+          <span class="text-sm text-gray-500 mr-1">Afficher pour :</span>
+          {[
+            { value: 'all', label: 'Les deux unités' },
+            { value: '67', label: '67ème Guide' },
+            { value: '106', label: '106ème Scout' },
+          ].map(({ value, label }) => (
+            <button
+              type="button"
+              role="tab"
+              data-filtre={value}
+              aria-selected={value === 'all' ? 'true' : 'false'}
+              class="px-4 py-1.5 rounded-full text-sm font-medium border transition-colors border-gray-200 text-gray-700 hover:border-accent aria-selected:bg-accent aria-selected:border-accent aria-selected:text-white"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Où acheter quoi ? -->
+    {articles.length > 0 && colonnes.length > 0 && (
+      <section id="ou-acheter" data-bloc>
+        <h2 class="text-2xl font-bold text-unit-dark mb-6">Où acheter quoi ?</h2>
+        <div class="overflow-x-auto rounded-2xl border border-gray-100 shadow-sm">
+          <table class="w-full text-sm">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="text-left px-4 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wide">Article</th>
+                {colonnes.map((type) => (
+                  <th class="px-4 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wide text-center whitespace-nowrap">
+                    {pointDeVenteLabels[type]}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-50">
+              {articles.map((a) => (
+                <tr data-unite={a.unite} class="hover:bg-gray-50 transition-colors">
+                  <td class="px-4 py-3">
+                    <span class="font-medium text-unit-dark">{a.nom}</span>
+                    {hasUnitSpecific && a.unite !== 'both' && <span class="ml-2"><UniteBadge unite={a.unite} /></span>}
+                    {a.remarque && <span class="block text-xs text-gray-400 mt-0.5">{a.remarque}</span>}
+                  </td>
+                  {colonnes.map((type) => (
+                    <td class="px-4 py-3 text-center">
+                      {a.ou.includes(type) ? (
+                        <span class="text-guide-green font-bold" aria-label="oui">✓</span>
+                      ) : (
+                        <span class="text-gray-300" aria-label="non">—</span>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    )}
+
+    <!-- Points de vente -->
+    {pointsDeVente.length > 0 && (
+      <section id="points-de-vente" data-bloc>
+        <h2 class="text-2xl font-bold text-unit-dark mb-6">Les points de vente</h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {pointsDeVente.map((p) => (
+            <div data-unite={p.unite} class="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <h3 class="font-semibold text-unit-dark">{p.nom}</h3>
+                {p.unite !== 'both' && <UniteBadge unite={p.unite} />}
+              </div>
+              <p class="text-xs font-medium text-accent uppercase tracking-wide mb-2">{pointDeVenteLabels[p.type] ?? p.type}</p>
+              {p.details && <p class="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{p.details}</p>}
+              {p.lien && (
+                <a href={p.lien} target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-sm font-medium text-accent hover:underline">
+                  Visiter le site ↗
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Insignes & écussons -->
+    {insignes.length > 0 && (
+      <section id="insignes" data-bloc>
+        <h2 class="text-2xl font-bold text-unit-dark mb-6">Insignes & écussons</h2>
+        <div class="space-y-10">
+          {insignes.map((g) => (
+            <div data-unite={g.unite}>
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <h3 class="text-lg font-bold text-unit-dark">{g.titre}</h3>
+                {g.unite !== 'both' && <UniteBadge unite={g.unite} />}
+              </div>
+              {g.description && <p class="text-sm text-gray-600 mb-4">{g.description}</p>}
+              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                {g.items.map((item) => (
+                  <figure class="bg-white rounded-2xl border border-gray-100 p-4 text-center">
+                    {item.image ? (
+                      <img src={item.image} alt={item.nom} class="h-24 w-full object-contain mb-3" loading="lazy" />
+                    ) : (
+                      <div class="h-24 flex items-center justify-center mb-3 text-gray-300" aria-hidden="true">
+                        <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z" />
+                        </svg>
+                      </div>
+                    )}
+                    <figcaption>
+                      <span class="block text-sm font-medium text-unit-dark">{item.nom}</span>
+                      {item.legende && <span class="block text-xs text-gray-500 mt-1">{item.legende}</span>}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Placement -->
+    {placement.length > 0 && (
+      <section id="placement" data-bloc>
+        <h2 class="text-2xl font-bold text-unit-dark mb-6">Où placer les insignes ?</h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          {placement.map((p) => (
+            <figure data-unite={p.unite} class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              {p.image && <img src={p.image} alt={`Placement des insignes : ${p.titre}`} class="w-full bg-gray-50 object-contain max-h-96" loading="lazy" />}
+              <figcaption class="p-5">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                  <span class="font-semibold text-unit-dark">{p.titre}</span>
+                  {p.unite !== 'both' && <UniteBadge unite={p.unite} />}
+                </div>
+                {p.texte && <p class="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{p.texte}</p>}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</PageLayout>
+
+<script>
+  // Onglets 67ème / 106ème : masque les éléments propres à l'autre unité, puis
+  // les blocs devenus vides. Sans JavaScript, tout reste affiché.
+  const boutons = document.querySelectorAll<HTMLButtonElement>('[data-filtre]');
+  boutons.forEach((bouton) =>
+    bouton.addEventListener('click', () => {
+      const filtre = bouton.dataset.filtre;
+      boutons.forEach((b) => b.setAttribute('aria-selected', String(b === bouton)));
+      document.querySelectorAll<HTMLElement>('[data-unite]').forEach((el) => {
+        const unite = el.dataset.unite;
+        el.hidden = !(filtre === 'all' || unite === 'both' || unite === filtre);
+      });
+      document.querySelectorAll<HTMLElement>('[data-bloc]').forEach((bloc) => {
+        const elements = [...bloc.querySelectorAll<HTMLElement>('[data-unite]')];
+        bloc.hidden = elements.length > 0 && elements.every((el) => el.hidden);
+      });
+    })
+  );
+</script>

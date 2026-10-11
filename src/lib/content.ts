@@ -45,12 +45,22 @@ export interface Section {
   typeLabel: string;
   ageRange: string;
   description: string;
-  contact: string;
+  contact?: string;
   color: string;
   accentColor: string;
   staff: StaffMember[];
+  blason?: string;
   illustration?: string;
-  photos: string[];
+  // Rubriques facultatives : HTML vide = rubrique masquée
+  valeurs: string;
+  infosPratiques: string;
+  uniforme: string;
+  equipes: {
+    titre?: string;
+    intro?: string;
+    liste: { nom: string; image?: string; description?: string }[];
+  };
+  photos: { src: string; legende?: string }[];
 }
 
 export interface Flash {
@@ -68,7 +78,7 @@ export const categoryConfig: Record<
   { label: string; color: string; bg: string }
 > = {
   reunion: { label: 'Réunion', color: 'text-guide-green', bg: 'bg-guide-green' },
-  camp: { label: 'Camp', color: 'text-unit-red', bg: 'bg-unit-red' },
+  camp: { label: 'Camp', color: 'text-accent', bg: 'bg-accent' },
   'we-section': { label: 'WE de section', color: 'text-guide-purple', bg: 'bg-guide-purple' },
   'we-unite': { label: "WE d'unités", color: 'text-unit-gold', bg: 'bg-unit-gold' },
   formation: { label: 'Formation', color: 'text-blue-600', bg: 'bg-blue-600' },
@@ -82,10 +92,10 @@ const sectionColors: Record<string, { color: string; accentColor: string }> = {
   lutins: { color: 'guide-green', accentColor: 'guide-purple' },
   guides: { color: 'guide-purple', accentColor: 'guide-green' },
   horizons: { color: 'guide-green', accentColor: 'guide-purple' },
-  baladins: { color: 'unit-red', accentColor: 'unit-gold' },
-  louveteaux: { color: 'unit-red', accentColor: 'unit-gold' },
-  eclaireurs: { color: 'unit-red', accentColor: 'unit-gold' },
-  pionniers: { color: 'unit-red', accentColor: 'unit-gold' },
+  baladins: { color: 'accent', accentColor: 'unit-gold' },
+  louveteaux: { color: 'accent', accentColor: 'unit-gold' },
+  eclaireurs: { color: 'accent', accentColor: 'unit-gold' },
+  pionniers: { color: 'accent', accentColor: 'unit-gold' },
 };
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -139,15 +149,15 @@ async function getSections(
   collection: 'sections67' | 'sections106'
 ): Promise<Section[]> {
   const entries = await reader.collections[collection].all();
-  return entries
-    .map(({ slug, entry }) => ({
+  const sections = await Promise.all(
+    entries.map(async ({ slug, entry }) => ({
       slug,
       name: entry.name,
       type: entry.type,
       typeLabel: entry.typeLabel,
       ageRange: entry.ageRange,
       description: entry.description,
-      contact: entry.contact,
+      contact: clean(entry.contact),
       order: entry.order ?? 0,
       ...(sectionColors[entry.type] ?? sectionColors.lutins),
       staff: entry.staff.map((m) => ({
@@ -157,14 +167,29 @@ async function getSections(
         phone: clean(m.phone),
         email: clean(m.email),
       })),
-      // Visuel de thème de la section, affiché tant qu'il n'y a pas de photos
-      // (et en attendant les balzons).
+      blason: clean(entry.blason),
+      // Visuel de thème de la section, affiché tant qu'il n'y a pas de photos.
       illustration: clean(entry.illustration),
+      valeurs: markdocToHtml(await entry.valeurs()),
+      infosPratiques: markdocToHtml(await entry.infosPratiques()),
+      uniforme: markdocToHtml(await entry.uniforme()),
+      equipes: {
+        titre: clean(entry.equipes.titre),
+        intro: clean(entry.equipes.intro),
+        liste: entry.equipes.liste.map((e) => ({
+          nom: e.nom,
+          image: clean(e.image),
+          description: clean(e.description),
+        })),
+      },
       // Pas de photo dans le CMS : liste vide, les vues affichent leur propre
       // visuel de remplacement (pas d'image fantôme à charger).
-      photos: entry.photos.filter(Boolean) as string[],
+      photos: entry.photos
+        .filter((p) => p.image)
+        .map((p) => ({ src: p.image as string, legende: clean(p.legende) })),
     }))
-    .sort((a, b) => a.order - b.order);
+  );
+  return sections.sort((a, b) => a.order - b.order);
 }
 
 export const getSections67 = () => getSections('sections67');
@@ -200,6 +225,11 @@ export async function getInscriptions() {
 
 // ── Documents & liens ────────────────────────────────────────────────────────
 
+export type Unite = 'both' | '67' | '106';
+
+// Documents propres à chaque unité, regroupés dans « Documents à remplir »
+export const adminDocCategories = ['sante', 'autorisations', 'droit-image'];
+
 export async function getDocuments() {
   const entries = await reader.collections.documents.all();
   return entries
@@ -208,6 +238,7 @@ export async function getDocuments() {
       title: entry.title,
       description: clean(entry.description),
       categorie: entry.categorie,
+      unite: (entry.unite ?? 'both') as Unite,
       file: entry.file,
     }))
     .sort((a, b) => a.title.localeCompare(b.title));
@@ -243,7 +274,16 @@ export interface ContentPage {
   html: string;
 }
 
-type PageSingleton = 'histoire' | 'presence' | 'grandCamp' | 'cotisations' | 'uniformes';
+type PageSingleton =
+  | 'histoire'
+  | 'fonctionnement'
+  | 'presence'
+  | 'reunions'
+  | 'weekends'
+  | 'grandCamp'
+  | 'communication'
+  | 'servicesPage'
+  | 'uniformes';
 
 export async function getPage(name: PageSingleton): Promise<ContentPage | null> {
   const entry = await reader.singletons[name].read();
@@ -265,4 +305,151 @@ export async function getChartes() {
       html: markdocToHtml(await entry.content()),
     }))
   );
+}
+
+export async function getCotisations() {
+  const entry = await reader.singletons.cotisations.read();
+  if (!entry) return null;
+  return {
+    title: entry.title,
+    intro: clean(entry.intro),
+    cotisation: markdocToHtml(await entry.cotisation()),
+    assurance: markdocToHtml(await entry.assurance()),
+    camp: markdocToHtml(await entry.camp()),
+  };
+}
+
+// ── Uniforme ─────────────────────────────────────────────────────────────────
+
+export const pointDeVenteLabels: Record<string, string> = {
+  local: 'Au local',
+  scouterie: 'Scouterie',
+  'en-ligne': 'En ligne',
+  'seconde-main': 'Seconde main',
+};
+
+export async function getUniforme() {
+  const entry = await reader.singletons.uniformes.read();
+  if (!entry) return null;
+  return {
+    title: entry.title,
+    intro: clean(entry.intro),
+    html: markdocToHtml(await entry.content()),
+    pointsDeVente: entry.pointsDeVente.map((p) => ({
+      nom: p.nom,
+      type: p.type,
+      unite: p.unite as Unite,
+      details: clean(p.details),
+      lien: clean(p.lien),
+    })),
+    articles: entry.articles.map((a) => ({
+      nom: a.nom,
+      unite: a.unite as Unite,
+      ou: [...a.ou],
+      remarque: clean(a.remarque),
+    })),
+    insignes: entry.insignes.map((g) => ({
+      titre: g.titre,
+      unite: g.unite as Unite,
+      description: clean(g.description),
+      items: g.items.map((i) => ({
+        nom: i.nom,
+        image: clean(i.image),
+        legende: clean(i.legende),
+      })),
+    })),
+    placement: entry.placement.map((p) => ({
+      titre: p.titre,
+      unite: p.unite as Unite,
+      image: clean(p.image),
+      texte: clean(p.texte),
+    })),
+  };
+}
+
+// ── Temps forts ──────────────────────────────────────────────────────────────
+
+export async function getTempsForts() {
+  const entries = await reader.collections.tempsForts.all();
+  return entries
+    .map(({ slug, entry }) => ({
+      slug,
+      title: entry.title,
+      periode: clean(entry.periode),
+      unite: entry.unite as Unite,
+      description: clean(entry.description),
+      image: clean(entry.image),
+      order: entry.order ?? 0,
+    }))
+    .sort((a, b) => a.order - b.order);
+}
+
+// ── Chiffres clés ────────────────────────────────────────────────────────────
+
+// Animés et animateurs : saisis dans le CMS. Sections : comptées dans les
+// collections, pour rester à jour sans y penser.
+export async function getChiffres() {
+  const c = await reader.singletons.chiffres.read();
+  const [s67, s106] = await Promise.all([getSections67(), getSections106()]);
+  const countByType = (list: Section[]) =>
+    list.reduce<Record<string, number>>((acc, s) => {
+      acc[s.type] = (acc[s.type] ?? 0) + 1;
+      return acc;
+    }, {});
+  const unit67 = {
+    animes: c?.animes67 ?? null,
+    animateurs: c?.animateurs67 ?? null,
+    sections: s67.length,
+    parType: countByType(s67),
+  };
+  const unit106 = {
+    animes: c?.animes106 ?? null,
+    animateurs: c?.animateurs106 ?? null,
+    sections: s106.length,
+    parType: countByType(s106),
+  };
+  const sum = (a: number | null, b: number | null) => (a === null || b === null ? null : a + b);
+  return {
+    unit67,
+    unit106,
+    total: {
+      animes: sum(unit67.animes, unit106.animes),
+      animateurs: sum(unit67.animateurs, unit106.animateurs),
+      sections: unit67.sections + unit106.sections,
+    },
+  };
+}
+
+// ── Bons plans & services ────────────────────────────────────────────────────
+
+export async function getServices() {
+  const entries = await reader.collections.services.all();
+  return entries
+    .map(({ slug, entry }) => ({
+      slug,
+      title: entry.title,
+      type: entry.type,
+      icone: clean(entry.icone),
+      proposePar: clean(entry.proposePar),
+      description: clean(entry.description),
+      lien: clean(entry.lien),
+      order: entry.order ?? 0,
+    }))
+    .sort((a, b) => a.order - b.order);
+}
+
+// ── Soutiens (remerciements) ─────────────────────────────────────────────────
+
+export async function getSoutiens() {
+  const entries = await reader.collections.soutiens.all();
+  return entries
+    .map(({ slug, entry }) => ({
+      slug,
+      nom: entry.nom,
+      description: clean(entry.description),
+      logo: clean(entry.logo),
+      lien: clean(entry.lien),
+      order: entry.order ?? 0,
+    }))
+    .sort((a, b) => a.order - b.order);
 }

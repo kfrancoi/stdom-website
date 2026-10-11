@@ -1,0 +1,75 @@
+---
+// Parcours d'un animé de 6 à 17 ans entre la 67ème et la 106ème.
+// Structure des branches fixée par les fédérations : pas besoin du CMS.
+
+type Carte = { nom: string; groupe: string; unite: 'mixte' | '67' | '106' | 'chef' };
+
+const etapes: { age: string; cartes: Carte[] }[] = [
+  { age: '6 – 8 ans', cartes: [{ nom: 'Baladins', groupe: 'Ribambelle mixte · 106ème', unite: 'mixte' }] },
+  {
+    age: '8 – 12 ans',
+    cartes: [
+      { nom: 'Lutins', groupe: 'Ronde · 67ème', unite: '67' },
+      { nom: 'Louveteaux', groupe: 'Meute · 106ème', unite: '106' },
+    ],
+  },
+  {
+    age: '12 – 16 ans',
+    cartes: [
+      { nom: 'Guides', groupe: 'Compagnie · 67ème', unite: '67' },
+      { nom: 'Éclaireurs', groupe: 'Troupe · 106ème', unite: '106' },
+    ],
+  },
+  {
+    age: '16 – 17 ans',
+    cartes: [
+      { nom: 'Horizons', groupe: 'Chaîne · 67ème', unite: '67' },
+      { nom: 'Pionniers', groupe: 'Poste · 106ème', unite: '106' },
+    ],
+  },
+  { age: 'Et après ?', cartes: [{ nom: 'Chef', groupe: 'Rejoindre un staff de section', unite: 'chef' }] },
+];
+
+const styles: Record<Carte['unite'], string> = {
+  mixte: 'bg-gradient-to-br from-guide-purple to-unit-dark text-white',
+  '67': 'bg-guide-purple/10 border border-guide-purple/20 text-guide-purple',
+  '106': 'bg-gray-100 border border-gray-200 text-unit-dark',
+  chef: 'bg-accent text-white',
+};
+---
+
+<div>
+  <ol class="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-3">
+    {etapes.map(({ age, cartes }, i) => (
+      <li class="relative flex flex-col">
+        <p class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2 md:text-center">{age}</p>
+        <div class="flex-1 grid grid-cols-2 md:grid-cols-1 gap-2">
+          {cartes.map((c) => (
+            <div
+              class:list={[
+                'rounded-xl p-4 flex flex-col justify-center',
+                cartes.length === 1 && 'col-span-2 md:col-span-1 md:h-full',
+                styles[c.unite],
+              ]}
+            >
+              <span class="font-bold">{c.nom}</span>
+              <span class="text-xs opacity-80 mt-0.5">{c.groupe}</span>
+            </div>
+          ))}
+        </div>
+        {i < etapes.length - 1 && (
+          <span class="hidden md:block absolute top-1/2 -right-3 z-10 text-gray-300" aria-hidden="true">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+  <p class="text-sm text-gray-600 mt-6 leading-relaxed">
+    Les <strong>Baladins</strong>, de 6 à 8 ans, sont mixtes. À 8 ans, les filles rejoignent la
+    <strong class="text-guide-purple">67ème Unité Guide</strong> (Lutins, Guides, Horizons) et les garçons
+    poursuivent à la <strong class="text-unit-dark">106ème Unité Scoute</strong> (Louveteaux, Éclaireurs, Pionniers).
+  </p>
+</div>

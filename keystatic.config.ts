@@ -44,6 +44,135 @@ const contentPage = (label: string, slug: string) =>
     },
   });
 
+// Images insérées dans un texte riche : rangées dans public/ pour être publiées
+const markdocImages = (dir: string) => ({
+  image: { directory: `public/images/${dir}`, publicPath: `/images/${dir}/` },
+});
+
+// Unité concernée par un contenu (événement, document, article d'uniforme…)
+const uniteSelect = (label = 'Unité concernée') =>
+  fields.select({
+    label,
+    options: [
+      { label: 'Les deux unités', value: 'both' },
+      { label: '67ème (Guides)', value: '67' },
+      { label: '106ème (Scouts)', value: '106' },
+    ],
+    defaultValue: 'both',
+  });
+
+// Types de points de vente de l'uniforme (colonnes du tableau « où acheter quoi »)
+const pointDeVenteOptions = [
+  { label: 'Au local', value: 'local' },
+  { label: 'Scouterie / boutique de la fédération', value: 'scouterie' },
+  { label: 'En ligne', value: 'en-ligne' },
+  { label: 'Seconde main', value: 'seconde-main' },
+];
+
+// Fiche d'une section (67ème ou 106ème). Chaque rubrique facultative laissée
+// vide est simplement masquée sur la page de la section.
+const sectionCollection = (
+  label: string,
+  dir: 'sections67' | 'sections106',
+  typeOptions: { label: string; value: string }[]
+) =>
+  collection({
+    label,
+    slugField: 'name',
+    path: `src/content/${dir}/*`,
+    format: { data: 'json' },
+    schema: {
+      name: fields.slug({ name: { label: 'Nom de la section' } }),
+      type: fields.select({
+        label: 'Type',
+        options: typeOptions,
+        defaultValue: typeOptions[0].value,
+      }),
+      typeLabel: fields.text({
+        label: 'Libellé du type (ex : Meute de Louveteaux)',
+        validation: { isRequired: true },
+      }),
+      ageRange: fields.text({
+        label: "Tranche d'âge (ex : 8 – 12 ans)",
+        validation: { isRequired: true },
+      }),
+      description: fields.text({
+        label: 'Description',
+        multiline: true,
+        validation: { isRequired: true },
+      }),
+      contact: fields.text({
+        label: 'Email de contact (usage interne, non affiché sur le site)',
+      }),
+      order: fields.integer({
+        label: "Ordre d'affichage",
+        defaultValue: 0,
+      }),
+      blason: fields.image({
+        label: 'Blason / logo de la section',
+        directory: 'public/images/blasons',
+        publicPath: '/images/blasons/',
+      }),
+      illustration: fields.image({
+        label: 'Visuel de thème (affiché tant qu\'il n\'y a pas de photo)',
+        directory: 'public/images/art_sections',
+        publicPath: '/images/art_sections/',
+      }),
+      valeurs: fields.markdoc({
+        label: 'Nos valeurs',
+        options: markdocImages('sections'),
+      }),
+      staff: staffArray('Staff de la section'),
+      equipes: fields.object(
+        {
+          titre: fields.text({
+            label: 'Titre de la rubrique (ex : Les sizaines, Les patrouilles)',
+          }),
+          intro: fields.text({ label: 'Introduction', multiline: true }),
+          liste: fields.array(
+            fields.object({
+              nom: fields.text({ label: 'Nom', validation: { isRequired: true } }),
+              image: fields.image({
+                label: 'Blason ou fanion (optionnel)',
+                directory: 'public/images/sections',
+                publicPath: '/images/sections/',
+              }),
+              description: fields.text({ label: 'Description', multiline: true }),
+            }),
+            {
+              label: 'Patrouilles, sizaines, équipes…',
+              itemLabel: (props) => props.fields.nom.value || 'Équipe',
+            }
+          ),
+        },
+        { label: 'Patrouilles, sizaines, équipes' }
+      ),
+      infosPratiques: fields.markdoc({
+        label: 'Informations pratiques propres à la section',
+        options: markdocImages('sections'),
+      }),
+      uniforme: fields.markdoc({
+        label: 'Uniforme & matériel',
+        options: markdocImages('sections'),
+      }),
+      photos: fields.array(
+        fields.object({
+          image: fields.image({
+            label: 'Photo',
+            directory: 'public/images/sections',
+            publicPath: '/images/sections/',
+            validation: { isRequired: true },
+          }),
+          legende: fields.text({ label: 'Légende (optionnelle)' }),
+        }),
+        {
+          label: 'Photos « best of »',
+          itemLabel: (props) => props.fields.legende.value || 'Photo',
+        }
+      ),
+    },
+  });
+
 // ── Configuration ────────────────────────────────────────────────────────────
 
 export default config({
@@ -60,10 +189,13 @@ export default config({
     brand: { name: 'Saint-Dom — Gestion du contenu' },
     navigation: {
       Actualités: ['flashs', 'evenements'],
-      Unité: ['staffs', 'histoire', 'presence'],
+      Unité: ['histoire', 'fonctionnement', 'chiffres', 'staffs', 'presence', 'soutiens'],
       Sections: ['sections67', 'sections106'],
-      Pratique: ['inscriptions', 'grandCamp', 'cotisations', 'uniformes'],
+      Activités: ['reunions', 'weekends', 'grandCamp', 'tempsForts'],
+      'Bons plans & services': ['servicesPage', 'services'],
+      Pratique: ['inscriptions', 'cotisations', 'uniformes'],
       Documents: ['documents', 'chartes', 'liens'],
+      Contact: ['communication'],
     },
   },
 
@@ -120,128 +252,23 @@ export default config({
           ],
           defaultValue: 'reunion',
         }),
-        unit: fields.select({
-          label: 'Unité concernée',
-          options: [
-            { label: 'Les deux unités', value: 'both' },
-            { label: '67ème (Guides)', value: '67' },
-            { label: '106ème (Scouts)', value: '106' },
-          ],
-          defaultValue: 'both',
-        }),
+        unit: uniteSelect(),
         description: fields.text({ label: 'Description', multiline: true }),
       },
     }),
 
     // ── Sections ────────────────────────────────────────────────────────────
-    sections67: collection({
-      label: 'Sections 67ème (Guides)',
-      slugField: 'name',
-      path: 'src/content/sections67/*',
-      format: { data: 'json' },
-      schema: {
-        name: fields.slug({ name: { label: 'Nom de la section' } }),
-        type: fields.select({
-          label: 'Type',
-          options: [
-            { label: 'Ronde de Lutins (8-12 ans)', value: 'lutins' },
-            { label: 'Compagnie de Guides (12-16 ans)', value: 'guides' },
-            { label: 'Chaîne Guide Horizons (16-17 ans)', value: 'horizons' },
-          ],
-          defaultValue: 'lutins',
-        }),
-        typeLabel: fields.text({
-          label: 'Libellé du type (ex : Ronde de Lutins)',
-          validation: { isRequired: true },
-        }),
-        ageRange: fields.text({
-          label: "Tranche d'âge (ex : 8 – 12 ans)",
-          validation: { isRequired: true },
-        }),
-        description: fields.text({
-          label: 'Description',
-          multiline: true,
-          validation: { isRequired: true },
-        }),
-        contact: fields.text({
-          label: 'Email de contact',
-          validation: { isRequired: true },
-        }),
-        order: fields.integer({
-          label: "Ordre d'affichage",
-          defaultValue: 0,
-        }),
-        staff: staffArray('Staff de la section'),
-        illustration: fields.image({
-          label: 'Visuel de thème (en attendant le balzon)',
-          directory: 'public/images/art_sections',
-          publicPath: '/images/art_sections/',
-        }),
-        photos: fields.array(
-          fields.image({
-            label: 'Photo',
-            directory: 'public/images/sections',
-            publicPath: '/images/sections/',
-          }),
-          { label: 'Photos', itemLabel: () => 'Photo' }
-        ),
-      },
-    }),
-
-    sections106: collection({
-      label: 'Sections 106ème (Scouts)',
-      slugField: 'name',
-      path: 'src/content/sections106/*',
-      format: { data: 'json' },
-      schema: {
-        name: fields.slug({ name: { label: 'Nom de la section' } }),
-        type: fields.select({
-          label: 'Type',
-          options: [
-            { label: 'Ribambelle de Baladins (6-8 ans)', value: 'baladins' },
-            { label: 'Meute de Louveteaux (8-12 ans)', value: 'louveteaux' },
-            { label: 'Troupe Scoute (12-16 ans)', value: 'eclaireurs' },
-            { label: 'Poste Pionniers (15-17 ans)', value: 'pionniers' },
-          ],
-          defaultValue: 'louveteaux',
-        }),
-        typeLabel: fields.text({
-          label: 'Libellé du type (ex : Meute de Louveteaux)',
-          validation: { isRequired: true },
-        }),
-        ageRange: fields.text({
-          label: "Tranche d'âge (ex : 8 – 12 ans)",
-          validation: { isRequired: true },
-        }),
-        description: fields.text({
-          label: 'Description',
-          multiline: true,
-          validation: { isRequired: true },
-        }),
-        contact: fields.text({
-          label: 'Email de contact',
-          validation: { isRequired: true },
-        }),
-        order: fields.integer({
-          label: "Ordre d'affichage",
-          defaultValue: 0,
-        }),
-        staff: staffArray('Staff de la section'),
-        illustration: fields.image({
-          label: 'Visuel de thème (en attendant le balzon)',
-          directory: 'public/images/art_sections',
-          publicPath: '/images/art_sections/',
-        }),
-        photos: fields.array(
-          fields.image({
-            label: 'Photo',
-            directory: 'public/images/sections',
-            publicPath: '/images/sections/',
-          }),
-          { label: 'Photos', itemLabel: () => 'Photo' }
-        ),
-      },
-    }),
+    sections67: sectionCollection('Sections 67ème (Guides)', 'sections67', [
+      { label: 'Ronde de Lutins (8-12 ans)', value: 'lutins' },
+      { label: 'Compagnie de Guides (12-16 ans)', value: 'guides' },
+      { label: 'Chaîne Guide Horizons (16-17 ans)', value: 'horizons' },
+    ]),
+    sections106: sectionCollection('Sections 106ème (Scouts)', 'sections106', [
+      { label: 'Ribambelle de Baladins (6-8 ans)', value: 'baladins' },
+      { label: 'Meute de Louveteaux (8-12 ans)', value: 'louveteaux' },
+      { label: 'Troupe Scoute (12-16 ans)', value: 'eclaireurs' },
+      { label: 'Poste Pionniers (16-17 ans)', value: 'pionniers' },
+    ]),
 
     // ── Documents téléchargeables ───────────────────────────────────────────
     documents: collection({
@@ -257,6 +284,7 @@ export default config({
           options: [
             { label: 'Fiche santé', value: 'sante' },
             { label: 'Autorisations', value: 'autorisations' },
+            { label: "Droit à l'image", value: 'droit-image' },
             { label: 'Administratif', value: 'administratif' },
             { label: 'Techniques & outils', value: 'techniques' },
             { label: 'Malles & matériel', value: 'materiel' },
@@ -264,12 +292,78 @@ export default config({
           ],
           defaultValue: 'autre',
         }),
+        unite: uniteSelect(
+          'Unité concernée (fiche santé, autorisations et droit à l\'image : version propre à chaque unité)'
+        ),
         file: fields.file({
           label: 'Fichier (PDF…)',
           directory: 'public/documents',
           publicPath: '/documents/',
           validation: { isRequired: true },
         }),
+      },
+    }),
+
+    // ── Temps forts de l'année (page Activités) ─────────────────────────────
+    tempsForts: collection({
+      label: "Temps forts de l'année",
+      slugField: 'title',
+      path: 'src/content/temps-forts/*',
+      format: { data: 'json' },
+      schema: {
+        title: fields.slug({ name: { label: 'Titre' } }),
+        periode: fields.text({ label: 'Période (ex : Septembre, Printemps…)' }),
+        unite: uniteSelect(),
+        description: fields.text({ label: 'Description', multiline: true }),
+        image: fields.image({
+          label: 'Photo (optionnelle)',
+          directory: 'public/images/temps-forts',
+          publicPath: '/images/temps-forts/',
+        }),
+        order: fields.integer({ label: "Ordre d'affichage", defaultValue: 0 }),
+      },
+    }),
+
+    // ── Bons plans & services (Horizons, Pionniers…) ────────────────────────
+    services: collection({
+      label: 'Services & bons plans',
+      slugField: 'title',
+      path: 'src/content/services/*',
+      format: { data: 'json' },
+      schema: {
+        title: fields.slug({ name: { label: 'Titre' } }),
+        type: fields.select({
+          label: 'Type',
+          options: [
+            { label: 'Service proposé par les jeunes', value: 'service' },
+            { label: 'Bon plan', value: 'bon-plan' },
+          ],
+          defaultValue: 'service',
+        }),
+        icone: fields.text({ label: 'Icône (un émoji, ex : 🌱)' }),
+        proposePar: fields.text({ label: 'Proposé par (ex : Horizons & Pionniers)' }),
+        description: fields.text({ label: 'Description', multiline: true }),
+        lien: fields.url({ label: 'Lien (optionnel)' }),
+        order: fields.integer({ label: "Ordre d'affichage", defaultValue: 0 }),
+      },
+    }),
+
+    // ── Remerciements : subsides et soutiens ────────────────────────────────
+    soutiens: collection({
+      label: 'Soutiens & subsides (remerciements)',
+      slugField: 'nom',
+      path: 'src/content/soutiens/*',
+      format: { data: 'json' },
+      schema: {
+        nom: fields.slug({ name: { label: 'Nom' } }),
+        description: fields.text({ label: 'Ce que nous lui devons', multiline: true }),
+        logo: fields.image({
+          label: 'Logo (optionnel)',
+          directory: 'public/images/soutiens',
+          publicPath: '/images/soutiens/',
+        }),
+        lien: fields.url({ label: 'Site web (optionnel)' }),
+        order: fields.integer({ label: "Ordre d'affichage", defaultValue: 0 }),
       },
     }),
 
@@ -351,11 +445,138 @@ export default config({
       },
     }),
 
+    // ── Chiffres clés (accueil et page L'Unité) ─────────────────────────────
+    chiffres: singleton({
+      label: 'Chiffres clés',
+      path: 'src/content/chiffres',
+      format: { data: 'json' },
+      schema: {
+        animes67: fields.integer({ label: 'Animées 67ème' }),
+        animateurs67: fields.integer({ label: 'Animatrices 67ème' }),
+        animes106: fields.integer({ label: 'Animés 106ème' }),
+        animateurs106: fields.integer({ label: 'Animateurs 106ème' }),
+      },
+    }),
+
     // ── Pages de contenu ────────────────────────────────────────────────────
     histoire: contentPage("Histoire de l'unité", 'histoire'),
+    fonctionnement: contentPage("Fonctionnement de l'unité", 'fonctionnement'),
     presence: contentPage('Présence & engagement', 'presence'),
+    reunions: contentPage('Réunions', 'reunions'),
+    weekends: contentPage('Week-ends & hikes', 'weekends'),
     grandCamp: contentPage('Grand camp', 'grand-camp'),
-    cotisations: contentPage('Cotisations & assurance', 'cotisations'),
-    uniformes: contentPage('Uniformes & scouterie', 'uniformes'),
+    communication: contentPage('Comment communiquons-nous ?', 'communication'),
+    servicesPage: contentPage('Page Bons plans & services', 'services'),
+
+    // Trois blocs de texte : le premier dans cotisations.mdoc, les deux autres
+    // dans le dossier cotisations/ (assurance.mdoc, camp.mdoc).
+    cotisations: singleton({
+      label: 'Cotisations & assurances',
+      path: 'src/content/pages/cotisations',
+      format: { contentField: 'cotisation' },
+      schema: {
+        title: fields.text({ label: 'Titre', validation: { isRequired: true } }),
+        intro: fields.text({ label: 'Introduction (affichée sous le titre)', multiline: true }),
+        cotisation: fields.markdoc({
+          label: 'Le prix de la cotisation',
+          options: markdocImages('pages'),
+        }),
+        assurance: fields.markdoc({
+          label: "L'assurance : ce qui est couvert",
+          options: markdocImages('pages'),
+        }),
+        camp: fields.markdoc({
+          label: 'Le coût du camp',
+          options: markdocImages('pages'),
+        }),
+      },
+    }),
+
+    // Page Uniforme : chaque bloc est masqué tant qu'il est vide, et chaque
+    // élément peut être réservé à une unité (onglets 67ème / 106ème).
+    uniformes: singleton({
+      label: 'Uniforme & équipement',
+      path: 'src/content/pages/uniformes',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.text({ label: 'Titre', validation: { isRequired: true } }),
+        intro: fields.text({ label: 'Introduction (affichée sous le titre)', multiline: true }),
+        content: fields.markdoc({
+          label: "L'uniforme en général (composition, conseils…)",
+          options: markdocImages('uniforme'),
+        }),
+        pointsDeVente: fields.array(
+          fields.object({
+            nom: fields.text({ label: 'Nom', validation: { isRequired: true } }),
+            type: fields.select({
+              label: 'Type',
+              options: pointDeVenteOptions,
+              defaultValue: 'scouterie',
+            }),
+            unite: uniteSelect(),
+            details: fields.text({ label: 'Adresse, horaires, remarques', multiline: true }),
+            lien: fields.url({ label: 'Lien (optionnel)' }),
+          }),
+          {
+            label: 'Points de vente',
+            itemLabel: (props) => props.fields.nom.value || 'Point de vente',
+          }
+        ),
+        articles: fields.array(
+          fields.object({
+            nom: fields.text({ label: 'Article', validation: { isRequired: true } }),
+            unite: uniteSelect(),
+            ou: fields.multiselect({
+              label: 'Où le trouver ?',
+              options: pointDeVenteOptions,
+            }),
+            remarque: fields.text({ label: 'Remarque (ex : stock limité)' }),
+          }),
+          {
+            label: 'Articles (tableau « où acheter quoi »)',
+            itemLabel: (props) => props.fields.nom.value || 'Article',
+          }
+        ),
+        insignes: fields.array(
+          fields.object({
+            titre: fields.text({ label: 'Titre du groupe', validation: { isRequired: true } }),
+            unite: uniteSelect(),
+            description: fields.text({ label: 'Explication', multiline: true }),
+            items: fields.array(
+              fields.object({
+                nom: fields.text({ label: 'Nom', validation: { isRequired: true } }),
+                image: fields.image({
+                  label: 'Image (optionnelle)',
+                  directory: 'public/images/uniforme',
+                  publicPath: '/images/uniforme/',
+                }),
+                legende: fields.text({ label: 'Légende (optionnelle)' }),
+              }),
+              { label: 'Insignes', itemLabel: (props) => props.fields.nom.value || 'Insigne' }
+            ),
+          }),
+          {
+            label: 'Insignes & écussons',
+            itemLabel: (props) => props.fields.titre.value || 'Groupe',
+          }
+        ),
+        placement: fields.array(
+          fields.object({
+            titre: fields.text({ label: 'Branche (ex : Louveteaux)', validation: { isRequired: true } }),
+            unite: uniteSelect(),
+            image: fields.image({
+              label: 'Schéma ou photo',
+              directory: 'public/images/uniforme',
+              publicPath: '/images/uniforme/',
+            }),
+            texte: fields.text({ label: 'Explication', multiline: true }),
+          }),
+          {
+            label: 'Placement des insignes',
+            itemLabel: (props) => props.fields.titre.value || 'Branche',
+          }
+        ),
+      },
+    }),
   },
 });

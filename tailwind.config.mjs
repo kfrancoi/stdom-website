@@ -6,8 +6,13 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Couleur d'accent du site (boutons, liens, menu actif…) : la changer
+        // ici suffit à recolorer tout le site. Le rouge du logo vaut #C41E3A.
+        accent: {
+          DEFAULT: '#8C2F39', // bordeaux
+          dark: '#6E242C', // survol des boutons
+        },
         // Identité commune de l'unité (logo)
-        'unit-red': '#C41E3A',
         'unit-gold': '#F5B800',
         'unit-dark': '#1A1A1A',
         // 67ème Guides (foulard vert & mauve)

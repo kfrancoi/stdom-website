@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../../components/PageLayout.astro';
 import SectionCard from '../../components/SectionCard.astro';
+import Parcours from '../../components/Parcours.astro';
 import { getSections67, getSections106 } from '../../lib/content';
 
 const sections67 = await getSections67();
@@ -22,7 +23,7 @@ const scout106Types = [
   { key: 'baladins',   label: 'Ribambelles de Baladins', ageRange: '6 – 8 ans',   color: 'bg-gray-100 text-gray-600 border-gray-200' },
   { key: 'louveteaux', label: 'Meutes de Louveteaux',    ageRange: '8 – 12 ans',  color: 'bg-gray-100 text-gray-600 border-gray-200' },
   { key: 'eclaireurs', label: 'Troupes Scoutes',         ageRange: '12 – 16 ans', color: 'bg-gray-100 text-gray-600 border-gray-200' },
-  { key: 'pionniers',  label: 'Postes Pionniers',        ageRange: '15 – 17 ans', color: 'bg-gray-100 text-gray-600 border-gray-200' },
+  { key: 'pionniers',  label: 'Postes Pionniers',        ageRange: '16 – 17 ans', color: 'bg-gray-100 text-gray-600 border-gray-200' },
 ];
 ---
 
@@ -37,25 +38,18 @@ const scout106Types = [
         <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">67ème & 106ème</p>
         <h1 class="text-4xl font-bold mb-4">Nos sections</h1>
         <p class="text-gray-300 text-lg leading-relaxed">
-          17 sections pour accueillir les jeunes de 6 à 17 ans. Chaque section a sa propre identité,
+          {sections67.length + sections106.length} sections pour accueillir les jeunes de 6 à 17 ans. Chaque section a sa propre identité,
           ses traditions, ses chefs — et le même esprit Saint-Dom.
         </p>
       </div>
+    </div>
+  </section>
 
-      <!-- Age guide -->
-      <div class="mt-10 flex flex-wrap gap-3">
-        {[
-          { age: '6–8 ans', section: 'Baladins', color: 'bg-white/10' },
-          { age: '8–12 ans', section: 'Lutins / Louveteaux', color: 'bg-white/10' },
-          { age: '12–16 ans', section: 'Guides / Éclaireurs', color: 'bg-white/10' },
-          { age: '16–17 ans', section: 'Horizons / Pionniers', color: 'bg-white/10' },
-        ].map(({ age, section, color }) => (
-          <div class={`${color} backdrop-blur-sm border border-white/20 rounded-xl px-4 py-2 text-sm`}>
-            <span class="font-bold text-unit-gold">{age}</span>
-            <span class="text-gray-300 ml-2">{section}</span>
-          </div>
-        ))}
-      </div>
+  <!-- Parcours 6-17 ans -->
+  <section class="py-16 bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-unit-dark mb-6">Quelle section, à quel âge ?</h2>
+      <Parcours />
     </div>
   </section>
 
@@ -75,7 +69,7 @@ const scout106Types = [
             Les Guides Catholiques de Belgique. Pour les filles de 8 à 17 ans.
             Foulard <span class="font-medium text-guide-green">vert</span> &amp;
             <span class="font-medium text-guide-purple">mauve</span>.
-            Contact : <a href="mailto:administration67@stdom.be" class="text-unit-red hover:underline">administration67@stdom.be</a>
+            Contact : <a href="mailto:administration67@stdom.be" class="text-accent hover:underline">administration67@stdom.be</a>
           </p>
         </div>
       </div>
@@ -99,7 +93,7 @@ const scout106Types = [
                   typeLabel={s.typeLabel}
                   ageRange={s.ageRange}
                   description={s.description}
-                  photo={s.photos[0]}
+                  photo={s.photos[0]?.src}
                   illustration={s.illustration}
                   staffCount={s.staff.length}
                 />
@@ -131,7 +125,7 @@ const scout106Types = [
           <p class="text-gray-500 max-w-xl">
             Les Scouts Baden Powell de Belgique. Pour les garçons et filles de 6 à 17 ans.
             Foulard <span class="font-medium">noir</span> &amp; blanc.
-            Contact : <a href="mailto:administration106@stdom.be" class="text-unit-red hover:underline">administration106@stdom.be</a>
+            Contact : <a href="mailto:administration106@stdom.be" class="text-accent hover:underline">administration106@stdom.be</a>
           </p>
         </div>
       </div>
@@ -154,7 +148,7 @@ const scout106Types = [
                   typeLabel={s.typeLabel}
                   ageRange={s.ageRange}
                   description={s.description}
-                  photo={s.photos[0]}
+                  photo={s.photos[0]?.src}
                   illustration={s.illustration}
                   staffCount={s.staff.length}
                 />

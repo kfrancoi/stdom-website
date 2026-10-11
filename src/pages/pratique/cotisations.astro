@@ -1,0 +1,73 @@
+---
+import PageLayout from '../../components/PageLayout.astro';
+import { getCotisations } from '../../lib/content';
+
+const page = await getCotisations();
+
+// Blocs vides (texte effacé dans le CMS) masqués
+const blocs = page
+  ? [
+      { id: 'cotisation', icon: '💶', title: 'La cotisation', html: page.cotisation },
+      { id: 'assurance', icon: '🛡️', title: "L'assurance : ce qui est couvert", html: page.assurance },
+      { id: 'camp', icon: '🏕️', title: 'Le coût du camp', html: page.camp },
+    ].filter((b) => b.html.trim() !== '')
+  : [];
+---
+
+<PageLayout
+  title={page?.title ?? 'Cotisations & assurances'}
+  description="Cotisation annuelle, assurance et coût du camp à l'unité Saint-Dominique (67ème Guide et 106ème Scout)."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">
+        <a href="/pratique" class="hover:underline">Pratique</a>
+      </p>
+      <h1 class="text-4xl font-bold mb-3">{page?.title ?? 'Cotisations & assurances'}</h1>
+      {page?.intro && <p class="text-gray-300 max-w-xl">{page.intro}</p>}
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid lg:grid-cols-3 gap-12">
+      <div class="lg:col-span-2 space-y-14">
+        {blocs.map(({ id, icon, title, html }) => (
+          <section id={id}>
+            <h2 class="flex items-center gap-3 text-2xl font-bold text-unit-dark mb-4">
+              <span aria-hidden="true">{icon}</span>{title}
+            </h2>
+            <div class="prose prose-gray max-w-none prose-a:text-accent prose-h2:text-lg prose-h2:mt-6 prose-h2:mb-3" set:html={html} />
+          </section>
+        ))}
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6">
+        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+          <h3 class="font-bold text-unit-dark mb-4">Une question ?</h3>
+          <p class="text-sm text-gray-600 mb-4">
+            Le staff d'unité répond à toutes les questions de cotisation, en toute confidentialité.
+          </p>
+          <div class="space-y-3 text-sm">
+            <div>
+              <p class="text-guide-purple font-semibold mb-1">67ème Unité Guide</p>
+              <a href="mailto:administration67@stdom.be" class="text-gray-600 hover:text-accent transition-colors">administration67@stdom.be</a>
+            </div>
+            <div>
+              <p class="text-gray-700 font-semibold mb-1">106ème Unité Scoute</p>
+              <a href="mailto:administration106@stdom.be" class="text-gray-600 hover:text-accent transition-colors">administration106@stdom.be</a>
+            </div>
+          </div>
+        </div>
+        <a
+          href="/documents#a-remplir"
+          class="block bg-accent/5 border border-accent/20 rounded-2xl p-5 text-sm text-gray-700 hover:border-accent/40 transition-colors"
+        >
+          <strong class="text-accent">📝 Documents à remplir</strong><br />
+          Fiche santé, autorisation parentale et droit à l'image, propres à chaque unité.
+        </a>
+      </aside>
+    </div>
+  </div>
+</PageLayout>

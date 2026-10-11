@@ -1,0 +1,42 @@
+---
+// Remerciements : communes et organismes qui soutiennent les unités (CMS « Soutiens »)
+import { getSoutiens } from '../lib/content';
+
+export interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const soutiens = await getSoutiens();
+---
+
+{soutiens.length > 0 && (
+  <ul class:list={['grid gap-4', !compact && 'sm:grid-cols-2 lg:grid-cols-3']}>
+    {soutiens.map((s) => {
+      const Tag = s.lien ? 'a' : 'div';
+      return (
+        <li>
+          <Tag
+            href={s.lien}
+            target={s.lien ? '_blank' : undefined}
+            rel={s.lien ? 'noopener noreferrer' : undefined}
+            class:list={[
+              'flex items-start gap-4 h-full bg-white rounded-2xl border border-gray-100 shadow-sm p-5',
+              s.lien && 'hover:border-accent/40 hover:shadow-md transition-all',
+            ]}
+          >
+            {s.logo ? (
+              <img src={s.logo} alt="" class="w-14 h-14 object-contain shrink-0" loading="lazy" />
+            ) : (
+              <span class="w-14 h-14 shrink-0 rounded-full bg-unit-gold/15 flex items-center justify-center text-2xl" aria-hidden="true">🙏</span>
+            )}
+            <span>
+              <span class="block font-semibold text-unit-dark">{s.nom}{s.lien && ' ↗'}</span>
+              {s.description && <span class="block text-sm text-gray-600 mt-1 leading-relaxed">{s.description}</span>}
+            </span>
+          </Tag>
+        </li>
+      );
+    })}
+  </ul>
+)}

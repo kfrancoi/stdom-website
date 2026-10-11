@@ -1,10 +1,7 @@
 ---
 import PageLayout from '../components/PageLayout.astro';
-import { getInscriptions, getPage } from '../lib/content';
+import { getInscriptions } from '../lib/content';
 
-const grandCamp = await getPage('grandCamp');
-const cotisations = await getPage('cotisations');
-const uniformes = await getPage('uniformes');
 const inscriptions = await getInscriptions();
 
 // Boutons d'inscription : liens e-mail si ouvertes, sinon grisés et non cliquables
@@ -50,6 +47,14 @@ const faq = [
   },
 ];
 
+// Pages pratiques à consulter une fois l'inscription faite
+const suite = [
+  { href: '/pratique/cotisations', icon: '💶', title: 'Cotisations & assurances', desc: 'Ce que couvre la cotisation et l\'assurance, et le coût du camp.' },
+  { href: '/pratique/uniforme', icon: '🧣', title: 'Uniforme', desc: 'De quoi il se compose, où l\'acheter et comment placer les insignes.' },
+  { href: '/documents#a-remplir', icon: '📝', title: 'Documents à remplir', desc: 'Fiche santé, autorisation parentale et droit à l\'image.' },
+  { href: '/activites', icon: '🏕️', title: 'Activités', desc: 'Réunions, week-ends, grand camp et temps forts de l\'année.' },
+];
+
 const inscriptionSteps = [
   { n: '1', title: 'Choisir la section', desc: 'Consultez la page Sections pour trouver celle adaptée à l\'âge de votre enfant.' },
   { n: '2', title: 'Envoyer un e-mail', desc: 'Écrivez à inscriptions67@stdom.be ou inscriptions106@stdom.be en précisant le prénom, l\'âge et la section souhaitée.' },
@@ -60,7 +65,7 @@ const inscriptionSteps = [
 
 <PageLayout
   title="Pratique"
-  description="Toutes les informations pratiques pour inscrire votre enfant à l'unité Saint-Dominique : procédure d'inscription, cotisations, FAQ."
+  description="Toutes les informations pratiques pour inscrire votre enfant à l'unité Saint-Dominique : procédure d'inscription, sections par âge, cotisations, uniforme, FAQ."
 >
   <!-- Hero -->
   <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
@@ -87,7 +92,7 @@ const inscriptionSteps = [
           <div class="space-y-4">
             {inscriptionSteps.map(({ n, title, desc }) => (
               <div class="flex gap-4 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
-                <div class="w-10 h-10 rounded-full bg-unit-red text-white font-bold text-lg flex items-center justify-center shrink-0">
+                <div class="w-10 h-10 rounded-full bg-accent text-white font-bold text-lg flex items-center justify-center shrink-0">
                   {n}
                 </div>
                 <div>
@@ -165,6 +170,25 @@ const inscriptionSteps = [
           </p>
         </section>
 
+        <!-- Et après l'inscription -->
+        <section id="et-apres">
+          <h2 class="text-2xl font-bold text-unit-dark mb-6">Et après l'inscription ?</h2>
+          <div class="grid sm:grid-cols-2 gap-4">
+            {suite.map(({ href, icon, title, desc }) => (
+              <a
+                href={href}
+                class="group flex gap-4 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-accent/40 hover:shadow-md transition-all"
+              >
+                <span class="text-3xl" aria-hidden="true">{icon}</span>
+                <span>
+                  <span class="block font-semibold text-unit-dark group-hover:text-accent transition-colors">{title}</span>
+                  <span class="block text-sm text-gray-500 mt-1 leading-relaxed">{desc}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+
         <!-- FAQ -->
         <section id="faq">
           <h2 class="text-2xl font-bold text-unit-dark mb-6">Questions fréquentes</h2>
@@ -192,33 +216,6 @@ const inscriptionSteps = [
             ))}
           </div>
         </section>
-
-        <!-- Grand camp -->
-        {grandCamp && (
-          <section id="grand-camp">
-            <h2 class="text-2xl font-bold text-unit-dark mb-2">{grandCamp.title}</h2>
-            {grandCamp.intro && <p class="text-gray-600 mb-4">{grandCamp.intro}</p>}
-            <div class="prose prose-sm prose-gray max-w-none" set:html={grandCamp.html} />
-          </section>
-        )}
-
-        <!-- Cotisations & assurance -->
-        {cotisations && (
-          <section id="cotisations">
-            <h2 class="text-2xl font-bold text-unit-dark mb-2">{cotisations.title}</h2>
-            {cotisations.intro && <p class="text-gray-600 mb-4">{cotisations.intro}</p>}
-            <div class="prose prose-sm prose-gray max-w-none" set:html={cotisations.html} />
-          </section>
-        )}
-
-        <!-- Uniformes & scouterie -->
-        {uniformes && (
-          <section id="uniformes">
-            <h2 class="text-2xl font-bold text-unit-dark mb-2">{uniformes.title}</h2>
-            {uniformes.intro && <p class="text-gray-600 mb-4">{uniformes.intro}</p>}
-            <div class="prose prose-sm prose-gray max-w-none" set:html={uniformes.html} />
-          </section>
-        )}
       </div>
 
       <!-- Sidebar -->
@@ -228,13 +225,13 @@ const inscriptionSteps = [
           <div class="space-y-4 text-sm">
             <div>
               <p class="text-guide-purple font-semibold mb-1">67ème Unité Guide</p>
-              <a href="mailto:administration67@stdom.be" class="block text-gray-600 hover:text-unit-red transition-colors">administration67@stdom.be</a>
-              <a href="mailto:inscriptions67@stdom.be" class="block text-gray-600 hover:text-unit-red transition-colors">inscriptions67@stdom.be</a>
+              <a href="mailto:administration67@stdom.be" class="block text-gray-600 hover:text-accent transition-colors">administration67@stdom.be</a>
+              <a href="mailto:inscriptions67@stdom.be" class="block text-gray-600 hover:text-accent transition-colors">inscriptions67@stdom.be</a>
             </div>
             <div>
               <p class="text-gray-700 font-semibold mb-1">106ème Unité Scoute</p>
-              <a href="mailto:administration106@stdom.be" class="block text-gray-600 hover:text-unit-red transition-colors">administration106@stdom.be</a>
-              <a href="mailto:inscriptions106@stdom.be" class="block text-gray-600 hover:text-unit-red transition-colors">inscriptions106@stdom.be</a>
+              <a href="mailto:administration106@stdom.be" class="block text-gray-600 hover:text-accent transition-colors">administration106@stdom.be</a>
+              <a href="mailto:inscriptions106@stdom.be" class="block text-gray-600 hover:text-accent transition-colors">inscriptions106@stdom.be</a>
             </div>
           </div>
         </div>
@@ -267,10 +264,10 @@ const inscriptionSteps = [
           </div>
         </div>
 
-        <div class="bg-unit-red/5 border border-unit-red/20 rounded-2xl p-5">
+        <div class="bg-accent/5 border border-accent/20 rounded-2xl p-5">
           <p class="text-sm text-gray-700 leading-relaxed">
-            <strong class="text-unit-red">Des questions ?</strong><br />
-            N'hésitez pas à nous contacter via la page <a href="/contact" class="text-unit-red font-medium hover:underline">Contact</a> ou par e-mail. Nous répondons dans les plus brefs délais !
+            <strong class="text-accent">Des questions ?</strong><br />
+            N'hésitez pas à nous contacter via la page <a href="/contact" class="text-accent font-medium hover:underline">Contact</a> ou par e-mail. Nous répondons dans les plus brefs délais !
           </p>
         </div>
       </aside>
