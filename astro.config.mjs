@@ -9,6 +9,11 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   integrations: [tailwind(), react(), keystatic()],
   site: 'https://stdom.be',
+  // Serveur d'édition (editor/) : les dépendances sont installées dans l'image
+  // Docker, hors du dossier du site ; Vite doit être autorisé à les servir.
+  vite: process.env.EDITOR_DEPS_DIR
+    ? { server: { fs: { allow: [process.cwd(), process.env.EDITOR_DEPS_DIR] } } }
+    : {},
   adapter: vercel({
     // Les visuels viennent du CMS sous forme de chemins (« /images/… »), pas
     // d'imports statiques : Astro ne peut donc pas les optimiser à la

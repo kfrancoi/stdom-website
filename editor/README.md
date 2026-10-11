@@ -43,7 +43,7 @@ ssh-keygen -t ed25519 -N "" -C "editeur-stdom" -f /tmp/editeur_key
 1. Railway → New Project → Deploy from GitHub repo → ce dépôt.
 2. Settings du service :
    - **Branch** : la branche qui contient `editor/` (`main` une fois fusionnée).
-   - **Watch Paths** : `editor/**`. Indispensable : sans ça, chaque commit de contenu poussé par l'éditeur sur `main` relance un déploiement Railway et redémarre l'éditeur.
+   - **Watch Paths** : `editor/**`, `package.json` et `package-lock.json`. Indispensable : sans ça, chaque commit de contenu poussé par l'éditeur sur `main` relance un déploiement Railway et redémarre l'éditeur. Les deux fichiers `package*.json` font reconstruire l'image quand les dépendances changent.
 3. Variables :
 
    | Variable | Valeur |
@@ -110,7 +110,7 @@ Modifier une info flash et sauvegarder. Dans les 1 à 2 minutes :
 ## À savoir
 
 - **Conflits** : si un développeur pousse du code, le serveur le récupère automatiquement. En cas de conflit sur un même fichier, le push échoue et se réessaie ; en dernier recours, supprimer le volume et redéployer repart d'une copie propre (les modifications non publiées sont perdues).
-- **Dépendances** : `npm ci` ne tourne qu'au premier démarrage et quand `package-lock.json` change (récupéré au redémarrage suivant).
+- **Dépendances** : installées dans l'image Docker (`/opt/deps`), pas dans le volume, qui ne contient que le dépôt. `astro.config.mjs` autorise Vite à les servir quand `EDITOR_DEPS_DIR` est défini (sans effet sur le build Vercel). Si les logs affichent « package-lock.json diffère de celui de l'image », redéployer le service.
 - **Sécurité** : le serveur de dev expose aussi le code source à qui est connecté ; n'autoriser que des personnes de confiance. La clé de déploiement, le jeton du tunnel et les mots de passe sont des secrets : à garder uniquement dans les variables Railway.
 - **Pas d'attribution** : tous les commits portent le même auteur. (En mode Cloudflare, Access journalise qui s'est connecté.)
 - **Admin Vercel** : `/keystatic` sur le site Vercel (mode cloud) reste accessible tant que la config n'est pas changée ; on peut le désactiver une fois ce serveur adopté.

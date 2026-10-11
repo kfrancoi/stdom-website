@@ -44,12 +44,14 @@ git config user.name "Éditeurs Saint-Dom"
 git config user.email "${GIT_AUTHOR_EMAIL:-1470140+kfrancoi@users.noreply.github.com}"
 git pull --rebase --autostash || echo "pull initial impossible, on continue avec la copie locale"
 
-# Les dépendances restent dans le volume : on ne réinstalle que si
-# package-lock.json a changé (un redémarrage prend alors quelques secondes).
-lock_hash="$(sha256sum package-lock.json | cut -d' ' -f1)"
-if [ "$(cat node_modules/.lock-hash 2>/dev/null)" != "$lock_hash" ]; then
-  npm ci
-  echo "$lock_hash" > node_modules/.lock-hash
+# Dépendances : celles de l'image (voir Dockerfile), via un lien symbolique.
+if [ ! -L node_modules ]; then
+  rm -rf node_modules
+fi
+ln -sfn "$EDITOR_DEPS_DIR/node_modules" node_modules
+grep -qx node_modules .git/info/exclude 2>/dev/null || echo node_modules >> .git/info/exclude
+if ! cmp -s package-lock.json "$EDITOR_DEPS_DIR/package-lock.json"; then
+  echo "ATTENTION : package-lock.json diffère de celui de l'image, redéployer le service." >&2
 fi
 
 # ── Processus ───────────────────────────────────────────────────────────────
