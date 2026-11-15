@@ -6,64 +6,44 @@
   "description": "La Tarentelle danse au rythme de la vie guide : des réunions dynamiques, des camps mémorables et une équipe soudée prête à se lancer dans toutes les aventures.",
   "contact": "tarentelle67@gmail.com",
   "order": 5,
+  "blason": "/images/blasons/Tarentelle/blason.jpg",
   "staff": [
     {
       "totem": "Manul",
       "name": "Marie-Astrid",
-      "role": "Cheftaine",
-      "phone": "",
-      "email": ""
+      "role": "Cheftaine"
     },
     {
       "totem": "Bagheera",
-      "name": "Lea",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Lea"
     },
     {
       "totem": "Dingo",
-      "name": "Elisa",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Elisa"
     },
     {
       "totem": "Shiba",
-      "name": "Nine",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Nine"
     },
     {
       "totem": "Cabri",
-      "name": "Théodora",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Théodora"
     },
     {
       "totem": "Ourebi",
-      "name": "Lucie",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Lucie"
     },
     {
       "totem": "Mazalaai",
-      "name": "Louise",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Louise"
     },
     {
       "totem": "Capucin",
-      "name": "Laure",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Laure"
     }
   ],
-  "illustration": "/images/art_sections/tarentelle.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }
