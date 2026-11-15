@@ -1,6 +1,8 @@
 {
   "title": "St-Dom Trophy",
+  "periode": "Printemps",
   "unite": "both",
   "description": "Lors de cette journée d'unité, un grand jeu inter-sections se joue dans la commune en vue de gagner le trophée de St-Dominique. La journée se termine par un apéro géant avec les parents. ",
+  "image": "/images/temps-forts/st-dom-trophy/image.jpg",
   "order": 7
 }
