@@ -6,6 +6,7 @@
   "description": "La compagnie des Amazones forge des jeunes femmes fortes, solidaires et créatives. Projets de patrouille, camps, service aux autres : les Amazones relèvent tous les défis !",
   "contact": "amazones67eme@stdom.be",
   "order": 3,
+  "blason": "/images/blasons/Amazones/blason.JPG",
   "staff": [
     {
       "totem": "Tamia",

@@ -6,50 +6,36 @@
   "description": "La compagnie Durandal, du nom de l'épée légendaire, incarne la force et la fidélité aux valeurs guides. Aventure, amitié et dépassement de soi sont au cœur de chaque réunion.",
   "contact": "compagniedurandal@gmail.com",
   "order": 4,
+  "blason": "/images/blasons/Durandal/blason.JPG",
   "staff": [
     {
       "totem": "Irbis",
       "name": "Emilie",
-      "role": "Cheftaine",
-      "phone": "",
-      "email": ""
+      "role": "Cheftaine"
     },
     {
       "totem": "Havana",
-      "name": "Emilie",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Emilie"
     },
     {
       "totem": "Sokoke",
-      "name": "Madeleine",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Madeleine"
     },
     {
       "totem": "Souslik",
-      "name": "Jeanne",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Jeanne"
     },
     {
       "totem": "Meeko",
-      "name": "Anli",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Anli"
     },
     {
       "totem": "Azawakh",
-      "name": "Marilou",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Marilou"
     }
   ],
-  "illustration": "/images/art_sections/durandal.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

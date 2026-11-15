@@ -6,50 +6,35 @@
   "description": "La ronde du Soleil Levant brille par son enthousiasme ! Nos lutins s'épanouissent à travers des activités créatives, sportives et spirituelles tout au long de l'année.",
   "contact": "soleillevantstdom@gmail.com",
   "order": 2,
+  "blason": "/images/blasons/Soleil-levant/blason.JPG",
   "staff": [
     {
       "totem": "Daman",
-      "name": "Marie",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Marie"
     },
     {
       "totem": "Wombat",
-      "name": "Eléonore",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Eléonore"
     },
     {
       "totem": "Okami",
-      "name": "Joséphine",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Joséphine"
     },
     {
       "totem": "Caracal",
-      "name": "Colombine",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Colombine"
     },
     {
       "totem": "Coywolf",
-      "name": "Evelyne",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Evelyne"
     },
     {
       "totem": "Spip",
-      "name": "Eglantine",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Eglantine"
     }
   ],
-  "illustration": "/images/art_sections/soleil-levant.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

@@ -6,57 +6,40 @@
   "description": "Les Farfadets, une ronde pleine d'énergie et de joie ! Chaque semaine, nos lutins explorent, créent, jouent et grandissent ensemble dans la bonne humeur.",
   "contact": "ronde.des.farfadets@gmail.com",
   "order": 0,
+  "blason": "/images/blasons/Farfadets/blason.JPG",
   "staff": [
     {
       "totem": "Patou",
       "name": "Emeline",
-      "role": "Cheftaine",
-      "phone": "",
-      "email": ""
+      "role": "Cheftaine"
     },
     {
       "totem": "Lynx",
-      "name": "Manon",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Manon"
     },
     {
       "totem": "Pika",
-      "name": "Emilie",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Emilie"
     },
     {
       "totem": "Gyra",
-      "name": "Valentine",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Valentine"
     },
     {
       "totem": "Madoqua",
-      "name": "Eleonore",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Eleonore"
     },
     {
       "totem": "Temminckii",
-      "name": "Lucie",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Lucie"
     },
     {
       "totem": "Uncia",
-      "name": "Lise",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Lise"
     }
   ],
-  "illustration": "/images/art_sections/farfadets.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

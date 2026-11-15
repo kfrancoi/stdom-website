@@ -6,57 +6,40 @@
   "description": "La ronde des Gavroches accueille les lutins dans un univers d'aventure et de découverte. Au programme : jeux, bricolage, sorties nature et belles amitiés.",
   "contact": "rondegavroche.stdom@gmail.com",
   "order": 1,
+  "blason": "/images/blasons/Gavroches/blason.JPG",
   "staff": [
     {
       "totem": "Estrella",
       "name": "Manon",
-      "role": "Cheftaine",
-      "phone": "",
-      "email": ""
+      "role": "Cheftaine"
     },
     {
       "totem": "Warrah",
-      "name": "Emilie",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Emilie"
     },
     {
       "totem": "Redunka",
-      "name": "Célestine",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Célestine"
     },
     {
       "totem": "Appaloosa",
-      "name": "Soline",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Soline"
     },
     {
       "totem": "Pajero",
-      "name": "Agnes",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Agnes"
     },
     {
       "totem": "Hutia",
-      "name": "Julie",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Julie"
     },
     {
       "totem": "Mangabey",
-      "name": "Valentine",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Valentine"
     }
   ],
-  "illustration": "/images/art_sections/gavroches.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }
