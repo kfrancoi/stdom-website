@@ -1,40 +1,33 @@
 {
   "name": "Eldorado",
   "type": "horizons",
-  "typeLabel": "Chaîne Guide Horizons",
+  "typeLabel": "Chaîne Guides Horizons",
   "ageRange": "16 – 17 ans",
   "description": "Eldorado, c'est l'aventure vers de nouveaux horizons. Les aînées de la 67ème s'engagent dans des projets plus ambitieux, portées par des valeurs d'entraide, de sens et de responsabilité.",
   "contact": "eldorado.stdom@gmail.com",
   "order": 6,
+  "blason": "/images/blasons/eldorado/blason.png",
   "staff": [
     {
       "totem": "Kinkajou",
       "name": "Hannah",
-      "role": "Cheftaine",
-      "phone": "",
-      "email": ""
+      "role": "Cheftaine"
     },
     {
       "totem": "Wallaby",
-      "name": "Laura",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Laura"
     },
     {
       "totem": "Isatis",
-      "name": "Alix-Anne",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Alix-Anne"
     },
     {
       "totem": "Hyrax",
-      "name": "Alicia",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Alicia"
     }
   ],
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }
