@@ -6,50 +6,35 @@
   "description": "Fidèle à l'idéal chevaleresque, la troupe de la Chevalerie forge des scouts droits, courageux et au service des autres. Honneur, fraternité et aventure au programme !",
   "contact": "chevalerie106@hotmail.com",
   "order": 7,
+  "illustration": "/images/art_sections/chevalerie/illustration.jpg",
   "staff": [
     {
       "totem": "Caracal",
-      "name": "Guillaume",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Guillaume"
     },
     {
       "totem": "Axis",
-      "name": "Louis",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Louis"
     },
     {
       "totem": "Douc",
-      "name": "Pierre",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Pierre"
     },
     {
       "totem": "Chinook",
-      "name": "Lucas",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Lucas"
     },
     {
       "totem": "Falco",
-      "name": "Thomas",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Thomas"
     },
     {
       "totem": "Lionceau",
-      "name": "Charlie",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Charlie"
     }
   ],
-  "illustration": "/images/art_sections/chevalerie.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

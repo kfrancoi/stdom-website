@@ -6,57 +6,39 @@
   "description": "Solide comme un roc, la meute du Rocher construit des louveteaux déterminés et créatifs. Avec leurs chefs, ils apprennent à relever des défis et à grandir ensemble.",
   "contact": "rocher106@gmail.com",
   "order": 5,
+  "illustration": "/images/art_sections/rocher/illustration.jpg",
   "staff": [
     {
       "totem": "Akela",
-      "name": "Harold",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Harold"
     },
     {
       "totem": "Baloo",
-      "name": "Edouard",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Edouard"
     },
     {
       "totem": "Rama",
-      "name": "Diego",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Diego"
     },
     {
       "totem": "Wontolla",
-      "name": "Jules",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Jules"
     },
     {
       "totem": "Phao",
-      "name": "Léon",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Léon"
     },
     {
       "totem": "Oonaï",
-      "name": "Victor",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Victor"
     },
     {
       "totem": "Sona",
-      "name": "Nathan",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Nathan"
     }
   ],
-  "illustration": "/images/art_sections/rocher.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

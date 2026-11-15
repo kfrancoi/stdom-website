@@ -6,57 +6,40 @@
   "description": "La ribambelle Mickey emmène les tout-petits dans une ribambelle d'aventures ! Jeux, chants, bricolages et premières nuits en plein air : le début d'une longue histoire avec le scoutisme.",
   "contact": "baladinsmickey@gmail.com",
   "order": 1,
+  "illustration": "/images/art_sections/mickey/illustration.jpg",
   "staff": [
     {
       "totem": "Timon",
       "name": "Anne-Catherine",
-      "role": "Grande cheffe",
-      "phone": "",
-      "email": ""
+      "role": "Grande cheffe"
     },
     {
       "totem": "Lucky",
-      "name": "Géraldine",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Géraldine"
     },
     {
       "totem": "Sirhiss",
-      "name": "Basil",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Basil"
     },
     {
       "totem": "Copper",
-      "name": "Valentina",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Valentina"
     },
     {
       "totem": "Tagelong",
-      "name": "Léonie",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Léonie"
     },
     {
       "totem": "Lotso",
-      "name": "Louis",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Louis"
     },
     {
       "totem": "Bogo",
-      "name": "Louis",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Louis"
     }
   ],
-  "illustration": "/images/art_sections/mickey.jpeg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

@@ -6,64 +6,44 @@
   "description": "Dans la savane Serengeti, les jeunes baladins partent à la découverte du monde qui les entoure. Curiosité, joie et partage sont les maîtres mots de cette ribambelle pleine de vie.",
   "contact": "serengeti106e@gmail.com",
   "order": 2,
+  "illustration": "/images/art_sections/serengeti/illustration.jpg",
   "staff": [
     {
       "totem": "Mufasa",
       "name": "Athéna",
-      "role": "Grande cheffe",
-      "phone": "",
-      "email": ""
+      "role": "Grande cheffe"
     },
     {
       "totem": "Mohatu",
-      "name": "Jean-Pierre",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Jean-Pierre"
     },
     {
       "totem": "Rafiki",
-      "name": "Jeanne",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Jeanne"
     },
     {
       "totem": "Nala",
-      "name": "Pauline",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Pauline"
     },
     {
       "totem": "Pumba",
-      "name": "Manon",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Manon"
     },
     {
       "totem": "Simba",
-      "name": "Alexis",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Alexis"
     },
     {
       "totem": "Timon",
-      "name": "Camille",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Camille"
     },
     {
       "totem": "Sarabi",
-      "name": "Alannah",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Alannah"
     }
   ],
-  "illustration": "/images/art_sections/serengeti.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

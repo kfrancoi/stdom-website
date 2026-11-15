@@ -6,64 +6,43 @@
   "description": "La ribambelle Merlin ouvre les portes du scoutisme aux plus jeunes ! Dans un univers enchanté, nos baladins découvrent la nature, la vie en groupe et les premières valeurs scouts, en s'amusant à fond.",
   "contact": "baladinsdemerlin@gmail.com",
   "order": 0,
+  "illustration": "/images/art_sections/merlin/illustration.jpg",
   "staff": [
     {
       "totem": "Perceval",
-      "name": "Eloi",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Eloi"
     },
     {
       "totem": "Iseldir",
-      "name": "Romane",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Romane"
     },
     {
       "totem": "Pellinore",
-      "name": "Romane",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Romane"
     },
     {
       "totem": "Kay",
-      "name": "Florentin",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Florentin"
     },
     {
       "totem": "Sefa",
-      "name": "Louise",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Louise"
     },
     {
       "totem": "Aithusa",
-      "name": "Fanny",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Fanny"
     },
     {
       "totem": "Oswald",
-      "name": "Nicolas",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Nicolas"
     },
     {
       "totem": "Lancelot",
-      "name": "Augustin",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Augustin"
     }
   ],
-  "illustration": "/images/art_sections/merlin.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

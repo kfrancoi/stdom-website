@@ -6,43 +6,31 @@
   "description": "Le poste Clinfoc rassemble les pionniers qui s'engagent pleinement dans des projets de grande envergure, portés par des valeurs profondes et une amitié scoute durable.",
   "contact": "administration106@stdom.be",
   "order": 8,
+  "illustration": "/images/art_sections/clinfoc/illustration.jpg",
   "staff": [
     {
       "totem": "Azores",
-      "name": "Alexandre",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Alexandre"
     },
     {
       "totem": "Guariba",
-      "name": "Sacha",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Sacha"
     },
     {
       "totem": "Koudou",
-      "name": "Marin",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Marin"
     },
     {
       "totem": "Hathi",
-      "name": "Sam",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Sam"
     },
     {
       "totem": "Sajou",
-      "name": "Nathan",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Nathan"
     }
   ],
-  "illustration": "/images/art_sections/clinfoc.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

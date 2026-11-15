@@ -6,57 +6,39 @@
   "description": "La troupe des Aigles vole haut ! Nos éclaireurs développent leur autonomie, leur sens du dépassement et leurs compétences techniques à travers projets de patrouille et grands camps.",
   "contact": "troupedesaigles@gmail.com",
   "order": 6,
+  "illustration": "/images/art_sections/aigles/illustration.jpg",
   "staff": [
     {
       "totem": "Basenji",
-      "name": "Charles",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Charles"
     },
     {
       "totem": "Mustang",
-      "name": "Louis",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Louis"
     },
     {
       "totem": "Irbis",
-      "name": "Théo",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Théo"
     },
     {
       "totem": "Alezan",
-      "name": "Tristan",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Tristan"
     },
     {
       "totem": "Lusitano",
-      "name": "Quentin",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Quentin"
     },
     {
       "totem": "Caracal",
-      "name": "Louis",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Louis"
     },
     {
       "totem": "Wapiti",
-      "name": "Benjamin",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Benjamin"
     }
   ],
-  "illustration": "/images/art_sections/aigles.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

@@ -6,64 +6,44 @@
   "description": "La meute des Abeilles bourdonne d'activités ! Nos louveteaux apprennent à vivre en meute : loyauté, débrouillardise et sens du service sont les piliers de leur progression scoute.",
   "contact": "abeilles@stdom.be",
   "order": 3,
+  "illustration": "/images/art_sections/abeilles/illustration.jpg",
   "staff": [
     {
       "totem": "Akela",
       "name": "Victor",
-      "role": "Grand chef",
-      "phone": "",
-      "email": ""
+      "role": "Grand chef"
     },
     {
       "totem": "Wontolla",
-      "name": "Arthur",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Arthur"
     },
     {
       "totem": "Toomaï",
-      "name": "Arthur",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Arthur"
     },
     {
       "totem": "Kaa",
-      "name": "Grégoire",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Grégoire"
     },
     {
       "totem": "Mang",
-      "name": "Jules",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Jules"
     },
     {
       "totem": "Phao",
-      "name": "Louis",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Louis"
     },
     {
       "totem": "Mysa",
-      "name": "Diego",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Diego"
     },
     {
       "totem": "Bagheera",
-      "name": "Pierre",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Pierre"
     }
   ],
-  "illustration": "/images/art_sections/abeilles.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }

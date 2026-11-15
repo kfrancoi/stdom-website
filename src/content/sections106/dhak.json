@@ -6,57 +6,40 @@
   "description": "La meute Dhak forge ses louveteaux dans l'esprit du Livre de la Jungle : entraide, courage et respect de la nature guident chaque réunion et chaque camp.",
   "contact": "dhak.stdom@gmail.com",
   "order": 4,
+  "illustration": "/images/art_sections/dhak/illustration.jpg",
   "staff": [
     {
       "totem": "Akela",
       "name": "Alexine",
-      "role": "Grande cheffe",
-      "phone": "",
-      "email": ""
+      "role": "Grande cheffe"
     },
     {
       "totem": "Bagheera",
-      "name": "Maxime",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Maxime"
     },
     {
       "totem": "Sona",
-      "name": "Chloé",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Chloé"
     },
     {
       "totem": "Jacala",
-      "name": "Xavier",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Xavier"
     },
     {
       "totem": "Ikea",
-      "name": "Pauline",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Pauline"
     },
     {
       "totem": "Coco Chanel",
-      "name": "Leonie",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "Leonie"
     },
     {
       "totem": "Haribo",
-      "name": "William",
-      "role": "",
-      "phone": "",
-      "email": ""
+      "name": "William"
     }
   ],
-  "illustration": "/images/art_sections/dhak.jpg",
+  "equipes": {
+    "liste": []
+  },
   "photos": []
 }
