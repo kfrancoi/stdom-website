@@ -10,7 +10,7 @@ set -u
 cd "${APP_DIR:?}"
 
 INTERVAL="${SYNC_INTERVAL:-60}"
-CONTENT_PATHS=(src/content public/images)
+CONTENT_PATHS=(src/content public/images public/documents)
 last=""
 
 while true; do
