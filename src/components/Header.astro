@@ -25,15 +25,14 @@ const navItems: NavItem[] = [
   {
     href: '/activites',
     label: 'Activités',
-    match: ['/activites', '/services'],
     children: [
       { href: '/activites#reunions', label: 'Réunions' },
       { href: '/activites#week-ends', label: 'Week-ends & hikes' },
       { href: '/activites#grand-camp', label: 'Grand camp' },
       { href: '/activites#temps-forts', label: 'Temps forts & engagements' },
-      { href: '/services', label: 'Bons plans & services' },
     ],
   },
+  { href: '/services', label: 'Bons plans' },
   { href: '/calendrier', label: 'Calendrier' },
   {
     href: '/pratique',
@@ -46,7 +45,6 @@ const navItems: NavItem[] = [
     ],
   },
   { href: '/documents', label: 'Documents' },
-  { href: '/contact', label: 'Contact' },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';

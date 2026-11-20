@@ -151,7 +151,10 @@ async function getSections(
   const entries = await reader.collections[collection].all();
   const sections = await Promise.all(
     entries.map(async ({ slug, entry }) => ({
-      slug,
+      // Adresse de la page toujours en minuscules : Keystatic accepte un nom de
+      // fichier avec majuscule, mais les sous-domaines (vercel.json) redirigent
+      // vers l'adresse en minuscules.
+      slug: slug.toLowerCase(),
       name: entry.name,
       type: entry.type,
       typeLabel: entry.typeLabel,
@@ -313,6 +316,12 @@ export async function getCotisations() {
   return {
     title: entry.title,
     intro: clean(entry.intro),
+    montants: entry.montants.map((m) => ({
+      unite: m.unite,
+      section: m.section,
+      montant: clean(m.montant),
+      remarque: clean(m.remarque),
+    })),
     cotisation: markdocToHtml(await entry.cotisation()),
     assurance: markdocToHtml(await entry.assurance()),
     camp: markdocToHtml(await entry.camp()),
@@ -436,6 +445,32 @@ export async function getServices() {
       order: entry.order ?? 0,
     }))
     .sort((a, b) => a.order - b.order);
+}
+
+// ── Photos « La vie à Saint-Dom » (accueil) ──────────────────────────────────
+
+export async function getPhotosAccueil() {
+  const entry = await reader.singletons.photosAccueil.read();
+  return (entry?.photos ?? [])
+    .filter((p) => p.image)
+    .map((p) => ({ src: p.image as string, legende: clean(p.legende) }));
+}
+
+// ── Page L'Unité : logo et fédérations ───────────────────────────────────────
+
+export async function getUnitePage() {
+  const entry = await reader.singletons.unitePage.read();
+  const federation = (f: { nom: string; site: string | null; logo: string | null } | undefined) => ({
+    nom: clean(f?.nom),
+    site: clean(f?.site),
+    logo: clean(f?.logo),
+  });
+  return {
+    logo: clean(entry?.logo),
+    federationsIntro: clean(entry?.federationsIntro),
+    federation67: federation(entry?.federation67),
+    federation106: federation(entry?.federation106),
+  };
 }
 
 // ── Soutiens (remerciements) ─────────────────────────────────────────────────

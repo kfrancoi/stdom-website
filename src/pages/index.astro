@@ -1,15 +1,17 @@
 ---
+import { Image } from 'astro:assets';
 import PageLayout from '../components/PageLayout.astro';
 import CalendarPreview from '../components/CalendarPreview.astro';
 import SectionCard from '../components/SectionCard.astro';
 import Soutiens from '../components/Soutiens.astro';
-import { getSections67, getSoutiens, getSections106, getActiveFlashs, getChiffres } from '../lib/content';
+import { getSections67, getSoutiens, getSections106, getActiveFlashs, getChiffres, getPhotosAccueil } from '../lib/content';
 
 const sections67 = await getSections67();
 const sections106 = await getSections106();
 const flashs = await getActiveFlashs();
 const chiffres = await getChiffres();
 const soutiens = await getSoutiens();
+const photos = await getPhotosAccueil();
 
 // « 3 Rondes de Lutins, 3 Compagnies de Guides… » : composé à partir des sections du CMS
 const typeNames: Record<string, [string, string]> = {
@@ -83,8 +85,29 @@ const values = [
       <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-unit-dark/60 to-transparent"></div>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-      <div class="max-w-2xl">
+    <!-- Infos flash dans le hero, pour être vues sans défiler : à droite sur
+         grand écran, au-dessus du titre sur mobile -->
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pt-24 grid lg:grid-cols-[minmax(0,1fr)_22rem] gap-8 lg:gap-12 items-center">
+      {flashs.length > 0 && (
+        <aside aria-label="Infos flash" class="lg:col-start-2 lg:row-start-1 space-y-3">
+          {flashs.map((flash) => (
+            <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-5 text-unit-dark">
+              <span class="inline-block bg-unit-gold text-unit-dark text-xs font-bold uppercase tracking-wide rounded-full px-2 py-0.5 mb-2">
+                Info flash
+              </span>
+              <p class="font-bold">{flash.title}</p>
+              <p class="text-sm text-gray-700 leading-relaxed mt-1">{flash.message}</p>
+              {flash.link && (
+                <a href={flash.link} class="inline-block mt-2 text-sm font-semibold text-accent hover:underline">
+                  {flash.linkLabel || 'En savoir plus'} →
+                </a>
+              )}
+            </div>
+          ))}
+        </aside>
+      )}
+
+      <div class="max-w-2xl lg:col-start-1 lg:row-start-1">
         <!-- Badge -->
         <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6">
           <span class="w-2 h-2 rounded-full bg-unit-gold animate-pulse"></span>
@@ -127,27 +150,6 @@ const values = [
       </svg>
     </div>
   </section>
-
-  <!-- ══════════════════════════════════════════════════════ INFOS FLASH -->
-  {flashs.length > 0 && (
-    <section class="bg-unit-gold/10 border-y border-unit-gold/30">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-2">
-        {flashs.map((flash) => (
-          <p class="text-sm text-unit-dark">
-            <span class="inline-block bg-unit-gold text-unit-dark text-xs font-bold uppercase tracking-wide rounded-full px-2 py-0.5 mr-2">
-              Info flash
-            </span>
-            <strong>{flash.title}</strong> — {flash.message}
-            {flash.link && (
-              <a href={flash.link} class="ml-1 font-semibold text-accent hover:underline">
-                {flash.linkLabel || 'En savoir plus'} →
-              </a>
-            )}
-          </p>
-        ))}
-      </div>
-    </section>
-  )}
 
   <!-- ═══════════════════════════════════════════════════════════ DEVISE -->
   <section class="bg-white">
@@ -371,33 +373,41 @@ const values = [
   </section>
 
   <!-- ═══════════════════════════════════════════════ PHOTOS D'AMBIANCE -->
-  <section class="py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <p class="text-accent font-semibold text-sm uppercase tracking-wider mb-2">La vie à Saint-Dom</p>
-        <h2 class="text-3xl font-bold text-unit-dark">Des aventures inoubliables</h2>
-      </div>
+  <!-- Photos du CMS (« Photos La vie à Saint-Dom ») ; section masquée sans photo -->
+  {photos.length > 0 && (
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <p class="text-accent font-semibold text-sm uppercase tracking-wider mb-2">La vie à Saint-Dom</p>
+          <h2 class="text-3xl font-bold text-unit-dark">Des aventures inoubliables</h2>
+        </div>
 
-      <!-- Mosaic grid — remplacer les images par les vraies photos -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 auto-rows-[200px]">
-        <div class="col-span-2 row-span-2 rounded-2xl overflow-hidden bg-gray-200">
-          <img src="/images/ambiance-1.jpg" alt="Scouts en camp" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy" />
-        </div>
-        <div class="rounded-2xl overflow-hidden bg-gray-200">
-          <img src="/images/ambiance-2.jpg" alt="Activité guides" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy" />
-        </div>
-        <div class="rounded-2xl overflow-hidden bg-gray-200">
-          <img src="/images/ambiance-3.jpg" alt="Feu de camp" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy" />
-        </div>
-        <div class="rounded-2xl overflow-hidden bg-gray-200">
-          <img src="/images/ambiance-4.jpg" alt="Jeux en plein air" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy" />
-        </div>
-        <div class="rounded-2xl overflow-hidden bg-gray-200">
-          <img src="/images/ambiance-5.jpg" alt="Réunion section" class="w-full h-full object-cover" onerror="this.style.display='none'" loading="lazy" />
+        <!-- Mosaïque : la première photo en grand -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 auto-rows-[200px] grid-flow-dense">
+          {photos.map((photo, i) => (
+            <figure class:list={['group relative rounded-2xl overflow-hidden bg-gray-200', i === 0 && 'col-span-2 row-span-2']}>
+              <Image
+                src={photo.src}
+                alt={photo.legende ?? 'La vie à Saint-Dom'}
+                width={i === 0 ? 800 : 640}
+                height={i === 0 ? 800 : 640}
+                widths={i === 0 ? [400, 800] : [320, 640]}
+                sizes={i === 0 ? '(min-width: 1024px) 50vw, 100vw' : '(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw'}
+                quality={72}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+              {photo.legende && (
+                <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 text-xs text-white">
+                  {photo.legende}
+                </figcaption>
+              )}
+            </figure>
+          ))}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- ═══════════════════════════════════════════════════════════ MERCI -->
   {soutiens.length > 0 && (

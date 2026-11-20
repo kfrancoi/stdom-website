@@ -61,6 +61,21 @@ const uniteSelect = (label = 'Unité concernée') =>
     defaultValue: 'both',
   });
 
+// Fédération d'une unité (page L'Unité, rubrique « Deux unités, deux fédérations »)
+const federationFields = (label: string) =>
+  fields.object(
+    {
+      nom: fields.text({ label: 'Nom de la fédération' }),
+      site: fields.url({ label: 'Site web' }),
+      logo: fields.image({
+        label: 'Logo',
+        directory: 'public/images/unite',
+        publicPath: '/images/unite/',
+      }),
+    },
+    { label }
+  );
+
 // Types de points de vente de l'uniforme (colonnes du tableau « où acheter quoi »)
 const pointDeVenteOptions = [
   { label: 'Au local', value: 'local' },
@@ -188,8 +203,8 @@ export default config({
   ui: {
     brand: { name: 'Saint-Dom — Gestion du contenu' },
     navigation: {
-      Actualités: ['flashs', 'evenements'],
-      Unité: ['histoire', 'fonctionnement', 'chiffres', 'staffs', 'presence', 'soutiens'],
+      Actualités: ['flashs', 'evenements', 'photosAccueil'],
+      Unité: ['unitePage', 'histoire', 'fonctionnement', 'chiffres', 'staffs', 'presence', 'soutiens'],
       Sections: ['sections67', 'sections106'],
       Activités: ['reunions', 'weekends', 'grandCamp', 'tempsForts'],
       'Bons plans & services': ['servicesPage', 'services'],
@@ -404,7 +419,6 @@ export default config({
             { label: 'Techniques & constructions', value: 'techniques' },
             { label: 'Malles & matériel', value: 'materiel' },
             { label: 'Réseaux des sections', value: 'reseaux' },
-            { label: 'Fédérations', value: 'federations' },
             { label: 'Autre', value: 'autre' },
           ],
           defaultValue: 'autre',
@@ -458,6 +472,50 @@ export default config({
       },
     }),
 
+    // ── Photos « La vie à Saint-Dom » (accueil) ─────────────────────────────
+    photosAccueil: singleton({
+      label: 'Photos « La vie à Saint-Dom » (accueil)',
+      path: 'src/content/photos-accueil',
+      format: { data: 'json' },
+      schema: {
+        photos: fields.array(
+          fields.object({
+            image: fields.image({
+              label: 'Photo',
+              directory: 'public/images/accueil',
+              publicPath: '/images/accueil/',
+              validation: { isRequired: true },
+            }),
+            legende: fields.text({ label: 'Légende (optionnelle, décrit aussi la photo pour les malvoyants)' }),
+          }),
+          {
+            label: 'Photos (la première est affichée en grand)',
+            itemLabel: (props) => props.fields.legende.value || 'Photo',
+          }
+        ),
+      },
+    }),
+
+    // ── Page L'Unité : logo de la bannière et fédérations ───────────────────
+    unitePage: singleton({
+      label: "Page L'Unité : logo & fédérations",
+      path: 'src/content/unite',
+      format: { data: 'json' },
+      schema: {
+        logo: fields.image({
+          label: "Logo « spirale » de l'unité (affiché dans la bannière)",
+          directory: 'public/images/unite',
+          publicPath: '/images/unite/',
+        }),
+        federationsIntro: fields.text({
+          label: 'Texte de la rubrique « Deux unités, deux fédérations »',
+          multiline: true,
+        }),
+        federation67: federationFields('Fédération de la 67ème (Guides)'),
+        federation106: federationFields('Fédération de la 106ème (Scouts)'),
+      },
+    }),
+
     // ── Pages de contenu ────────────────────────────────────────────────────
     histoire: contentPage("Histoire de l'unité", 'histoire'),
     fonctionnement: contentPage("Fonctionnement de l'unité", 'fonctionnement'),
@@ -477,6 +535,29 @@ export default config({
       schema: {
         title: fields.text({ label: 'Titre', validation: { isRequired: true } }),
         intro: fields.text({ label: 'Introduction (affichée sous le titre)', multiline: true }),
+        montants: fields.array(
+          fields.object({
+            unite: fields.select({
+              label: 'Unité',
+              options: [
+                { label: '67ème (Guides)', value: '67' },
+                { label: '106ème (Scouts)', value: '106' },
+              ],
+              defaultValue: '67',
+            }),
+            section: fields.text({
+              label: 'Section ou branche (ex : Lutins, Pionniers)',
+              validation: { isRequired: true },
+            }),
+            montant: fields.text({ label: 'Montant (ex : 45 €) — vide = « à préciser »' }),
+            remarque: fields.text({ label: 'Remarque (optionnelle, ex : 40 € à partir du 2e enfant)' }),
+          }),
+          {
+            label: 'Montants des cotisations (tableau par unité et par section)',
+            itemLabel: (props) =>
+              `${props.fields.unite.value}ème — ${props.fields.section.value || 'Section'} : ${props.fields.montant.value || 'à préciser'}`,
+          }
+        ),
         cotisation: fields.markdoc({
           label: 'Le prix de la cotisation',
           options: markdocImages('pages'),
