@@ -2,13 +2,20 @@
 import PageLayout from '../components/PageLayout.astro';
 import StaffCard from '../components/StaffCard.astro';
 import Parcours from '../components/Parcours.astro';
-import { getStaffs, getPage, getChiffres } from '../lib/content';
+import { getStaffs, getPage, getChiffres, getUnitePage } from '../lib/content';
 
 const { staff67, staff106 } = await getStaffs();
 const histoire = await getPage('histoire');
 const fonctionnement = await getPage('fonctionnement');
 const presence = await getPage('presence');
 const { total } = await getChiffres();
+const unitePage = await getUnitePage();
+
+// « Deux unités, deux fédérations » : une carte par fédération renseignée dans le CMS
+const federations = [
+  { unite: '67ème Unité Guide', accent: 'text-guide-purple', ...unitePage.federation67 },
+  { unite: '106ème Unité Scoute', accent: 'text-unit-dark', ...unitePage.federation106 },
+].filter((f) => f.nom);
 
 // Chiffres non renseignés dans le CMS : simplement non affichés
 const chiffresCles = [
@@ -25,24 +32,33 @@ const chiffresCles = [
 >
   <!-- Hero -->
   <section class="bg-gradient-to-br from-unit-dark to-gray-800 py-16 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">Saint-Dominique</p>
-      <h1 class="text-4xl font-bold mb-3">L'Unité</h1>
-      <p class="text-gray-300 max-w-xl">
-        Une unité, deux familles : la 67<sup>ème</sup> Guide et la 106<sup>ème</sup> Scout,
-        réunies sur le parvis Saint-Dominique.
-      </p>
-      <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl">
-        {chiffresCles.map(({ valeur, label }) => (
-          <div class="bg-white/10 border border-white/10 rounded-xl p-4 text-center">
-            <dt class="sr-only">{label}</dt>
-            <dd>
-              <span class="block text-3xl font-bold text-unit-gold">{valeur}</span>
-              <span class="block text-xs text-gray-300 mt-1">{label}</span>
-            </dd>
-          </div>
-        ))}
-      </dl>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-8">
+      <div>
+        <p class="text-unit-gold font-semibold text-sm uppercase tracking-wider mb-2">Saint-Dominique</p>
+        <h1 class="text-4xl font-bold mb-3">L'Unité</h1>
+        <p class="text-gray-300 max-w-xl">
+          Une unité, deux familles : la 67<sup>ème</sup> Guide et la 106<sup>ème</sup> Scout,
+          réunies sur le parvis Saint-Dominique.
+        </p>
+        <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl">
+          {chiffresCles.map(({ valeur, label }) => (
+            <div class="bg-white/10 border border-white/10 rounded-xl p-4 text-center">
+              <dt class="sr-only">{label}</dt>
+              <dd>
+                <span class="block text-3xl font-bold text-unit-gold">{valeur}</span>
+                <span class="block text-xs text-gray-300 mt-1">{label}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+      {unitePage.logo && (
+        <img
+          src={unitePage.logo}
+          alt="Logo de l'unité Saint-Dominique"
+          class="w-28 h-28 md:w-48 md:h-48 lg:w-60 lg:h-60 object-contain shrink-0"
+        />
+      )}
     </div>
   </section>
 
@@ -64,6 +80,43 @@ const chiffresCles = [
         <h2 class="text-3xl font-bold text-unit-dark mb-3">{fonctionnement.title}</h2>
         {fonctionnement.intro && <p class="text-lg text-gray-600 mb-8">{fonctionnement.intro}</p>}
         <div class="prose prose-gray max-w-none prose-a:text-accent" set:html={fonctionnement.html} />
+      </div>
+    </section>
+  )}
+
+  <!-- Deux unités, deux fédérations (prolonge visuellement le fonctionnement) -->
+  {federations.length > 0 && (
+    <section id="federations" class="pb-16 bg-gray-50">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Deux unités, deux fédérations</h2>
+        {unitePage.federationsIntro && <p class="text-gray-600 mb-6">{unitePage.federationsIntro}</p>}
+        <div class="grid sm:grid-cols-2 gap-5">
+          {federations.map((f) => {
+            const Tag = f.site ? 'a' : 'div';
+            return (
+              <Tag
+                href={f.site}
+                target={f.site ? '_blank' : undefined}
+                rel={f.site ? 'noopener noreferrer' : undefined}
+                class:list={[
+                  'flex flex-col items-center text-center gap-4 h-full bg-white rounded-2xl border border-gray-100 shadow-sm p-6',
+                  f.site && 'hover:border-accent/40 hover:shadow-md transition-all',
+                ]}
+              >
+                {f.logo && <img src={f.logo} alt={`Logo — ${f.nom}`} class="h-20 w-auto max-w-full object-contain" loading="lazy" />}
+                <span>
+                  <span class:list={['block text-sm font-semibold uppercase tracking-wide', f.accent]}>{f.unite}</span>
+                  <span class="block text-lg font-bold text-unit-dark mt-1">{f.nom}</span>
+                  {f.site && (
+                    <span class="block text-sm font-medium text-accent mt-2">
+                      {f.site.replace(/^https?:\/\//, '').replace(/\/$/, '')} ↗
+                    </span>
+                  )}
+                </span>
+              </Tag>
+            );
+          })}
+        </div>
       </div>
     </section>
   )}

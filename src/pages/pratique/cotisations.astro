@@ -4,13 +4,21 @@ import { getCotisations } from '../../lib/content';
 
 const page = await getCotisations();
 
+// Tableau des montants, une rubrique par unité (unité sans ligne : masquée)
+const montantsParUnite = [
+  { unite: '67', label: '67ème Unité Guide', style: 'text-guide-purple bg-guide-purple/5' },
+  { unite: '106', label: '106ème Unité Scoute', style: 'text-unit-dark bg-gray-100' },
+]
+  .map((u) => ({ ...u, lignes: (page?.montants ?? []).filter((m) => m.unite === u.unite) }))
+  .filter((u) => u.lignes.length > 0);
+
 // Blocs vides (texte effacé dans le CMS) masqués
 const blocs = page
   ? [
       { id: 'cotisation', icon: '💶', title: 'La cotisation', html: page.cotisation },
       { id: 'assurance', icon: '🛡️', title: "L'assurance : ce qui est couvert", html: page.assurance },
       { id: 'camp', icon: '🏕️', title: 'Le coût du camp', html: page.camp },
-    ].filter((b) => b.html.trim() !== '')
+    ].filter((b) => b.html.trim() !== '' || (b.id === 'cotisation' && montantsParUnite.length > 0))
   : [];
 ---
 
@@ -37,6 +45,39 @@ const blocs = page
             <h2 class="flex items-center gap-3 text-2xl font-bold text-unit-dark mb-4">
               <span aria-hidden="true">{icon}</span>{title}
             </h2>
+            {id === 'cotisation' && montantsParUnite.length > 0 && (
+              <div class="mb-6 overflow-hidden rounded-2xl border border-gray-100 shadow-sm">
+                <table class="w-full text-sm">
+                  <caption class="sr-only">Montants des cotisations par unité et par section</caption>
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class="text-left px-4 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wide">Section</th>
+                      <th scope="col" class="text-right px-4 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wide">Montant</th>
+                    </tr>
+                  </thead>
+                  {montantsParUnite.map((groupe) => (
+                    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                      <tr>
+                        <th scope="colgroup" colspan="2" class:list={['text-left px-4 py-2 font-bold', groupe.style]}>{groupe.label}</th>
+                      </tr>
+                      {groupe.lignes.map((m) => (
+                        <tr>
+                          <td class="px-4 py-3">
+                            <span class="font-medium text-unit-dark">{m.section}</span>
+                            {m.remarque && <span class="block text-xs text-gray-500 mt-0.5">{m.remarque}</span>}
+                          </td>
+                          <td class="px-4 py-3 text-right whitespace-nowrap">
+                            {m.montant
+                              ? <span class="font-semibold text-unit-dark">{m.montant}</span>
+                              : <span class="italic text-gray-400">À préciser</span>}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  ))}
+                </table>
+              </div>
+            )}
             <div class="prose prose-gray max-w-none prose-a:text-accent prose-h2:text-lg prose-h2:mt-6 prose-h2:mb-3" set:html={html} />
           </section>
         ))}

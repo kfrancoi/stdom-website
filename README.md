@@ -106,15 +106,18 @@ Aucune variable d'environnement n'est nécessaire : ni sur Vercel, ni en local.
 
 | Menu Keystatic | Contenu | Page du site |
 |---|---|---|
-| Actualités → **Infos flash** | Annonces en bandeau, avec date d'expiration | Accueil |
+| Actualités → **Infos flash** | Annonces affichées dans le visuel d'accueil (visibles sans défiler), avec date d'expiration | Accueil |
+| Actualités → **Photos « La vie à Saint-Dom »** | Mosaïque de photos, la première en grand ; rubrique masquée tant qu'il n'y a pas de photo | Accueil |
+| Unité → **Page L'Unité : logo & fédérations** | Logo « spirale » de la bannière ; nom, site web et logo des deux fédérations | `/unite` |
 | Actualités → **Événements** | Calendrier de l'année | `/calendrier` + « Prochains événements » en accueil |
 | Unité → **Staffs d'unité & ASBL** | Staff 67, staff 106, conseil d'administration ASBL | `/unite`, `/asbl`, `/contact` |
 | Unité → **Histoire** | Texte riche | `/unite` |
 | Unité → **Présence & engagement** | Texte riche | `/unite` |
 | Sections → **67ème / 106ème** | Description, contacts, staff, visuel, photos de chaque section | `/sections` et `/sections/<unité>/<section>` |
 | Pratique → **Inscriptions** | Case « ouvertes » + message d'information | `/pratique` |
-| Pratique → **Grand camp / Cotisations / Uniformes** | Textes riches | `/pratique` |
-| Documents → **Téléchargements** | PDF à télécharger (fiche santé, autorisations, outils…) | `/documents` |
+| Pratique → **Grand camp / Uniformes** | Textes riches | `/pratique` |
+| Pratique → **Cotisations & assurances** | Tableau des montants par unité et par section (montant vide = « À préciser »), textes cotisation, assurance et camp | `/pratique/cotisations` |
+| Documents → **Téléchargements** | PDF à télécharger (fiche santé, autorisations, outils…). Catégories *Fiche santé*, *Autorisations* et *Droit à l'image* : rubrique « Documents à remplir », dans la colonne de l'unité choisie | `/documents` |
 | Documents → **Chartes** | Les 3 chartes (scoutisme, totémisation, chef) | `/documents`, `/chartes/<nom>` |
 | Documents → **Liens utiles** | Liens externes classés par catégorie | `/documents` |
 
@@ -147,7 +150,7 @@ Aucune variable d'environnement n'est nécessaire : ni sur Vercel, ni en local.
 
 ### Ajouter un document à télécharger
 
-*Keystatic → Documents → Téléchargements → Create.* Choisir la catégorie et envoyer le PDF. Il est publié dans `public/documents/`.
+*Keystatic → Documents → Téléchargements → Create.* Choisir la catégorie et envoyer le PDF. Il est publié dans `public/documents/`. Les catégories *Fiche santé*, *Autorisations* et *Droit à l'image* alimentent la rubrique « Documents à remplir » (menu Pratique), dans la colonne de l'unité choisie (« Les deux unités » : dans les deux colonnes).
 
 ### Mettre à jour les staffs (rentrée)
 
