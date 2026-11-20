@@ -117,7 +117,9 @@ Le site n'a besoin d'aucune variable d'environnement, ni sur Vercel ni en local.
 | GitHub | Gratuite | 0 |
 | OVH | Domaine + mails | Renouvellement annuel, *montant à compléter* |
 
-**Limite de dépense Railway** : une alerte par email est envoyée quand l'utilisation du mois dépasse **5 $** (Railway → Workspace → *Usage*, ou `railway usage limit status`). **Aucun arrêt automatique** n'est défini. Railway impose un minimum de 10 $ pour une limite stricte, et l'atteindre arrêterait l'éditeur jusqu'au début de la période suivante. Le site public, lui, ne serait pas touché.
+**Limite de dépense Railway** (Railway → Workspace → *Usage*, ou `railway usage limit status`) :
+- à **5 $** d'utilisation dans le mois, une alerte est envoyée par email ;
+- à **10 $**, Railway **arrête l'éditeur** jusqu'au début de la période de facturation suivante (le 8 du mois). C'est le minimum qu'accepte Railway pour un arrêt. Le site public n'est pas touché.
 
 ## 4. Modifier le contenu (sans code)
 
