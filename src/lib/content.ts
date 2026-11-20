@@ -151,7 +151,10 @@ async function getSections(
   const entries = await reader.collections[collection].all();
   const sections = await Promise.all(
     entries.map(async ({ slug, entry }) => ({
-      slug,
+      // Adresse de la page toujours en minuscules : Keystatic accepte un nom de
+      // fichier avec majuscule, mais les sous-domaines (vercel.json) redirigent
+      // vers l'adresse en minuscules.
+      slug: slug.toLowerCase(),
       name: entry.name,
       type: entry.type,
       typeLabel: entry.typeLabel,

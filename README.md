@@ -264,7 +264,7 @@ Créer une section dans Keystatic **ne crée pas son sous-domaine**. Trois étap
 
 Si l'une des trois étapes manque, le sous-domaine ne fonctionne pas : sans l'étape 1 il n'y a pas de redirection, sans l'étape 2 Vercel refuse la requête, sans l'étape 3 l'adresse n'existe pas dans le DNS.
 
-> Le *slug* dans `vercel.json` doit être **identique** au nom du fichier dans `src/content/sections67/` (ou `sections106/`).
+> Le *slug* dans `vercel.json` doit être **identique** au nom du fichier dans `src/content/sections67/` (ou `sections106/`), **en minuscules** : l'adresse de la page est toujours en minuscules, même si le fichier porte une majuscule (ex. `Amazones.json` → `/sections/67eme/amazones`).
 
 ## 9. Développer en local
 
