@@ -180,6 +180,8 @@ Pour retirer un éditeur, supprimer son adresse de la même liste.
 - Case **cochée** : les boutons sont actifs
 - Le champ *message* s'affiche au-dessus des boutons (vide = aucun message)
 
+Les pages de section ne proposent pas d'e-mail d'inscription : leur bouton « S'inscrire » renvoie vers cette page (`/pratique#inscription`), qui est la même pour toutes les sections.
+
 ### Publier une info flash
 
 *Keystatic → Actualités → Infos flash.* Renseigner un titre, un message, et idéalement **« Afficher jusqu'au »** pour que l'annonce disparaisse d'elle-même (voir l'[avertissement sur les dates](#les-contenus-dépendant-de-la-date-ne-se-rafraîchissent-quau-déploiement)).
