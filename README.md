@@ -148,7 +148,7 @@ Tous les éditeurs travaillent sur la même copie du site. Toutes les modificati
 | Sections → **67ème / 106ème** | Description, contacts, staff, visuel, photos de chaque section | `/sections` et `/sections/<unité>/<section>` |
 | Pratique → **Inscriptions** | Case « ouvertes » + message d'information | `/pratique` |
 | Pratique → **Grand camp / Uniformes** | Textes riches | `/pratique` |
-| Pratique → **Cotisations & assurances** | Tableau des montants par unité et par section (montant vide = « À préciser »), textes cotisation, assurance et camp | `/pratique/cotisations` |
+| Pratique → **Cotisations & assurances** | Tableau des cotisations par enfant : une ligne par poste (activités, assurance…), un montant par taille de fratrie (1 enfant, 2, 3 et +), total calculé automatiquement (montant vide = « À préciser ») ; textes cotisation, assurance et camp | `/pratique/cotisations` |
 | Documents → **Téléchargements** | PDF à télécharger (fiche santé, autorisations, outils…). Catégories *Fiche santé*, *Autorisations* et *Droit à l'image* : rubrique « Documents à remplir », dans la colonne de l'unité choisie | `/documents` |
 | Documents → **Chartes** | Les 3 chartes (scoutisme, totémisation, chef) | `/documents`, `/chartes/<nom>` |
 | Documents → **Liens utiles** | Liens externes classés par catégorie | `/documents` |

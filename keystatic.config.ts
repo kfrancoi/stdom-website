@@ -535,27 +535,23 @@ export default config({
       schema: {
         title: fields.text({ label: 'Titre', validation: { isRequired: true } }),
         intro: fields.text({ label: 'Introduction (affichée sous le titre)', multiline: true }),
+        // Une ligne par poste ; le total par enfant est calculé sur le site.
         montants: fields.array(
           fields.object({
-            unite: fields.select({
-              label: 'Unité',
-              options: [
-                { label: '67ème (Guides)', value: '67' },
-                { label: '106ème (Scouts)', value: '106' },
-              ],
-              defaultValue: '67',
-            }),
-            section: fields.text({
-              label: 'Section ou branche (ex : Lutins, Pionniers)',
+            poste: fields.text({
+              label: 'Poste (ex : Assurance)',
               validation: { isRequired: true },
             }),
-            montant: fields.text({ label: 'Montant (ex : 45 €) — vide = « à préciser »' }),
-            remarque: fields.text({ label: 'Remarque (optionnelle, ex : 40 € à partir du 2e enfant)' }),
+            unEnfant: fields.number({ label: 'Cotisation annuelle, 1 enfant (€) — vide = « à préciser »', step: 0.01 }),
+            deuxEnfants: fields.number({ label: 'Fratrie de 2 enfants, par enfant (€)', step: 0.01 }),
+            troisEnfants: fields.number({ label: 'Fratrie de 3 enfants et +, par enfant (€)', step: 0.01 }),
           }),
           {
-            label: 'Montants des cotisations (tableau par unité et par section)',
+            label: 'Tableau des cotisations (par enfant, toutes sections et unités confondues)',
             itemLabel: (props) =>
-              `${props.fields.unite.value}ème — ${props.fields.section.value || 'Section'} : ${props.fields.montant.value || 'à préciser'}`,
+              `${props.fields.poste.value || 'Poste'} : ${[props.fields.unEnfant, props.fields.deuxEnfants, props.fields.troisEnfants]
+                .map((f) => (f.value === null ? '?' : `${f.value.toLocaleString('fr-BE')} €`))
+                .join(' / ')}`,
           }
         ),
         cotisation: fields.markdoc({
