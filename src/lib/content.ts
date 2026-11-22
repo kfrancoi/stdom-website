@@ -317,10 +317,8 @@ export async function getCotisations() {
     title: entry.title,
     intro: clean(entry.intro),
     montants: entry.montants.map((m) => ({
-      unite: m.unite,
-      section: m.section,
-      montant: clean(m.montant),
-      remarque: clean(m.remarque),
+      poste: m.poste,
+      parFratrie: [m.unEnfant, m.deuxEnfants, m.troisEnfants],
     })),
     cotisation: markdocToHtml(await entry.cotisation()),
     assurance: markdocToHtml(await entry.assurance()),

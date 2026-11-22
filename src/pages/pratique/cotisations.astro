@@ -4,13 +4,21 @@ import { getCotisations } from '../../lib/content';
 
 const page = await getCotisations();
 
-// Tableau des montants, une rubrique par unité (unité sans ligne : masquée)
-const montantsParUnite = [
-  { unite: '67', label: '67ème Unité Guide', style: 'text-guide-purple bg-guide-purple/5' },
-  { unite: '106', label: '106ème Unité Scoute', style: 'text-unit-dark bg-gray-100' },
-]
-  .map((u) => ({ ...u, lignes: (page?.montants ?? []).filter((m) => m.unite === u.unite) }))
-  .filter((u) => u.lignes.length > 0);
+// Tableau des cotisations : un poste par ligne, une colonne par taille de fratrie
+const colonnes = ['Cotisation annuelle', 'Fratrie de 2 enfants', 'Fratrie de 3 enfants et +'];
+const montants = page?.montants ?? [];
+// Le total d'une colonne n'est affiché que si tous ses montants sont renseignés
+const totaux = colonnes.map((_, i) =>
+  montants.every((m) => m.parFratrie[i] !== null)
+    ? montants.reduce((total, m) => total + (m.parFratrie[i] ?? 0), 0)
+    : null
+);
+const euros = new Intl.NumberFormat('fr-BE', {
+  style: 'currency',
+  currency: 'EUR',
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2,
+});
 
 // Blocs vides (texte effacé dans le CMS) masqués
 const blocs = page
@@ -18,7 +26,7 @@ const blocs = page
       { id: 'cotisation', icon: '💶', title: 'La cotisation', html: page.cotisation },
       { id: 'assurance', icon: '🛡️', title: "L'assurance : ce qui est couvert", html: page.assurance },
       { id: 'camp', icon: '🏕️', title: 'Le coût du camp', html: page.camp },
-    ].filter((b) => b.html.trim() !== '' || (b.id === 'cotisation' && montantsParUnite.length > 0))
+    ].filter((b) => b.html.trim() !== '' || (b.id === 'cotisation' && montants.length > 0))
   : [];
 ---
 
@@ -39,43 +47,57 @@ const blocs = page
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="grid lg:grid-cols-3 gap-12">
-      <div class="lg:col-span-2 space-y-14">
+      <div class="lg:col-span-2 min-w-0 space-y-14">
         {blocs.map(({ id, icon, title, html }) => (
           <section id={id}>
             <h2 class="flex items-center gap-3 text-2xl font-bold text-unit-dark mb-4">
               <span aria-hidden="true">{icon}</span>{title}
             </h2>
-            {id === 'cotisation' && montantsParUnite.length > 0 && (
-              <div class="mb-6 overflow-hidden rounded-2xl border border-gray-100 shadow-sm">
-                <table class="w-full text-sm">
-                  <caption class="sr-only">Montants des cotisations par unité et par section</caption>
-                  <thead class="bg-gray-50">
-                    <tr>
-                      <th scope="col" class="text-left px-4 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wide">Section</th>
-                      <th scope="col" class="text-right px-4 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wide">Montant</th>
-                    </tr>
-                  </thead>
-                  {montantsParUnite.map((groupe) => (
-                    <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+            {id === 'cotisation' && montants.length > 0 && (
+              <div class="mb-6">
+                <p class="text-sm text-gray-500 mb-3">
+                  Montants par enfant, selon le nombre d'enfants de votre famille inscrits
+                  (toutes sections et unités confondues).
+                </p>
+                <div class="overflow-x-auto rounded-2xl border border-gray-100 shadow-sm">
+                  <table class="w-full text-sm">
+                    <caption class="sr-only">Cotisation annuelle par enfant selon le nombre d'enfants de la famille</caption>
+                    <thead class="bg-gray-50">
                       <tr>
-                        <th scope="colgroup" colspan="2" class:list={['text-left px-4 py-2 font-bold', groupe.style]}>{groupe.label}</th>
+                        <th scope="col" class="text-left px-2 sm:px-4 py-3 text-gray-500 font-semibold text-xs sm:uppercase sm:tracking-wide">Poste</th>
+                        {colonnes.map((colonne) => (
+                          <th scope="col" class="text-right px-2 sm:px-4 py-3 text-gray-500 font-semibold text-xs sm:uppercase sm:tracking-wide">{colonne}</th>
+                        ))}
                       </tr>
-                      {groupe.lignes.map((m) => (
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                      {montants.map((m) => (
                         <tr>
-                          <td class="px-4 py-3">
-                            <span class="font-medium text-unit-dark">{m.section}</span>
-                            {m.remarque && <span class="block text-xs text-gray-500 mt-0.5">{m.remarque}</span>}
-                          </td>
-                          <td class="px-4 py-3 text-right whitespace-nowrap">
-                            {m.montant
-                              ? <span class="font-semibold text-unit-dark">{m.montant}</span>
-                              : <span class="italic text-gray-400">À préciser</span>}
-                          </td>
+                          <th scope="row" class="text-left px-2 sm:px-4 py-3 font-medium text-unit-dark">{m.poste}</th>
+                          {m.parFratrie.map((montant) => (
+                            <td class="px-2 sm:px-4 py-3 text-right whitespace-nowrap">
+                              {montant === null
+                                ? <span class="italic text-gray-400">À préciser</span>
+                                : euros.format(montant)}
+                            </td>
+                          ))}
                         </tr>
                       ))}
                     </tbody>
-                  ))}
-                </table>
+                    <tfoot class="bg-gray-50 border-t-2 border-gray-200">
+                      <tr>
+                        <th scope="row" class="text-left px-2 sm:px-4 py-3 font-bold text-unit-dark">Total par enfant</th>
+                        {totaux.map((total) => (
+                          <td class="px-2 sm:px-4 py-3 text-right whitespace-nowrap font-bold text-unit-dark">
+                            {total === null
+                              ? <span class="italic font-normal text-gray-400">À préciser</span>
+                              : euros.format(total)}
+                          </td>
+                        ))}
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
               </div>
             )}
             <div class="prose prose-gray max-w-none prose-a:text-accent prose-h2:text-lg prose-h2:mt-6 prose-h2:mb-3" set:html={html} />
