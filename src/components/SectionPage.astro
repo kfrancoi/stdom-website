@@ -22,7 +22,6 @@ export interface Theme {
   ctaText: string;
   ctaButton: string;
   ctaPhrase: string; // « Votre fille a 8 à 12 ans ? … »
-  inscriptionEmail: string;
 }
 
 export interface Props {
@@ -285,11 +284,12 @@ const show = (id: string) => rubriques.some((r) => r.id === id);
         <div class:list={['rounded-2xl p-6 text-white', theme.ctaBox]}>
           <h3 class="font-bold text-lg mb-2">Intéressé·e ?</h3>
           <p class:list={['text-sm mb-4 leading-relaxed', theme.ctaText]}>{theme.ctaPhrase}</p>
+          <!-- Même procédure pour toutes les sections : la page Pratique gère l'ouverture des inscriptions -->
           <a
-            href={`mailto:${theme.inscriptionEmail}?subject=Inscription ${section.name}`}
+            href="/pratique#inscription"
             class:list={['block text-center bg-white font-semibold text-sm px-4 py-2.5 rounded-full hover:bg-white/90 transition-colors', theme.ctaButton]}
           >
-            Demande d'inscription
+            S'inscrire
           </a>
         </div>
 
